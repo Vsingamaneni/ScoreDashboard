@@ -129,15 +129,15 @@
         <h5>Recent Users</h5>
         <ul class="w3-ul w3-card-4 w3-white">
             <li class="w3-padding-16">
-                <img src="./avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <img src="/resources/core/images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                 <span class="w3-xlarge">Mike</span><br>
             </li>
             <li class="w3-padding-16">
-                <img src="./avatar3.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <img src="/resources/core/images/avatar3.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                 <span class="w3-xlarge">Jill</span><br>
             </li>
             <li class="w3-padding-16">
-                <img src="./avatar1.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <img src="/resources/core/images/avatar1.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                 <span class="w3-xlarge">Jane</span><br>
             </li>
         </ul>
@@ -172,7 +172,7 @@
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
         <h4>FOOTER</h4>
-        <p>© All rights Reserved @ Vamsi Krishna Singamaneni</p>
+        <p>&copy; All rights Reserved @ Vamsi Krishna Singamaneni</p>
     </footer>
 
     <!-- End page content -->
