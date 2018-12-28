@@ -4,10 +4,6 @@ public class Register {
 
     private int memberId;
 
-    private String event;
-
-    private String title;
-
     private String fName;
 
     private String lName;
@@ -22,19 +18,13 @@ public class Register {
 
     private String confirmPassword;
 
-    private String gender;
-
     private String country;
-
-    private String mobile;
 
     private String securityQuestion;
 
     private String securityAnswer;
 
     private String security;
-
-    private String terms;
 
     private String encryptedPass;
 
@@ -54,22 +44,6 @@ public class Register {
         this.memberId = memberId;
     }
 
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getfName() {
         return fName;
     }
@@ -85,7 +59,6 @@ public class Register {
     public void setlName(String lName) {
         this.lName = lName;
     }
-
 
     public String getRegisteredTime() {
         return registeredTime;
@@ -127,14 +100,6 @@ public class Register {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -143,12 +108,20 @@ public class Register {
         this.country = country;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getSecurityQuestion() {
+        return securityQuestion;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
     }
 
     public String getSecurity() {
@@ -157,14 +130,6 @@ public class Register {
 
     public void setSecurity(String security) {
         this.security = security;
-    }
-
-    public String getTerms() {
-        return terms;
-    }
-
-    public void setTerms(String terms) {
-        this.terms = terms;
     }
 
     public String getEncryptedPass() {
@@ -189,22 +154,6 @@ public class Register {
 
     public void setIsActive(String isActive) {
         this.isActive = isActive;
-    }
-
-    public String getSecurityQuestion() {
-        return securityQuestion;
-    }
-
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
-    }
-
-    public String getSecurityAnswer() {
-        return securityAnswer;
-    }
-
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
     }
 
     public String getRole() {

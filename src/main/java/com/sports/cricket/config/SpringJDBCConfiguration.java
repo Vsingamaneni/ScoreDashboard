@@ -16,9 +16,16 @@ public class SpringJDBCConfiguration {
         //MySQL database we are using
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         // Google cloud URL - 35.194.225.158
-        dataSource.setUrl("jdbc:mysql://localhost:3306/sports");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ipl");
         dataSource.setUsername("root");
         dataSource.setPassword("");
+
+       /* Microsoft Azure Connection
+        dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dataSource.setUrl("jdbc:sqlserver://ipl.database.windows.net:1433;databaseName=ipl-test");
+        dataSource.setUsername("ipl");
+        dataSource.setPassword("Sweety143:");
+        */
 
         return dataSource;
     }

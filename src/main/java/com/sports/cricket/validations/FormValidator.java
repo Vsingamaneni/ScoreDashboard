@@ -57,7 +57,7 @@ public class FormValidator {
         return errorsList;
     }
 
-    public List<ErrorDetails> isRegisterValid(Register register, Restrictions restrictions){
+    public List<ErrorDetails> ValidateRegistrationDetails(Register register, Restrictions restrictions){
         errorsList = new ArrayList<>();
         ErrorDetails errorDetails = null;
 
@@ -76,7 +76,7 @@ public class FormValidator {
                 errorsList.add(errorDetails);
             }
 
-            if(null == register.getfName() || register.getfName().isEmpty()){
+            if(null == register.getlName() || register.getlName().isEmpty()){
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("lastName");
                 errorDetails.setErrorMessage("Last Name cannot be empty ..!!");
@@ -143,8 +143,15 @@ public class FormValidator {
                 }
             }
 
+            if(null == register.getSecurityAnswer() || register.getSecurityAnswer().isEmpty()){
+                errorDetails = new ErrorDetails();
+                errorDetails.setErrorField("securityAnswer");
+                errorDetails.setErrorMessage("Security Answer cannot be empty ..!!");
+                errorsList.add(errorDetails);
+            }
+
             if ( null != restrictions){
-                if( null != restrictions.getSecurityCode()) {
+                if( null != register.getSecurity()) {
                     if (!restrictions.getSecurityCode().equalsIgnoreCase(register.getSecurity())) {
                         errorDetails = new ErrorDetails();
                         errorDetails.setErrorField("securityCode");
@@ -153,32 +160,13 @@ public class FormValidator {
                     }
                 } else{
                     errorDetails = new ErrorDetails();
-                    errorDetails.setErrorField("securityCode");
-                    errorDetails.setErrorMessage("Security Code cannot be empty..!");
+                    errorDetails.setErrorField("securityKey");
+                    errorDetails.setErrorMessage("Security Key cannot be empty..!");
                     errorsList.add(errorDetails);
                 }
             }
 
-            if(null == register.getSecurityAnswer() || register.getSecurityAnswer().isEmpty()){
-                errorDetails = new ErrorDetails();
-                errorDetails.setErrorField("securityAnswer");
-                errorDetails.setErrorMessage("Security Answer cannot be empty ..!!");
-                errorsList.add(errorDetails);
-            }
 
-            if(null == register.getSecurity() || register.getSecurity().isEmpty()){
-                errorDetails = new ErrorDetails();
-                errorDetails.setErrorField("securityKey");
-                errorDetails.setErrorMessage("Security Key cannot be empty ..!!");
-                errorsList.add(errorDetails);
-            }
-
-            if(null == register.getTerms() || register.getTerms().isEmpty() || null != register.getTerms() && !register.getTerms().equalsIgnoreCase("yes"))  {
-                errorDetails = new ErrorDetails();
-                errorDetails.setErrorField("terms");
-                errorDetails.setErrorMessage("You must accept terms and conditions to register!!");
-                errorsList.add(errorDetails);
-            }
         }
 
         return errorsList;

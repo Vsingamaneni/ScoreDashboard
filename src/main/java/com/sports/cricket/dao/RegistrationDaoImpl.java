@@ -52,8 +52,8 @@ public class RegistrationDaoImpl implements RegistrationDao {
             registration.setIsAdminActivated("N");
         }
 
-        String sql = "INSERT INTO REGISTER(event, title, fname, lname, registeredTime, emailId, gender, mobile, country, encryptedPass, saltKey, securityQuestion, securityAnswer, securityKey, isActive, role, isAdminActivated) "
-                    + "VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO REGISTER(fname, lname, registeredTime, email, country, encryptedPass, saltKey, securityQuestion, securityAnswer, securityKey, isActive, role, isAdminActivated) "
+                    + "VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
         Connection conn = null;
@@ -61,23 +61,19 @@ public class RegistrationDaoImpl implements RegistrationDao {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, registration.getEvent());
-            ps.setString(2, registration.getTitle());
-            ps.setString(3, registration.getfName());
-            ps.setString(4, registration.getlName());
-            ps.setString(5, registration.getRegisteredTime());
-            ps.setString(6, registration.getEmailId());
-            ps.setString(7, registration.getGender());
-            ps.setString(8, registration.getMobile());
-            ps.setString(9, registration.getCountry());
-            ps.setString(10, registration.getEncryptedPass());
-            ps.setString(11, registration.getSaltKey());
-            ps.setString(12, registration.getSecurityQuestion());
-            ps.setString(13, registration.getSecurityAnswer());
-            ps.setString(14, registration.getSecurity());
-            ps.setString(15, registration.getIsActive());
-            ps.setString(16, registration.getRole());
-            ps.setString(17, registration.getIsAdminActivated());
+            ps.setString(1, registration.getfName());
+            ps.setString(2, registration.getlName());
+            ps.setString(3, registration.getRegisteredTime());
+            ps.setString(4, registration.getEmailId());
+            ps.setString(5, registration.getCountry());
+            ps.setString(6, registration.getEncryptedPass());
+            ps.setString(7, registration.getSaltKey());
+            ps.setString(8, registration.getSecurityQuestion());
+            ps.setString(9, registration.getSecurityAnswer());
+            ps.setString(10, registration.getSecurity());
+            ps.setString(11, registration.getIsActive());
+            ps.setString(12, registration.getRole());
+            ps.setString(13, registration.getIsAdminActivated());
 
             ps.executeUpdate();
             ps.close();
@@ -106,7 +102,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
         Map<String, Object> params = new HashMap<>();
         params.put("email", userLogin.getEmail());
 
-        String selectSQL = "SELECT * FROM REGISTER where emailId = '" + userLogin.getEmail() + "'";
+        String selectSQL = "SELECT * FROM REGISTER where email = '" + userLogin.getEmail() + "'";
 
         Connection conn = null;
         Statement statement;
@@ -250,9 +246,10 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
     @Override
     public List<Restrictions> getRestrictions() {
-        String sql = "Select * from RESTRICTIONS";
+        String sql = "Select * from restrictions";
+        List<Restrictions> restrictions = null;
 
-        List<Restrictions> restrictions = jdbcTemplate.query(sql,new BeanPropertyRowMapper(Restrictions.class));
+        restrictions = jdbcTemplate.query(sql,new BeanPropertyRowMapper(Restrictions.class));
 
         return restrictions;
     }
