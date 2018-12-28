@@ -70,11 +70,13 @@ public class UserController {
         this.registrationService = registrationService;
     }
 
+    // Show index page
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, HttpSession httpSession) {
         return "redirect:/index";
     }
 
+    // Show index page
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showHomePage(Model model, HttpSession httpSession) {
         if (null != httpSession
@@ -83,10 +85,17 @@ public class UserController {
             logger.debug("Login Page");
             model.addAttribute("userLogin", userLogin);
             return "users/index";
-        } else {
-            // Change it to login page
-            return "users/welcome";
+        } else if (null != httpSession
+                && null != httpSession.getAttribute("session")){
+            Object userLogin = httpSession.getAttribute("session");
+            if (userLogin instanceof UserLogin){
+                UserLogin login = (UserLogin) userLogin;
+                if (login.getIsAdminActivated().equalsIgnoreCase("N")){
+                    return "users/contact_admin";
+                }
+            }
         }
+        return "users/welcome";
     }
 
     // Validate the login details
@@ -128,17 +137,16 @@ public class UserController {
 
             if (loginDetails.getIsAdminActivated().equalsIgnoreCase("N")){
                 httpSession.setAttribute("msg", "Please contact the admin to activate your account..!");
-                return "users/welcome";
+                return "users/contact_admin";
             }
-
-            return "users/welcome";
+            return "redirect:/profile";
         } else {
             httpSession.setAttribute("msg", "Invalid email or password..!!");
-            return "redirect:/login";
+            return "redirect:/";
         }
     }
 
-    // Show Register page
+    // Show user profile page
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String userProfile(ModelMap model, HttpSession httpSession) {
 
@@ -198,7 +206,7 @@ public class UserController {
         return "users/register";
     }
 
-    // Show Register User Screen
+    // Validate the registration details
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("registerForm") Register register, ModelMap model, HttpSession httpSession, final RedirectAttributes redirectAttributes) {
 
@@ -230,7 +238,7 @@ public class UserController {
 
         logger.debug("logoutUser()");
         httpSession.invalidate();
-        return "pages/logout";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -238,7 +246,7 @@ public class UserController {
 
         logger.debug("logoutUser()");
         httpSession.invalidate();
-        return "pages/logout";
+        return "redirect:/";
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)

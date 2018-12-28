@@ -1,4 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
 <<title>Score Finder</title>
@@ -20,6 +22,15 @@
 	<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
 	<span class="w3-bar-item w3-right">Score Finder</span>
 </div>
+
+<%--<c:if test="${not empty user}">
+	<c:set var="user_name" value="${user.firstName}"/>
+	<c:set var="role" value="${user.role}"/>
+</c:if>
+
+<c:if test="${empty user}">
+	<c:set var="user_name" value="User"/>
+</c:if>--%>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
