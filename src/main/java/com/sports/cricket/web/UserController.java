@@ -1,7 +1,5 @@
 package com.sports.cricket.web;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +8,9 @@ import javax.servlet.http.HttpSession;
 import com.sports.cricket.model.*;
 import com.sports.cricket.service.RegistrationService;
 import com.sports.cricket.service.ScheduleService;
-import com.sports.cricket.util.LeaderBoardDetails;
-import com.sports.cricket.util.MatchUpdates;
-import com.sports.cricket.util.ValidateDeadline;
-import com.sports.cricket.util.ValidatePredictions;
+import com.sports.cricket.util.*;
 import com.sports.cricket.validations.ErrorDetails;
 import com.sports.cricket.validations.FormValidator;
-import com.sports.cricket.validations.ResultValidator;
-import com.sports.cricket.validations.ValidateDeadLine;
 import com.sports.cricket.validator.LoginValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,8 +31,6 @@ import com.sports.cricket.validator.UserFormValidator;
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-    UserLogin userLogin = new UserLogin();
 
     @Autowired
     UserFormValidator userFormValidator;
@@ -86,16 +77,13 @@ public class UserController {
             model.addAttribute("userLogin", userLogin);
             return "users/index";
         } else if (null != httpSession
-                && null != httpSession.getAttribute("session")){
-            Object userLogin = httpSession.getAttribute("session");
-            if (userLogin instanceof UserLogin){
-                UserLogin login = (UserLogin) userLogin;
-                if (login.getIsAdminActivated().equalsIgnoreCase("N")){
-                    return "users/contact_admin";
-                }
+                && null != httpSession.getAttribute("session")) {
+            UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+            if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
+                return "users/contact_admin";
             }
         }
-        return "users/welcome";
+        return "redirect:/profile";
     }
 
     // Validate the login details
@@ -150,7 +138,7 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String userProfile(ModelMap model, HttpSession httpSession) {
 
-        UserLogin userLogin = (UserLogin) httpSession.getAttribute("login");
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
         if (null != model.get("msg")) {
             model.remove("msg");
         }
@@ -170,20 +158,23 @@ public class UserController {
             httpSession.setAttribute("role", userLogin.getRole());
             httpSession.setAttribute("session", userLogin);
 
-            List<Standings> standingsList = scheduleService.getLeaderBoard();
-            List<Restrictions> restrictions = registrationService.getRestrictions();
+            List<Schedule> scheduleList = scheduleService.scheduleList();
+            int matchDay = ScheduleValidation.getMatchDay(scheduleList);
+            model.addAttribute("matchDay", matchDay);
 
-            Register currentUser = registrationService.getUser(userLogin.getEmail());
+            List<Prediction> predictionList = scheduleService.getPredictionsByMatchDay(matchDay);
+            List<MatchDetails> matchDetailsList = PredictionListMapper.matchDetails(predictionList);
+            model.addAttribute("matchDetailsList", matchDetailsList);
 
-            userLogin.setIsActive(currentUser.getIsActive());
-
-            userLogin.setLimitReached(LeaderBoardDetails.isLimitReached(standingsList, userLogin.getMemberId(), restrictions.get(0).getMaxLimit()));
+            List<Register> registerList = registrationService.getAllUsers();
+            List<MatchDetails> userDetails = UserListMapper.getUsersList(registerList);
+            model.addAttribute("userActiveDetails", userDetails);
 
             model.addAttribute("session", userLogin);
             model.addAttribute("userLogin", userLogin);
 
             httpSession.setMaxInactiveInterval(5 * 60);
-            return "users/user_profile";
+            return "users/welcome";
         }
     }
 

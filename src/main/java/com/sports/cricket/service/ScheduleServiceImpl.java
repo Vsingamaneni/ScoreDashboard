@@ -71,6 +71,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<Prediction> getPredictionsByMatchDay(Integer matchDay) {
+        return scheduleDao.getPredictionByMatchDay(matchDay);
+    }
+
+
+    @Override
     public boolean updateMatchResult(Schedule schedule) {
         return scheduleDao.updateMatchResult(schedule);
     }

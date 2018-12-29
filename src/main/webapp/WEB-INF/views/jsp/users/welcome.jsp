@@ -5,10 +5,12 @@
   Time: 12:03 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
     <<title>Score Finder</title>
     <meta charset="UTF-8">
@@ -85,45 +87,68 @@
         <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
     </header>
 
+    <c:if test="${not empty userActiveDetails}">
+        <c:forEach var="userDetails" items="${userActiveDetails}">
+            <c:if test="${userDetails.match.equalsIgnoreCase('active')}">
+                <c:set var="activeUser" value="${userDetails.count}"/>
+            </c:if>
+            <c:if test="${userDetails.match.equalsIgnoreCase('inactive')}">
+                <c:set var="inActiveUser" value="${userDetails.count}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
+
     <div class="w3-row-padding w3-margin-bottom">
+        <div class="w3-quarter">
+            <div class="w3-container w3-blue w3-padding-16">
+                <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <c:if test="${not empty matchDay}">
+                    <h3>${matchDay}</h3>
+                    </c:if>
+                    <c:if test="${empty matchDay}">
+                        <h3>N/A</h3>
+                    </c:if>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>MatchDay</h4>
+            </div>
+        </div>
         <div class="w3-quarter">
             <div class="w3-container w3-red w3-padding-16">
                 <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>52</h3>
+                    <c:if test="${not empty matchDetailsList}">
+                        <c:forEach var="matchDetails" items="${matchDetailsList}">
+                           <h3>${matchDetails.match} : ${matchDetails.count}</h3>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${ empty matchDetailsList}">
+                            <h3>N/A</h3>
+                    </c:if>
                 </div>
                 <div class="w3-clear"></div>
                 <h4>Predictions</h4>
             </div>
         </div>
         <div class="w3-quarter">
-            <div class="w3-container w3-blue w3-padding-16">
-                <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                    <h3>99</h3>
-                </div>
-                <div class="w3-clear"></div>
-                <h4>Views</h4>
-            </div>
-        </div>
-        <div class="w3-quarter">
             <div class="w3-container w3-orange w3-text-white w3-padding-16">
                 <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>50</h3>
+                    <h3>${activeUser}</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Users</h4>
+                <h4>Active</h4>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-teal w3-padding-16">
                 <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>23</h3>
+                    <h3>${inActiveUser}</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Active Users</h4>
+                <h4>InActive</h4>
             </div>
         </div>
     </div>
@@ -134,19 +159,9 @@
                 <h5>Feeds</h5>
                 <table class="w3-table w3-striped w3-white">
                     <tr>
-                        <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                        <td>New User Registered.</td>
-                        <td><i>10 mins</i></td>
-                    </tr>
-                    <tr>
                         <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
                         <td>Deadline for XX vs XX reached.</td>
                         <td><i>15 mins</i></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
-                        <td>A User opted out</td>
-                        <td><i>17 mins</i></td>
                     </tr>
                     <tr>
                         <td><i class="fa fa-comment w3-text-red w3-large"></i></td>

@@ -29,6 +29,8 @@ public interface ScheduleService {
 
     List<Prediction> getPredictionsByMatch(Integer matchId);
 
+    List<Prediction> getPredictionsByMatchDay(Integer matchDay);
+
     boolean updateMatchResult(Schedule schedule);
 
     Integer totalMatches(Integer matchDay);

@@ -4,6 +4,7 @@ import com.sports.cricket.model.Prediction;
 import com.sports.cricket.model.Result;
 import com.sports.cricket.model.Schedule;
 import com.sports.cricket.model.Standings;
+import com.sports.cricket.util.PredictionListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -170,6 +171,17 @@ public class ScheduleDaoImpl implements ScheduleDao {
     }
 
     @Override
+    public List<Prediction> getPredictionByMatchDay(Integer matchDay) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("matchDay", matchDay);
+
+        String sql = "SELECT * FROM PREDICTIONS where matchDay = ?";
+
+        List<Prediction> predictionList = PredictionListMapper.predictionList(jdbcTemplate, sql, matchDay);
+        return predictionList;
+    }
+
+    @Override
     public boolean deletePrediction(Integer predictionId) {
         boolean isSuccess = false;
 
@@ -237,26 +249,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
         String sql = "SELECT * FROM PREDICTIONS where matchNumber =?";
 
-        List<Prediction> predictionList = jdbcTemplate.query(sql, new Object[]{matchId}, rs -> {
-
-            List<Prediction> predictionList1 = new ArrayList<>();
-            while(rs.next()){
-                Prediction prediction = new Prediction();
-
-                prediction.setPredictionId(rs.getInt("predictionId"));
-                prediction.setMemberId(rs.getInt("memberId"));
-                prediction.setMatchNumber(rs.getInt("matchNumber"));
-                prediction.setHomeTeam(rs.getString("homeTeam"));
-                prediction.setAwayTeam(rs.getString("awayTeam"));
-                prediction.setFirstName(rs.getString("firstName"));
-                prediction.setSelected(rs.getString("selected"));
-                prediction.setPredictedTime(rs.getString("predictedTime"));
-
-                predictionList1.add(prediction);
-            }
-            return predictionList1;
-        });
-
+        List<Prediction> predictionList = PredictionListMapper.predictionList(jdbcTemplate, sql, matchId);
         return predictionList;
     }
 

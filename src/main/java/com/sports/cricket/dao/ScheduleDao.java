@@ -23,6 +23,8 @@ public interface ScheduleDao {
 
     Prediction getPrediction(Integer predictionId, Integer matchId);
 
+    List<Prediction> getPredictionByMatchDay(Integer matchDay);
+
     boolean deletePrediction(Integer predictionId);
 
     boolean authorizeMember(Integer memberID);

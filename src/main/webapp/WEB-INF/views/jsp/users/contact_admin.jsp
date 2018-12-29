@@ -111,7 +111,7 @@
             <div class="w3-right">
             </div>
             <div class="w3-clear"></div>
-            <h4>You will be joining with ${session.memberId -1} members !! </h4>
+            <h4>You will be joining with ${session.memberId -1} other members !! </h4>
         </div>
     </div>
 
