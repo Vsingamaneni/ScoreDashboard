@@ -2,9 +2,11 @@ package com.sports.cricket.util;
 
 import com.sports.cricket.model.MatchDetails;
 import com.sports.cricket.model.Prediction;
+import com.sports.cricket.model.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 
+import java.text.ParseException;
 import java.util.*;
 
 public class PredictionListMapper {
@@ -33,7 +35,6 @@ public class PredictionListMapper {
     }
 
     public static List<MatchDetails> matchDetails(List<Prediction> predictionList){
-        List<MatchDetails> matchDetailsList = new ArrayList<>();
         HashMap<String, Integer> hmap = new HashMap<>();
         StringBuffer stringBuffer;
         if (!CollectionUtils.isEmpty(predictionList)){
@@ -49,14 +50,61 @@ public class PredictionListMapper {
                 }
             }
         }
-        Set set = hmap.entrySet();
-        Iterator iterator = set.iterator();
-        while(iterator.hasNext()) {
-            MatchDetails matchDetails = new MatchDetails();
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            matchDetails.setMatch(mentry.getKey().toString());
-            matchDetails.setCount(Integer.parseInt(mentry.getValue().toString()));
-            matchDetailsList.add(matchDetails);
+        return UserListMapper.mapFromHashMap(hmap);
+    }
+
+    public static List<MatchDetails> getNewsFeed(List<Schedule> scheduleList, int matchDay){
+        List<Schedule> schedules = new ArrayList<>();
+
+        for (Schedule schedule : scheduleList){
+            if (schedule.getMatchDay() == matchDay){
+                schedules.add(schedule);
+            } else if (schedule.getMatchDay() == matchDay-1){
+                schedules.add(schedule);
+            }
+        }
+
+        List<MatchDetails> matchDetailsList = null;
+        try {
+            matchDetailsList = generateNewsFeed(schedules);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return matchDetailsList;
+    }
+
+
+    /*
+     * get schedule deadlines
+     * get match result updated
+     * get standings updated
+     */
+    public static List<MatchDetails> generateNewsFeed(List<Schedule> scheduleList) throws ParseException {
+        List<MatchDetails> matchDetailsList = new ArrayList<>();
+        MatchDetails matchDetails;
+        for (Schedule schedule : scheduleList){
+            if (null == schedule.getWinner()){
+                if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+                    matchDetails = new MatchDetails();
+                    matchDetails.setMatch("Predictions for "+ schedule.getHomeTeam() + " vs " + schedule.getAwayTeam() + " is now closed");
+                    matchDetailsList.add(matchDetails);
+                } else {
+                    matchDetails = new MatchDetails();
+                    matchDetails.setMatch("Predictions for " + schedule.getHomeTeam() + " vs " + schedule.getAwayTeam() + " is open");
+                    matchDetailsList.add(matchDetails);
+                }
+            } else {
+
+                matchDetails = new MatchDetails();
+                matchDetails.setMatch("Predictions for "+ schedule.getHomeTeam() + " vs " + schedule.getAwayTeam() + " is now closed");
+                matchDetailsList.add(matchDetails);
+
+                matchDetails = new MatchDetails();
+                matchDetails.setMatch("Result for " + schedule.getHomeTeam() + " vs " + schedule.getAwayTeam() + " is updated");
+                matchDetailsList.add(matchDetails);
+
+            }
         }
         return matchDetailsList;
     }

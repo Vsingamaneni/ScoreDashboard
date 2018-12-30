@@ -1,5 +1,6 @@
 package com.sports.cricket.web;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import com.sports.cricket.service.ScheduleService;
 import com.sports.cricket.util.*;
 import com.sports.cricket.validations.ErrorDetails;
 import com.sports.cricket.validations.FormValidator;
+import com.sports.cricket.validations.ValidateDeadLine;
 import com.sports.cricket.validator.LoginValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,9 +168,15 @@ public class UserController {
             List<MatchDetails> matchDetailsList = PredictionListMapper.matchDetails(predictionList);
             model.addAttribute("matchDetailsList", matchDetailsList);
 
+            List<MatchDetails> matchDetails = PredictionListMapper.getNewsFeed(scheduleList, matchDay);
+            model.addAttribute("newsFeed", matchDetails);
+
             List<Register> registerList = registrationService.getAllUsers();
             List<MatchDetails> userDetails = UserListMapper.getUsersList(registerList);
             model.addAttribute("userActiveDetails", userDetails);
+
+            List<MatchDetails> usersList = UserListMapper.getGeoDetails(registerList);
+            model.addAttribute("geoDetails", usersList);
 
             model.addAttribute("session", userLogin);
             model.addAttribute("userLogin", userLogin);
@@ -179,22 +187,33 @@ public class UserController {
     }
 
     // Show Register page
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(ModelMap model, HttpSession httpSession) {
+    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    public String schedule(ModelMap model, HttpSession httpSession) throws ParseException {
+        logger.debug("schedule()");
 
-        List<ErrorDetails> registerErrorDetails = (List<ErrorDetails>) httpSession.getAttribute("registerErrorDetails");
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
 
-        if (null != registerErrorDetails
-                && registerErrorDetails.size() > 0) {
-            model.addAttribute("registerErrorDetails", registerErrorDetails);
-            httpSession.removeAttribute("registerErrorDetails");
+        model.addAttribute("session", userLogin);
+        model.addAttribute("login", userLogin);
+        model.addAttribute("userLogin", userLogin);
+
+        if(userLogin.getIsActive().equalsIgnoreCase("N")){
+            httpSession.setAttribute("msg", "You Need to be active to predict for matches");
+            return "users/contact_admin";
         }
 
-        Register register = new Register();
+        List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
+        List<Prediction> predictions = scheduleService.findPredictions(userLogin.getMemberId());
+        //schedules = ValidatePredictions.isScheduleAfterRegistration(schedules, userLogin.getRegisteredTime());
+        List<Schedule> finalSchedule = ValidatePredictions.validatePrediction(schedules, predictions);
+        predictions = ValidateDeadLine.mapScheduleToPredictions(schedules, predictions);
 
-        logger.debug("Register User()");
-        model.addAttribute("registerForm", register);
-        return "users/register";
+        model.addAttribute("predictions", predictions);
+        model.addAttribute("schedules", schedules);
+
+        httpSession.setMaxInactiveInterval(5 * 60);
+
+        return "users/schedule";
     }
 
     // Validate the registration details
@@ -222,6 +241,25 @@ public class UserController {
             redirectAttributes.addFlashAttribute("msg", "OOOPSS!! Registration Failed!");
             return "redirect:/register";
         }
+    }
+
+    // Show Register page
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(ModelMap model, HttpSession httpSession) {
+
+        List<ErrorDetails> registerErrorDetails = (List<ErrorDetails>) httpSession.getAttribute("registerErrorDetails");
+
+        if (null != registerErrorDetails
+                && registerErrorDetails.size() > 0) {
+            model.addAttribute("registerErrorDetails", registerErrorDetails);
+            httpSession.removeAttribute("registerErrorDetails");
+        }
+
+        Register register = new Register();
+
+        logger.debug("Register User()");
+        model.addAttribute("registerForm", register);
+        return "users/register";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

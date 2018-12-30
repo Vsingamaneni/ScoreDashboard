@@ -1,11 +1,11 @@
 package com.sports.cricket.util;
 
 import com.sports.cricket.model.MatchDetails;
+import com.sports.cricket.model.Prediction;
 import com.sports.cricket.model.Register;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserListMapper {
 
@@ -33,5 +33,38 @@ public class UserListMapper {
         matchUpdates.add(inactiveUsers);
 
         return matchUpdates;
+    }
+
+    public static List<MatchDetails> getGeoDetails(List<Register> registerList){
+        HashMap<String, Integer> hmap = new HashMap<>();
+        StringBuffer stringBuffer;
+        if (!CollectionUtils.isEmpty(registerList)){
+            for (Register register : registerList){
+                stringBuffer = new StringBuffer();
+                stringBuffer.append(register.getCountry());
+                if (hmap.containsKey(stringBuffer.toString())){
+                    hmap.put(stringBuffer.toString(), hmap.get((stringBuffer.toString()) + 1));
+                } else {
+                    hmap.put(stringBuffer.toString(), 1);
+                }
+            }
+        }
+
+        return mapFromHashMap(hmap);
+    }
+
+
+    public static List<MatchDetails> mapFromHashMap(HashMap<String, Integer> hmap) {
+        List<MatchDetails> matchDetailsList = new ArrayList<>();
+        Set set = hmap.entrySet();
+        Iterator users = set.iterator();
+        while (users.hasNext()) {
+            MatchDetails userDetails = new MatchDetails();
+            Map.Entry entry = (Map.Entry) users.next();
+            userDetails.setMatch(entry.getKey().toString());
+            userDetails.setCount(Integer.parseInt(entry.getValue().toString()));
+            matchDetailsList.add(userDetails);
+        }
+        return matchDetailsList;
     }
 }

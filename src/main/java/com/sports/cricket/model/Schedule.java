@@ -12,6 +12,8 @@ public class Schedule {
 
     private String startDate;
 
+    private String deadline;
+
     private String winner;
 
     private Integer possibleResult;
@@ -62,6 +64,14 @@ public class Schedule {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 
     public String getWinner() {
