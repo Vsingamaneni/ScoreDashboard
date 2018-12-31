@@ -26,6 +26,8 @@ public class Schedule {
 
     private Integer matchDay;
 
+    private String status;
+
     public Integer getLineNumber() {
         return lineNumber;
     }
@@ -121,5 +123,13 @@ public class Schedule {
 
     public void setMatchDay(Integer matchDay) {
         this.matchDay = matchDay;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

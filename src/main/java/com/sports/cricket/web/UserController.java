@@ -83,9 +83,28 @@ public class UserController {
             UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
             if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
                 return "users/contact_admin";
+            } else {
+               return "redirect:/profile";
             }
         }
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, HttpSession httpSession) {
+        if (null == httpSession.getAttribute("session")) {
+            UserLogin userLogin = new UserLogin();
+            model.addAttribute("userLogin", userLogin);
+            return "users/index";
+        } else if (null != httpSession.getAttribute("session")) {
+            UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+            if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
+                return "users/contact_admin";
+            } else {
+                return "redirect:/profile";
+            }
+        }
+        return "redirect:/";
     }
 
     // Validate the login details
@@ -193,27 +212,27 @@ public class UserController {
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
 
-        model.addAttribute("session", userLogin);
-        model.addAttribute("login", userLogin);
-        model.addAttribute("userLogin", userLogin);
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            model.addAttribute("login", userLogin);
+            model.addAttribute("userLogin", userLogin);
 
-        if(userLogin.getIsActive().equalsIgnoreCase("N")){
-            httpSession.setAttribute("msg", "You Need to be active to predict for matches");
-            return "users/contact_admin";
+            if (userLogin.getIsActive().equalsIgnoreCase("N")) {
+                httpSession.setAttribute("msg", "You Need to be active to predict for matches");
+                return "users/contact_admin";
+            }
+
+            List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
+            schedules = ScheduleListMapper.mapScheduleStauts(schedules);
+
+            model.addAttribute("schedules", schedules);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+
+            return "users/schedule";
         }
-
-        List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
-        List<Prediction> predictions = scheduleService.findPredictions(userLogin.getMemberId());
-        //schedules = ValidatePredictions.isScheduleAfterRegistration(schedules, userLogin.getRegisteredTime());
-        List<Schedule> finalSchedule = ValidatePredictions.validatePrediction(schedules, predictions);
-        predictions = ValidateDeadLine.mapScheduleToPredictions(schedules, predictions);
-
-        model.addAttribute("predictions", predictions);
-        model.addAttribute("schedules", schedules);
-
-        httpSession.setMaxInactiveInterval(5 * 60);
-
-        return "users/schedule";
     }
 
     // Validate the registration details
