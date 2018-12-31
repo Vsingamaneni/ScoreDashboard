@@ -161,13 +161,13 @@ public class RegistrationDaoImpl implements RegistrationDao {
     }
 
     @Override
-    public Register getUser(String emailId) {
+    public Register getUser(String email) {
         System.out.println("Inside retrieving User");
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("email", emailId);
+        params.put("email", email);
 
-        String getUser = "SELECT * FROM REGISTER where emailId = '" + emailId + "'";
+        String getUser = "SELECT * FROM REGISTER where email = '" + email + "'";
 
         Connection conn = null;
         Statement statement;
@@ -185,7 +185,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
                 register = new Register();
                 register.setfName(resultSet.getString("fName"));
                 register.setlName(resultSet.getString("lName"));
-                register.setEmailId(resultSet.getString("emailId"));
+                register.setEmailId(resultSet.getString("email"));
                 register.setMemberId(resultSet.getInt("memberId"));
                 register.setIsActive(resultSet.getString("isActive"));
                 register.setRegisteredTime(resultSet.getString("registeredTime"));

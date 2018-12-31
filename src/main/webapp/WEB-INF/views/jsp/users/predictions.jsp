@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 12/29/18
-  Time: 10:41 PM
+  Date: 12/31/18
+  Time: 12:46 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -15,10 +15,12 @@
     <<title>Score Finder</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/resources/login/images/icons/cricket.ico"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
+    <link rel="stylesheet" href="/resources/core/css/table.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
@@ -35,6 +37,7 @@
 <c:if test="${not empty session}">
     <c:set var="user_name" value="${session.firstName}"/>
     <c:set var="role" value="${session.role}"/>
+    <c:set var="isActivated" value="${session.isAdminActivated}"/>
 </c:if>
 
 <c:if test="${empty session}">
@@ -83,46 +86,102 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-    <!-- Header -->
-    <header class="w3-container" style="padding-top:22px">
-        <h1><b><i class="fa fa-bell"></i> Schedule </b></h1>
-    </header>
 
-    <div class="w3-panel">
-        <div class="w3-row-padding" style="margin:0 auto">
-            <div style="width:100%">
-                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <tr align="center">
-                        <th>#Game</th>
-                        <th>Fixture</th>
-                        <th>Deadline</th>
-                        <th>Result</th>
-                        <th>Status</th>
-                    </tr>
-                    <c:forEach var="schedule" items="${schedules}">
-                        <c:if test="${not empty schedule}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS;align:center;">
-                                <td style="text-align:left;">${schedule.matchNumber}</td>
-                                <td style="text-align:left;">${schedule.homeTeam} vs ${schedule.awayTeam}</td>
-                                <td style="text-align:left;">${schedule.deadline}</td>
-                                <td style="text-align:left;">
-                                    <c:if test="${not empty schedule.winner}">
-                                        ${schedule.winner}
-                                    </c:if>
-                                    <c:if test="${empty schedule.winner}">
-                                        N/A
-                                    </c:if>
-                                </td>
-                                <td style="text-align:left;">
-                                    ${schedule.status}
-                                </td>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-                </table>
+    <c:if test="${isActivated.equalsIgnoreCase('N')}">
+        <div class="w3-row-padding w3-margin-bottom">
+            <div class="w3-container w3-red w3-padding-16">
+                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
             </div>
         </div>
-    </div>
+        <br><br><br><br><br><br><br><br>
+    </c:if>
+    <c:if test="${isActivated.equalsIgnoreCase('Y')}">
+
+        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
+
+        <!-- Predictions -->
+        <header class="w3-container" style="padding-top:22px">
+            <h3><b><i class="fa fa-pen"></i> Predictions </b></h3>
+        </header>
+
+        <div class="w3-panel">
+            <div class="w3-row-padding" style="margin:0 auto">
+                <div style="width:100%">
+                    <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                        <tr align="center">
+                            <th>#Game</th>
+                            <th>Fixture</th>
+                            <th>Choice</th>
+                            <th>Predicted Time</th>
+                            <th>Action</th>
+                        </tr>
+                        <c:forEach var="prediction" items="${predictions}">
+                            <c:if test="${not empty prediction}">
+                                <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS;align:center;">
+                                    <td>${fn:toUpperCase(prediction.matchNumber)}</td>
+                                    <td>${fn:toUpperCase(prediction.homeTeam)} vs ${fn:toUpperCase(prediction.awayTeam)}</td>
+                                    <td>${fn:toUpperCase(prediction.selected)}</td>
+                                    <td>${fn:toUpperCase(prediction.predictedTime)}</td>
+                                    <td>
+                                    <spring:url value="/prediction/${prediction.predictionId}/${prediction.matchNumber}/view" var="userUrl" />
+                                    <spring:url value="/prediction/${prediction.predictionId}/${prediction.matchNumber}/update" var="updateUrl" />
+                                    <spring:url value="/prediction/${prediction.predictionId}/delete" var="deleteUrl" />
+
+                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
+                                    <c:if test="${prediction.canPredict}">
+                                        <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
+                                        <button class="btn btn-danger" onclick="location.href=('${deleteUrl}')">Delete</button>
+                                    </c:if>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Up Coming Schedule -->
+        <header class="w3-container" style="padding-top:22px">
+            <h3><b><i class="fa fa-bell"></i> Up Coming  </b></h3>
+        </header>
+
+        <div class="w3-panel">
+            <div class="w3-row-padding" style="margin:0 auto">
+                <div style="width:100%">
+                    <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                        <tr align="center">
+                            <th>#Game</th>
+                            <th>Fixture</th>
+                            <th>Deadline</th>
+                            <th>Action</th>
+                        </tr>
+                        <c:forEach var="schedule" items="${schedules}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;">${schedule.matchNumber}</td>
+                                <td style="text-align:left;">${schedule.homeTeam} vs ${schedule.awayTeam}</td>
+                                <td style="text-align:left;">${schedule.startDate}</td>
+                                <td style="text-align:left;">
+                                    <spring:url value="/match/${session.memberId}/${schedule.matchNumber}/predict" var="predictUrl" />
+                                    <c:if test="${schedule.canPredict}">
+                                    <button class="btn btn-primary" onclick="location.href='${predictUrl}'">Predict</button>
+                                    </c:if>
+                                    <c:if test="${!schedule.canPredict}">
+                                    <button class="btn btn-danger" onclick="location.href='#'">You Missed it</button>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </c:if>
+
     <hr>
 
     <hr>

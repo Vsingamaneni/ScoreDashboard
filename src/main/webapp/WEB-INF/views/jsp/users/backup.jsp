@@ -234,8 +234,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <h4>FOOTER</h4>
-        <p>&copy; All rights Reserved @ Vamsi Krishna Singamaneni</p>
+        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->

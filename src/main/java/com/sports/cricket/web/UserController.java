@@ -1,6 +1,7 @@
 package com.sports.cricket.web;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +43,6 @@ public class UserController {
 
     FormValidator formValidator = new FormValidator();
 
-    MatchUpdates matchUpdates = new MatchUpdates();
-
     private UserService userService;
     private ScheduleService scheduleService;
     private RegistrationService registrationService;
@@ -76,11 +75,25 @@ public class UserController {
                 && null == httpSession.getAttribute("session")) {
             UserLogin userLogin = new UserLogin();
             logger.debug("Login Page");
+            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>)httpSession.getAttribute("loginErrorDetails");
+            if (null != errorDetailsList
+                && errorDetailsList.size() > 0){
+                model.addAttribute("errorDetailsList", errorDetailsList);
+                httpSession.removeAttribute("errorDetailsList");
+            }
             model.addAttribute("userLogin", userLogin);
             return "users/index";
-        } else if (null != httpSession
-                && null != httpSession.getAttribute("session")) {
+        } else if (null != httpSession.getAttribute("session")) {
             UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+            Register register;
+            if (null != userLogin.getIsAdminActivated()
+                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")){
+                register = registrationService.getUser(userLogin.getEmail());
+
+                userLogin.setIsActive(register.getIsActive());
+                userLogin.setIsAdminActivated(register.getIsAdminActivated());
+            }
+
             if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
                 return "users/contact_admin";
             } else {
@@ -88,23 +101,6 @@ public class UserController {
             }
         }
         return "redirect:/profile";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, HttpSession httpSession) {
-        if (null == httpSession.getAttribute("session")) {
-            UserLogin userLogin = new UserLogin();
-            model.addAttribute("userLogin", userLogin);
-            return "users/index";
-        } else if (null != httpSession.getAttribute("session")) {
-            UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
-            if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
-                return "users/contact_admin";
-            } else {
-                return "redirect:/profile";
-            }
-        }
-        return "redirect:/";
     }
 
     // Validate the login details
@@ -126,7 +122,7 @@ public class UserController {
                 && loginErrorDetails.size() > 0) {
             model.addAttribute("loginErrorDetails", loginErrorDetails);
             httpSession.setAttribute("loginErrorDetails", loginErrorDetails);
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         logger.debug("saveOrUpdateLogin() : {}", "");
@@ -137,8 +133,6 @@ public class UserController {
                 && loginDetails.isLoginSuccess()) {
 
             model.addAttribute("session", loginDetails);
-            //model.addAttribute("msg", "User logged in");
-            httpSession.setAttribute("login", loginDetails);
             httpSession.setAttribute("user", loginDetails.getFirstName());
             httpSession.setAttribute("userLastName", loginDetails.getLastName());
             httpSession.setAttribute("role", loginDetails.getRole());
@@ -150,7 +144,12 @@ public class UserController {
             }
             return "redirect:/profile";
         } else {
-            httpSession.setAttribute("msg", "Invalid email or password..!!");
+            List<ErrorDetails> errorDetailsList = new ArrayList<>();
+            ErrorDetails errorDetails = new ErrorDetails();
+            errorDetails.setErrorField("Password");
+            errorDetails.setErrorMessage("Invalid email or password");
+            errorDetailsList.add(errorDetails);
+            httpSession.setAttribute("loginErrorDetails", errorDetailsList);
             return "redirect:/";
         }
     }
@@ -167,14 +166,15 @@ public class UserController {
         if (null == userLogin) {
             return "redirect:/";
         } else {
+            Register register;
+            if (null != userLogin.getIsAdminActivated()
+                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")){
+                register = registrationService.getUser(userLogin.getEmail());
 
-            String value = (String) httpSession.getAttribute("msg");
-            if (null != value) {
-                model.addAttribute("msg", value);
+                userLogin.setIsActive(register.getIsActive());
+                userLogin.setIsAdminActivated(register.getIsAdminActivated());
             }
 
-            httpSession.removeAttribute("msg");
-            httpSession.setAttribute("login", userLogin);
             httpSession.setAttribute("user", userLogin.getFirstName());
             httpSession.setAttribute("role", userLogin.getRole());
             httpSession.setAttribute("session", userLogin);
@@ -279,6 +279,42 @@ public class UserController {
         logger.debug("Register User()");
         model.addAttribute("registerForm", register);
         return "users/register";
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/predictions", method = RequestMethod.GET)
+    public String showPredictions(ModelMap model, HttpSession httpSession) throws ParseException {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("user", userLogin.getFirstName());
+            httpSession.setAttribute("role", userLogin.getRole());
+            httpSession.setAttribute("session", userLogin);
+
+            Register register = registrationService.getUser(userLogin.getEmail());
+
+            userLogin.setIsActive(register.getIsActive());
+
+            if(userLogin.getIsActive().equalsIgnoreCase("N")){
+                return "users/predictions";
+            }
+
+            List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
+            List<Prediction> predictions = scheduleService.findPredictions(userLogin.getMemberId());
+            schedules = ValidatePredictions.isScheduleAfterRegistration(schedules, register.getRegisteredTime());
+            List<Schedule> finalSchedule = ValidatePredictions.validatePrediction(schedules, predictions);
+            predictions = ValidateDeadLine.mapScheduleToPredictions(schedules, predictions);
+
+            model.addAttribute("predictions", predictions);
+            model.addAttribute("schedules", finalSchedule);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/predictions";
+        }
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

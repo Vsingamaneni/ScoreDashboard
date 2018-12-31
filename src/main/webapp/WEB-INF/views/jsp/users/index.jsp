@@ -39,6 +39,14 @@
 					Account Login
 				</span>
             <form class="login100-form validate-form p-b-33 p-t-5" action="/loginUser" modelAttribute="userLogin" method="POST">
+                <c:if test="${not empty loginErrorDetails}">
+                    <h2 style="color:red;font-size:15px;text-decoration:none;text-align: center;font-family:Comic Sans MS"> Please fix the below errors..!!</h2>
+                </c:if>
+                <c:forEach var="loginErrorDetails" items="${loginErrorDetails}">
+                    <c:if test="${not empty loginErrorDetails.errorMessage}" >
+                        <h2 style="color:red;font-size:15px;text-decoration:none;text-align: center;font-family:Comic Sans MS"> *** ${loginErrorDetails.errorMessage} </h2>
+                    </c:if>
+                </c:forEach>
 
                 <div class="wrap-input100 validate-input" data-validate = "Enter username">
                     <input class="input100" type="text" placeholder="User name" name="email">
