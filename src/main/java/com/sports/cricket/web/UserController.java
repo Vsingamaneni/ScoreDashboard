@@ -319,32 +319,14 @@ public class UserController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logoutUser(Model model, HttpSession httpSession) {
-
-        logger.debug("logoutUser()");
-        httpSession.invalidate();
-        return "redirect:/";
+        return "redirect:/logout";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutUserAgain(Model model, HttpSession httpSession) {
-
         logger.debug("logoutUser()");
         httpSession.invalidate();
         return "redirect:/";
-    }
-
-    @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ModelAndView handleEmptyData(HttpServletRequest req, Exception ex) {
-
-        logger.debug("handleEmptyData()");
-        logger.error("Request: {}, error ", req.getRequestURL(), ex);
-
-        ModelAndView model = new ModelAndView();
-        model.setViewName("user/show");
-        model.addObject("msg", "user not found");
-
-        return model;
-
     }
 
 }
