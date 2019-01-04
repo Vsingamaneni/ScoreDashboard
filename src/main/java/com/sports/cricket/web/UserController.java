@@ -13,6 +13,7 @@ import com.sports.cricket.service.ScheduleService;
 import com.sports.cricket.util.*;
 import com.sports.cricket.validations.ErrorDetails;
 import com.sports.cricket.validations.FormValidator;
+import com.sports.cricket.validations.ResultValidator;
 import com.sports.cricket.validations.ValidateDeadLine;
 import com.sports.cricket.validator.LoginValidator;
 import org.slf4j.Logger;
@@ -299,6 +300,10 @@ public class UserController {
 
             userLogin.setIsActive(register.getIsActive());
 
+            if (null !=  httpSession.getAttribute("msg")){
+                model.addAttribute("msg", httpSession.getAttribute("msg"));
+            }
+
             if(userLogin.getIsActive().equalsIgnoreCase("N")){
                 return "users/predictions";
             }
@@ -316,6 +321,96 @@ public class UserController {
             return "users/predictions";
         }
     }
+
+    // show update form
+    @RequestMapping(value = "/match/{memberId}/{matchNumber}/predict", method = RequestMethod.GET)
+    public String predictMatch(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
+
+        logger.debug("predictMatch() : {}", memberId, matchNumber);
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+
+            if (null != httpSession.getAttribute("errorDetailsList")) {
+                List<ErrorDetails> errorDetailsList = (List<ErrorDetails>) httpSession.getAttribute("errorDetailsList");
+                model.addAttribute("errorDetailsList", errorDetailsList);
+                httpSession.removeAttribute("errorDetailsList");
+            }
+
+            Schedule schedule = scheduleService.findById(matchNumber);
+
+            Prediction prediction = new Prediction();
+
+            model.addAttribute("scheduleForm", schedule);
+            model.addAttribute("predictionForm", prediction);
+            model.addAttribute("session", userLogin);
+
+            return "users/user_prediction";
+        }
+    }
+
+
+    // Update Prediction details
+    @RequestMapping(value = "/match/{memberId}/save", method = RequestMethod.POST)
+    public String savePrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, Model model, HttpSession httpSession) {
+
+        logger.debug("savePrediction() : {}", memberId, memberId);
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+
+
+            List<ErrorDetails> errorDetailsList = ResultValidator.isValid(prediction);
+            if (errorDetailsList.size() > 0) {
+                httpSession.setAttribute("errorDetailsList", errorDetailsList);
+
+                return "redirect:/match/" + prediction.getMemberId() + "/" + prediction.getMatchNumber() + "/predict";
+            }
+            boolean savePrediction = scheduleService.savePrediction(prediction);
+
+            //Prediction prediction = new Prediction();
+
+            //model.addAttribute("scheduleForm", schedule);
+            model.addAttribute("isPredictionSuccess", savePrediction);
+            model.addAttribute("session", httpSession.getAttribute("session"));
+            model.addAttribute("msg" , "Your Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is Saved Successfully!!");
+            httpSession.setAttribute("msg", "Your Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is Saved Successfully!!");
+
+            return "redirect:/predictions";
+        }
+    }
+
+
+    // Update prediction form
+    @RequestMapping(value = "/prediction/{memberId}/{matchNumber}/update", method = RequestMethod.GET)
+    public String updatePrediction(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
+
+        logger.debug("updatePrediction() : {}", memberId, matchNumber);
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        }
+
+        Schedule schedule = scheduleService.findById(matchNumber);
+        Prediction prediction = scheduleService.getPrediction(memberId, matchNumber);
+
+        model.addAttribute("scheduleForm", schedule);
+        model.addAttribute("predictionForm", prediction);
+        model.addAttribute("session", userLogin);
+        //httpSession.setAttribute("msg", "Update for match " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is saved successfully ..!! ");
+
+        return "users/update";
+
+    }
+
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logoutUser(Model model, HttpSession httpSession) {
