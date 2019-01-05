@@ -45,7 +45,7 @@
     <c:set var="user_name" value="User"/>
 </c:if>
 
-<spring:url value="/match/${user_id}/add" var="updateUrl" />
+<spring:url value="/match/${session.memberId}/${predictionForm.matchNumber}/save" var="updateUrl" />
 <spring:url value="/predictions" var="cancelUrl" />
 
 <!-- Sidebar/menu -->
@@ -116,8 +116,7 @@
                         <h5 style="text-align: left;">Good Luck !!</h5>
                     </div>
                     <div class='panel-body'>
-                        <form action="${predictionUrl}" modelAttribute="predictionForm" method="POST"
-                              class='form-horizontal' role='form'>
+                        <form action="${updateUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
                             <div class='form-group'>
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_event'>Match</label>
                                 <div class='col-md-2'>
@@ -127,8 +126,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <input type=hidden id="memberId" name="memberId" value="${user_id}">
-                            <input type=hidden id="matchNumber" name="matchNumber" value="${scheduleForm.matchNumber}">
+                            <input type=hidden id="predictionId" name="predictionId" value="${predictionForm.predictionId}">
+                            <input type=hidden id="memberId" name="memberId" value="${session.memberId}">
+                            <input type=hidden id="matchNumber" name="matchNumber" value="${predictionForm.matchNumber}">
                             <input type=hidden id="homeTeam" name="homeTeam" value="${scheduleForm.homeTeam}">
                             <input type=hidden id="awayTeam" name="awayTeam" value="${scheduleForm.awayTeam}">
                             <div class='form-group'>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class='col-md-3'>
                                     <button class='btn-lg btn-danger' type='submit'>
-                                        <a href="/predictions" style="color:white;">CANCEL</a>
+                                        <a href="/predictions" style="color:white;text-decoration : none;">CANCEL</a>
                                     </button>
                                 </div>
                             </div>

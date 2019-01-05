@@ -87,6 +87,7 @@
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
 
+
     <c:if test="${isActivated.equalsIgnoreCase('N')}">
         <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-container w3-red w3-padding-16">
@@ -100,7 +101,13 @@
         <br><br><br><br><br><br><br><br>
     </c:if>
 
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
+    <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
+
+    <c:if test="${not empty msg}">
+        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
+            <h4><strong>${msg}</strong></h4>
+        </div>
+    </c:if>
 
         <!-- Predictions -->
         <header class="w3-container" style="padding-top:22px">
@@ -126,11 +133,9 @@
                                     <td>${fn:toUpperCase(prediction.selected)}</td>
                                     <td>${fn:toUpperCase(prediction.predictedTime)}</td>
                                     <td>
-                                    <spring:url value="/prediction/${prediction.predictionId}/${prediction.matchNumber}/view" var="userUrl" />
                                     <spring:url value="/prediction/${prediction.predictionId}/${prediction.matchNumber}/update" var="updateUrl" />
                                     <spring:url value="/prediction/${prediction.predictionId}/delete" var="deleteUrl" />
 
-                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
                                     <c:if test="${prediction.canPredict}">
                                         <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                                         <button class="btn btn-danger" onclick="location.href=('${deleteUrl}')">Delete</button>

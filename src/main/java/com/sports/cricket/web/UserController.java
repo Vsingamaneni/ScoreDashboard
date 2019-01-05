@@ -288,6 +288,7 @@ public class UserController {
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
 
+
         if (null == userLogin) {
             return "redirect:/";
         } else {
@@ -302,6 +303,7 @@ public class UserController {
 
             if (null !=  httpSession.getAttribute("msg")){
                 model.addAttribute("msg", httpSession.getAttribute("msg"));
+                httpSession.removeAttribute("msg");
             }
 
             if(userLogin.getIsActive().equalsIgnoreCase("N")){
@@ -353,7 +355,7 @@ public class UserController {
     }
 
 
-    // Update Prediction details
+    // Save Prediction details
     @RequestMapping(value = "/match/{memberId}/save", method = RequestMethod.POST)
     public String savePrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, Model model, HttpSession httpSession) {
 
@@ -386,7 +388,6 @@ public class UserController {
         }
     }
 
-
     // Update prediction form
     @RequestMapping(value = "/prediction/{memberId}/{matchNumber}/update", method = RequestMethod.GET)
     public String updatePrediction(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
@@ -411,6 +412,23 @@ public class UserController {
 
     }
 
+
+    @RequestMapping(value = "/match/{memberId}/{matchNumber}/save", method = RequestMethod.POST)
+    public String saveUpdatedPrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
+
+        logger.debug("saveUpdatedPrediction() : {}", memberId, matchNumber);
+
+        boolean savePrediction = scheduleService.updatePrediction(prediction);
+
+        model.addAttribute("isPredictionSuccess", savePrediction);
+        model.addAttribute("session", httpSession.getAttribute("session"));
+
+        if (savePrediction){
+            httpSession.setAttribute("msg", "Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is updated successfully");
+        }
+
+        return "redirect:/predictions";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logoutUser(Model model, HttpSession httpSession) {
