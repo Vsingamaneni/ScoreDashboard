@@ -1,13 +1,12 @@
 package com.sports.cricket.validations;
 
+import com.sports.cricket.model.Prediction;
 import com.sports.cricket.model.Register;
 import com.sports.cricket.model.Restrictions;
 import com.sports.cricket.model.UserLogin;
 import com.sports.cricket.service.RegistrationService;
-import com.sports.cricket.service.ScheduleService;
 import com.sports.cricket.validator.EmailValidator;
 
-import javax.servlet.Registration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,6 +165,32 @@ public class FormValidator {
                 }
             }
 
+
+        }
+
+        return errorsList;
+    }
+
+    public List<ErrorDetails> ValidateUpdatePrediction(Prediction prediction){
+        errorsList = new ArrayList<>();
+        ErrorDetails errorDetails = null;
+
+        if(null == prediction){
+            errorDetails = new ErrorDetails();
+            errorDetails.setErrorField("prediction");
+            errorDetails.setErrorMessage("prediction details are empty..!!");
+            errorsList.add(errorDetails);
+        }
+
+        if(null != prediction){
+
+            if(null != prediction.getSelected() && prediction.getSelected().equalsIgnoreCase("--- SELECT ---")){
+
+                errorDetails = new ErrorDetails();
+                errorDetails.setErrorField("Selected");
+                errorDetails.setErrorMessage("Select one of the teams !!");
+                errorsList.add(errorDetails);
+            }
 
         }
 

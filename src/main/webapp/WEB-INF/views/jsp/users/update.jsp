@@ -105,6 +105,16 @@
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
+        <c:if test="${not empty errorDetailsList}">
+            <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> Dude, fix the below error(s)</h2>
+        </c:if>
+        <c:forEach var="errorDetails" items="${errorDetailsList}">
+            <c:if test="${not empty errorDetails.errorMessage}" >
+                <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> *** ${errorDetails.errorMessage} </h2>
+            </c:if>
+        </c:forEach>
+        <br /><br /><br />
+
         <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
         <br /><br /><br />
 

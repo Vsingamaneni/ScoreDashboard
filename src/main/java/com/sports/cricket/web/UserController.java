@@ -354,7 +354,6 @@ public class UserController {
         }
     }
 
-
     // Save Prediction details
     @RequestMapping(value = "/match/{memberId}/save", method = RequestMethod.POST)
     public String savePrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, Model model, HttpSession httpSession) {
@@ -396,6 +395,12 @@ public class UserController {
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
 
+        if (null != httpSession.getAttribute("errorDetailsList")) {
+            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>) httpSession.getAttribute("errorDetailsList");
+            httpSession.removeAttribute("errorDetailsList");
+            model.addAttribute("errorDetailsList", errorDetailsList);
+        }
+
         if (null == userLogin) {
             return "redirect:/";
         }
@@ -406,17 +411,25 @@ public class UserController {
         model.addAttribute("scheduleForm", schedule);
         model.addAttribute("predictionForm", prediction);
         model.addAttribute("session", userLogin);
-        //httpSession.setAttribute("msg", "Update for match " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is saved successfully ..!! ");
 
         return "users/update";
 
     }
 
-
+    // Save Updated prediction
     @RequestMapping(value = "/match/{memberId}/{matchNumber}/save", method = RequestMethod.POST)
     public String saveUpdatedPrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
 
         logger.debug("saveUpdatedPrediction() : {}", memberId, matchNumber);
+
+        List<ErrorDetails> errorDetailsList = formValidator.ValidateUpdatePrediction(prediction);
+
+        if (null != errorDetailsList
+                && errorDetailsList.size() > 0) {
+            model.addAttribute("errorDetailsList", errorDetailsList);
+            httpSession.setAttribute("errorDetailsList", errorDetailsList);
+            return "redirect:/prediction/{memberId}/{matchNumber}/update";
+        }
 
         boolean savePrediction = scheduleService.updatePrediction(prediction);
 
