@@ -45,7 +45,7 @@
     <c:set var="user_name" value="User"/>
 </c:if>
 
-<spring:url value="/match/${predictionForm.predictionId}/${predictionForm.matchNumber}/save" var="updateUrl" />
+<spring:url value="/prediction/${predictionForm.predictionId}/delete" var="updateUrl" />
 <spring:url value="/predictions" var="cancelUrl" />
 
 <!-- Sidebar/menu -->
@@ -105,17 +105,7 @@
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
-        <c:if test="${not empty errorDetailsList}">
-            <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> Dude, fix the below error(s)</h2>
-        </c:if>
-        <c:forEach var="errorDetails" items="${errorDetailsList}">
-            <c:if test="${not empty errorDetails.errorMessage}" >
-                <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> *** ${errorDetails.errorMessage} </h2>
-            </c:if>
-        </c:forEach>
-        <br /><br /><br />
-
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
+        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
         <br /><br /><br />
 
         <div style="margin: 0 auto;">
@@ -123,7 +113,7 @@
             <div class='container'>
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
-                        <h5 style="text-align: left;">Good Luck !!</h5>
+                        <h5 style="text-align: left;">Make sure you don't miss the deadline !!</h5>
                     </div>
                     <div class='panel-body'>
                         <form action="${updateUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
@@ -131,34 +121,31 @@
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_event'>Match</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_event' name="event" style="min-width:150px;">
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}
-                                            vs ${fn:toUpperCase(scheduleForm.awayTeam)}</option>
+                                        <option style="text-align: center">${fn:toUpperCase(predictionForm.homeTeam)}
+                                            vs ${fn:toUpperCase(predictionForm.awayTeam)}</option>
                                     </select>
                                 </div>
                             </div>
                             <input type=hidden id="predictionId" name="predictionId" value="${predictionForm.predictionId}">
                             <input type=hidden id="memberId" name="memberId" value="${session.memberId}">
                             <input type=hidden id="matchNumber" name="matchNumber" value="${predictionForm.matchNumber}">
-                            <input type=hidden id="homeTeam" name="homeTeam" value="${scheduleForm.homeTeam}">
-                            <input type=hidden id="awayTeam" name="awayTeam" value="${scheduleForm.awayTeam}">
+                            <input type=hidden id="homeTeam" name="homeTeam" value="${predictionForm.homeTeam}">
+                            <input type=hidden id="awayTeam" name="awayTeam" value="${predictionForm.awayTeam}">
                             <div class='form-group'>
-                                <label class='control-label col-md-2 col-md-offset-2' for='id_name'>Previous Choice</label>
+                                <label class='control-label col-md-2 col-md-offset-2' for='id_name'>Name</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_name' name="abc"
                                             style="min-width:150px; ">
-                                        <option style="text-align: center">${predictionForm.selected}</option>
+                                        <option style="text-align: center">${predictionForm.firstName}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class='form-group'>
-                                <label class='control-label col-md-2 col-md-offset-2' for='id_selected'>Your
-                                    Choice</label>
+                                <label class='control-label col-md-2 col-md-offset-2' for='id_selected'>Selected</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_selected' name="selected"
                                             style="min-width:150px; ">
-                                        <option style="text-align: center"> --- SELECT ---</option>
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}</option>
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.awayTeam)}</option>
+                                        <option style="text-align: center">${predictionForm.selected}</option>
                                     </select>
                                 </div>
                             </div>
@@ -166,12 +153,12 @@
                             <div class='form-group'>
                                 <div class='col-md-offset-4 col-md-3'>
                                     <button class='btn-lg btn-primary' type='submit' onclick="post('${updateUrl}')">
-                                        UPDATE
+                                        Sure?
                                     </button>
                                 </div>
                                 <div class='col-md-3'>
                                     <button class='btn-lg btn-danger' type='submit'>
-                                        <a href="/predictions" style="color:white;text-decoration : none;">CANCEL</a>
+                                        <a href="/predictions" style="color:white;text-decoration : none;">Nah</a>
                                     </button>
                                 </div>
                             </div>

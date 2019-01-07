@@ -56,6 +56,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public Prediction getPrediction(Integer predictionId) {
+        return scheduleDao.getPrediction(predictionId);
+    }
+
+    @Override
     public boolean deletePrediction(Integer predictionId) {
         return scheduleDao.deletePrediction(predictionId);
     }

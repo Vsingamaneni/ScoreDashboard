@@ -46,6 +46,7 @@ public class ResultValidator {
         }
 
         if (null != prediction
+                && null != prediction.getFirstName()
                 && prediction.getFirstName().equalsIgnoreCase("--- SELECT ---")){
             ErrorDetails errorDetails = new ErrorDetails();
             errorDetails.setErrorField("Name");

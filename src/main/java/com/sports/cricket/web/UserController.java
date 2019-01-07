@@ -366,13 +366,12 @@ public class UserController {
             return "redirect:/";
         } else {
 
-
             List<ErrorDetails> errorDetailsList = ResultValidator.isValid(prediction);
             if (errorDetailsList.size() > 0) {
                 httpSession.setAttribute("errorDetailsList", errorDetailsList);
-
                 return "redirect:/match/" + prediction.getMemberId() + "/" + prediction.getMatchNumber() + "/predict";
             }
+
             boolean savePrediction = scheduleService.savePrediction(prediction);
 
             //Prediction prediction = new Prediction();
@@ -416,7 +415,7 @@ public class UserController {
 
     }
 
-    // Save Updated prediction
+    // Update prediction Details
     @RequestMapping(value = "/match/{memberId}/{matchNumber}/save", method = RequestMethod.POST)
     public String saveUpdatedPrediction(@ModelAttribute("predictionForm") Prediction prediction, @PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
 
@@ -442,6 +441,49 @@ public class UserController {
 
         return "redirect:/predictions";
     }
+
+    // show delete form
+    @RequestMapping(value = "/prediction/{predictionID}/delete", method = RequestMethod.GET)
+    public String showDeletePrediction(@PathVariable("predictionID") Integer predictionId, Model model, HttpSession httpSession) {
+
+        logger.debug("show Delete Form() : {}", predictionId);
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+
+            Prediction prediction = scheduleService.getPrediction(predictionId);
+
+            model.addAttribute("session", userLogin);
+            model.addAttribute("predictionForm", prediction);
+
+            return "users/confirm_delete";
+        }
+    }
+
+    // confirm delete form
+    @RequestMapping(value = "/prediction/{predictionId}/delete", method = RequestMethod.POST)
+    public String deletePrediction(@PathVariable("predictionId") Integer predictionId, Model model, HttpSession httpSession) {
+
+        logger.debug("delete Prediction() : {}", predictionId);
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            boolean isDeleteSuccess = scheduleService.deletePrediction(predictionId);
+
+            model.addAttribute("isDeleteSuccess", isDeleteSuccess);
+            model.addAttribute("session", httpSession.getAttribute("session"));
+            httpSession.setAttribute("msg", "Prediction deleted successfully ..!! ");
+
+            return "redirect:/predictions";
+        }
+    }
+
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logoutUser(Model model, HttpSession httpSession) {

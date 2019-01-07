@@ -103,6 +103,7 @@
 
     <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
 
+    <br />
     <c:if test="${not empty msg}">
         <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
             <h4><strong>${msg}</strong></h4>

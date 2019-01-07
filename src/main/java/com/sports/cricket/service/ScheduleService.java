@@ -23,6 +23,8 @@ public interface ScheduleService {
 
     Prediction getPrediction(Integer predictionId, Integer matchId);
 
+    Prediction getPrediction(Integer predictionId);
+
     boolean deletePrediction(Integer predictionId);
 
     boolean authorizeMember(Integer memberId);

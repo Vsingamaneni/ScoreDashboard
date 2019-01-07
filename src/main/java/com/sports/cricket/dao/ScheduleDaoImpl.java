@@ -171,6 +171,23 @@ public class ScheduleDaoImpl implements ScheduleDao {
     }
 
     @Override
+    public Prediction getPrediction(Integer predictionId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("predictionId", predictionId);
+
+        String sql = "SELECT * FROM PREDICTIONS where predictionId = ?";
+
+        Prediction prediction = null;
+        try {
+            prediction = (Prediction) jdbcTemplate.queryForObject(sql, new Object[]{predictionId}, new BeanPropertyRowMapper(Prediction.class));
+        } catch (EmptyResultDataAccessException e) {
+        }
+
+        return prediction;
+    }
+
+
+    @Override
     public List<Prediction> getPredictionByMatchDay(Integer matchDay) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("matchDay", matchDay);

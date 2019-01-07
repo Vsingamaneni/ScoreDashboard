@@ -105,8 +105,19 @@
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
+        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Select your team. </h2>
         <br /><br /><br />
+
+        <c:if test="${not empty errorDetailsList}">
+            <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> Dude, fix the below error(s)</h2>
+        </c:if>
+        <c:forEach var="errorDetails" items="${errorDetailsList}">
+            <c:if test="${not empty errorDetails.errorMessage}" >
+                <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> *** ${errorDetails.errorMessage} </h2>
+            </c:if>
+        </c:forEach>
+        <br /><br /><br />
+
 
         <div style="margin: 0 auto;">
 
@@ -133,7 +144,7 @@
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_name'>Name</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_name' name="firstName" style="min-width:150px; ">
-                                        <option>   --- SELECTED ---    </option>
+                                        <option>   --- SELECT ---    </option>
                                         <option>${user_name}</option>
                                     </select>
                                 </div>

@@ -23,14 +23,6 @@
 	<span class="w3-bar-item w3-right">Score Finder</span>
 </div>
 
-<%--<c:if test="${not empty user}">
-	<c:set var="user_name" value="${user.firstName}"/>
-	<c:set var="role" value="${user.role}"/>
-</c:if>
-
-<c:if test="${empty user}">
-	<c:set var="user_name" value="User"/>
-</c:if>--%>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -49,14 +41,5 @@
 	<div class="w3-container">
 		<h5>Dashboard</h5>
 	</div>
-	<div class="w3-bar-block">
-		<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>&nbsp; Home</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
-	</div>
+
 </nav>
