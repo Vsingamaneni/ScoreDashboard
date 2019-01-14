@@ -72,6 +72,9 @@
         <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
         <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
         <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
+        <c:if test="${ not user_name.equalsIgnoreCase('user')}">
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+        </c:if>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
@@ -99,9 +102,10 @@
                 </div>
                 <div class="w3-clear"></div>
                 <h4>Hello ${user_name}, You need to be active in order to update for matches. !! Please contact the admin !</h4>
+                <br><br><br><br><br><br><br><br>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br>
+
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
@@ -116,7 +120,7 @@
                 <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> *** ${errorDetails.errorMessage} </h2>
             </c:if>
         </c:forEach>
-        <br /><br /><br />
+        <br />
 
 
         <div style="margin: 0 auto;">

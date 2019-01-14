@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MatchUpdates {
 
-    public SchedulePrediction setUpdates(Schedule schedule, ScheduleService scheduleService, RegistrationService registrationService ){
+    public static SchedulePrediction setUpdates(Schedule schedule, ScheduleService scheduleService, RegistrationService registrationService ){
         SchedulePrediction schedulePrediction = new SchedulePrediction();
         schedulePrediction.setSchedule(schedule);
         List<Prediction> predictionsList =  scheduleService.getPredictionsByMatch(schedule.getMatchNumber());

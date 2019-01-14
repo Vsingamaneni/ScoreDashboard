@@ -484,6 +484,31 @@ public class UserController {
         }
     }
 
+    // Show Current Predictions
+    @RequestMapping(value = "/currentPredictions", method = RequestMethod.GET)
+    public String showCurrentPredictions(Model model, HttpSession httpSession) throws ParseException {
+
+        logger.debug("showCurrentPredictions()");
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        model.addAttribute("session", userLogin);
+        model.addAttribute("login", userLogin);
+        model.addAttribute("userLogin", userLogin);
+        List<Schedule> currentSchedule = ValidatePredictions.validateSchedule(scheduleService.findAll());
+
+        List<SchedulePrediction> schedulePredictionsList = new ArrayList<>();
+        for (Schedule schedule : currentSchedule) {
+
+            SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
+            ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
+            schedulePredictionsList.add(matchDetails);
+        }
+
+        model.addAttribute("schedulePredictions", schedulePredictionsList);
+
+        return "users/currentPredictions";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logoutUser(Model model, HttpSession httpSession) {

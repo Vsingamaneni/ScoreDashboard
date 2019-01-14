@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 1/1/19
-  Time: 10:34 AM
+  Date: 1/11/19
+  Time: 5:41 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
-    <link rel="stylesheet" href="/resources/core/css/table.css"/>
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -45,9 +44,6 @@
     <c:set var="user_name" value="User"/>
 </c:if>
 
-<spring:url value="/match/${predictionForm.predictionId}/${predictionForm.matchNumber}/save" var="updateUrl" />
-<spring:url value="/predictions" var="cancelUrl" />
-
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
     <div class="w3-container w3-row">
@@ -71,9 +67,9 @@
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
         <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
         <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
-        <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
+        <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+            <a href="/matchDayList" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
@@ -83,7 +79,7 @@
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
+            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Logout</a>
         </c:if>
     </div>
 </nav>
@@ -93,7 +89,6 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-
     <c:if test="${isActivated.equalsIgnoreCase('N')}">
         <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-container w3-red w3-padding-16">
@@ -101,90 +96,86 @@
                 <div class="w3-right">
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Hello ${user_name}, You need to be active in order to update for matches. !! Please contact the admin !</h4>
-                <br><br><br><br><br><br><br><br>
+                <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
             </div>
         </div>
-
+        <br><br><br><br><br><br><br><br>
     </c:if>
-    <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
-
-        <c:if test="${not empty errorDetailsList}">
-            <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> Dude, fix the below error(s)</h2>
-        </c:if>
-        <c:forEach var="errorDetails" items="${errorDetailsList}">
-            <c:if test="${not empty errorDetails.errorMessage}" >
-                <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> *** ${errorDetails.errorMessage} </h2>
-            </c:if>
-        </c:forEach>
-        <br /><br /><br />
-
-        <div style="margin: 0 auto;">
-
-            <div class='container'>
-                <div class='panel panel-primary dialog-panel'>
-                    <div class='panel-heading' style="background-color: #082a3e;">
-                        <h5 style="text-align: left;">Good Luck !!</h5>
-                    </div>
-                    <div class='panel-body'>
-                        <form action="${updateUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
-                            <div class='form-group'>
-                                <label class='control-label col-md-2 col-md-offset-2' for='id_event'>Match</label>
-                                <div class='col-md-2'>
-                                    <select class='form-control' id='id_event' name="event" style="min-width:150px;">
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}
-                                            vs ${fn:toUpperCase(scheduleForm.awayTeam)}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <input type=hidden id="predictionId" name="predictionId" value="${predictionForm.predictionId}">
-                            <input type=hidden id="memberId" name="memberId" value="${session.memberId}">
-                            <input type=hidden id="matchNumber" name="matchNumber" value="${predictionForm.matchNumber}">
-                            <input type=hidden id="homeTeam" name="homeTeam" value="${scheduleForm.homeTeam}">
-                            <input type=hidden id="awayTeam" name="awayTeam" value="${scheduleForm.awayTeam}">
-                            <div class='form-group'>
-                                <label class='control-label col-md-2 col-md-offset-2' for='id_name'>Previous Choice</label>
-                                <div class='col-md-2'>
-                                    <select class='form-control' id='id_name' name="abc"
-                                            style="min-width:150px; ">
-                                        <option style="text-align: center">${predictionForm.selected}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class='form-group'>
-                                <label class='control-label col-md-2 col-md-offset-2' for='id_selected'>Your
-                                    Choice</label>
-                                <div class='col-md-2'>
-                                    <select class='form-control' id='id_selected' name="selected"
-                                            style="min-width:150px; ">
-                                        <option style="text-align: center"> --- SELECT ---</option>
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}</option>
-                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.awayTeam)}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <div class='form-group'>
-                                <div class='col-md-offset-4 col-md-3'>
-                                    <button class='btn-lg btn-primary' type='submit' onclick="post('${updateUrl}')">
-                                        UPDATE
-                                    </button>
-                                </div>
-                                <div class='col-md-3'>
-                                    <button class='btn-lg btn-danger' type='submit'>
-                                        <a href="/predictions" style="color:white;text-decoration : none;">CANCEL</a>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <br />
+    <c:if test="${not empty msg}">
+        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
+            <h4><strong>${msg}</strong></h4>
         </div>
-
     </c:if>
+
+    <div class="w3-panel">
+        <div style="width: 1000px; margin: 0 auto;">
+            <h1 style="text-align:center;">Match Day Predictions</h1>
+
+            <c:forEach var="schedulePrediction" items="${schedulePredictions}">
+                <c:if test="${not empty schedulePrediction.schedule}">
+                    <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
+                    <br />
+                    <button class="btn btn-info">${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}</button>
+                    <button class="btn btn-primary">${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}</button>
+                    <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
+                        <button class="btn btn-primary" style="color:white;background-color:gray;border-color:darkgoldenrod;">DRAW : ${schedulePrediction.drawTeamCount}</button>
+                    </c:if>
+                    <button class="btn btn-danger">DEFAULT : ${schedulePrediction.notPredicted}</button>
+                    <br /><br />
+                </c:if>
+                <c:if test="${schedulePrediction.deadlinReached}">
+                    <button class="btn btn-info">${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} win: ${schedulePrediction.homeWinAmount}</button>
+                    <button class="btn btn-primary">${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} win : ${schedulePrediction.awayWinAmount}</button>
+                    <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
+                        <button class="btn btn-primary" style="color:white;background-color:gray;border-color:darkgoldenrod;">DRAW win : ${schedulePrediction.drawWinAmount}</button>
+                    </c:if>
+                    <br /><br />
+
+                </c:if>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#Game</th>
+                        <th>Name</th>
+                        <th>Fixture</th>
+                        <th>Prediction</th>
+                        <th>Predicted Time</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty schedulePrediction}">
+                        <c:forEach var="predictions" items="${schedulePrediction.prediction}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${predictions.matchNumber}</td>
+                                <td style="text-align:left;"> ${predictions.firstName}</td>
+                                <td style="text-align:left;">${predictions.homeTeam} vs ${predictions.awayTeam}</td>
+                                <td style="text-align:left;">${predictions.selected}</td>
+                                <td style="text-align:left;">${predictions.predictedTime}</td>
+                                <td style="text-align:left;">
+                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/view" var="userUrl" />
+                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/update" var="updateUrl" />
+
+                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
+                                    <c:if test="${predictions.canPredict == true}">
+                                    <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
+                                    </c:if>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <hr>
+                <br /><br /><br />
+            </c:forEach>
+        </div>
+    </div>
+
+    <hr>
+
+    <hr>
+
     <br>
 
     <!-- Footer -->
