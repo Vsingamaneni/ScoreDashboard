@@ -27,6 +27,7 @@
     <!--===============================================================================================-->
 
     <spring:url value="/registerUser" var="registerUrl" />
+    <spring:url value="/" var="cancelUrl" />
 </head>
 <body>
 
@@ -111,7 +112,8 @@
                 </div>
 
                 <div class="container-login100-form-btn m-t-32">
-                    <button class="login100-form-btn" type='submit' onclick="post('${registerUrl}')">Register</button>
+                    <button class="login100-form-btn" type='submit' formaction="/registerUser"<%--onclick="post('${registerUrl}')"--%>>Register</button>
+                    <button class="login100-form-btn" type='submit' formaction="/" >Cancel<%--<a href="/" style="color:white;text-decoration : none;">Cancel</a>--%></button>
                 </div>
             </form>
         </div>

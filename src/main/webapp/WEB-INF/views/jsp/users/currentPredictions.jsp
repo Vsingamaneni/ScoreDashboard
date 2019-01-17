@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
-    <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/core/css/table.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
@@ -109,51 +109,53 @@
         </div>
     </c:if>
 
-    <div class="w3-panel">
-        <div style="width: 1000px; margin: 0 auto;">
-            <h1 style="text-align:center;">Match Day Predictions</h1>
 
-            <c:forEach var="schedulePrediction" items="${schedulePredictions}">
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 auto">
+            <div style="width:100%">
+                <h1 style="text-align:center;">Match Day Predictions</h1>
+                <c:forEach var="schedulePrediction" items="${schedulePredictions}">
                 <c:if test="${not empty schedulePrediction.schedule}">
                     <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
+                    <hr>
                     <br />
-                    <button class="btn btn-info">${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}</button>
-                    <button class="btn btn-primary">${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}</button>
-                    <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                        <button class="btn btn-primary" style="color:white;background-color:gray;border-color:darkgoldenrod;">DRAW : ${schedulePrediction.drawTeamCount}</button>
-                    </c:if>
-                    <button class="btn btn-danger">DEFAULT : ${schedulePrediction.notPredicted}</button>
-                    <br /><br />
+                        <span style="display:flex;">
+                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
+                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
+                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
+                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
+                        </c:if>
+                        <input type="button" value="DEFAULT : ${schedulePrediction.notPredicted}" style=" margin: 0 auto;" class="btn btn-danger">
+                        </span>
+                    <br />
                 </c:if>
-                <c:if test="${schedulePrediction.deadlinReached}">
+                    <c:if test="${schedulePrediction.deadlinReached}">
                     <button class="btn btn-info">${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} win: ${schedulePrediction.homeWinAmount}</button>
                     <button class="btn btn-primary">${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} win : ${schedulePrediction.awayWinAmount}</button>
                     <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
                         <button class="btn btn-primary" style="color:white;background-color:gray;border-color:darkgoldenrod;">DRAW win : ${schedulePrediction.drawWinAmount}</button>
                     </c:if>
-                    <br /><br />
-
                 </c:if>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
+                    <br /><br />
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <tr align="center">
+                        <thead>
                         <th>#Game</th>
                         <th>Name</th>
                         <th>Fixture</th>
-                        <th>Prediction</th>
+                        <th>Choice</th>
                         <th>Predicted Time</th>
                         <th>Action</th>
+                        </thead>
                     </tr>
-                    </thead>
-
                     <c:if test="${not empty schedulePrediction}">
                         <c:forEach var="predictions" items="${schedulePrediction.prediction}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                                <td style="text-align:left;"> ${predictions.matchNumber}</td>
-                                <td style="text-align:left;"> ${predictions.firstName}</td>
-                                <td style="text-align:left;">${predictions.homeTeam} vs ${predictions.awayTeam}</td>
-                                <td style="text-align:left;">${predictions.selected}</td>
-                                <td style="text-align:left;">${predictions.predictedTime}</td>
+                            <tr style="color:black;font-size:20px;text-decoration:none;">
+                                <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>
+                                <td style="text-align:left;"> <b>${predictions.firstName} </b></td>
+                                <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
+                                <td style="text-align:left;"><b>${predictions.selected} </b> </td>
+                                <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
                                 <td style="text-align:left;">
                                         <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/view" var="userUrl" />
                                         <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/update" var="updateUrl" />
@@ -166,13 +168,13 @@
                         </c:forEach>
                     </c:if>
                 </table>
+                </c:forEach>
                 <hr>
                 <br /><br /><br />
-            </c:forEach>
+            </div>
         </div>
     </div>
 
-    <hr>
 
     <hr>
 

@@ -64,7 +64,7 @@ public class UserController {
     }
 
     // Show index page
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public String index(Model model, HttpSession httpSession) {
         return "redirect:/index";
     }
@@ -76,11 +76,11 @@ public class UserController {
                 && null == httpSession.getAttribute("session")) {
             UserLogin userLogin = new UserLogin();
             logger.debug("Login Page");
-            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>)httpSession.getAttribute("loginErrorDetails");
-            if (null != errorDetailsList
-                && errorDetailsList.size() > 0){
-                model.addAttribute("errorDetailsList", errorDetailsList);
-                httpSession.removeAttribute("errorDetailsList");
+            List<ErrorDetails> loginErrorDetails = (List<ErrorDetails>)httpSession.getAttribute("loginErrorDetails");
+            if (null != loginErrorDetails
+                && loginErrorDetails.size() > 0){
+                model.addAttribute("loginErrorDetails", loginErrorDetails);
+                httpSession.removeAttribute("loginErrorDetails");
             }
             model.addAttribute("userLogin", userLogin);
             return "users/index";
@@ -264,7 +264,7 @@ public class UserController {
     }
 
     // Show Register page
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
     public String register(ModelMap model, HttpSession httpSession) {
 
         List<ErrorDetails> registerErrorDetails = (List<ErrorDetails>) httpSession.getAttribute("registerErrorDetails");
