@@ -15,7 +15,7 @@
     <<title>Score Finder</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/resources/login/images/icons/cricket.ico"/>
+    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,6 +71,9 @@
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/matchDayList" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
+        <c:if test="${role.equalsIgnoreCase('admin')}">
+            <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
+        </c:if>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
@@ -114,6 +117,13 @@
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:100%">
                 <h1 style="text-align:center;">Match Day Predictions</h1>
+                <c:if test="${not empty matchSchedule}">
+                    <c:forEach var="errors" items="${matchSchedule}">
+                    <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;" role="alert">
+                        <h4><strong>${errors.errorMessage}</strong></h4>
+                    </div>
+                    </c:forEach>
+                </c:if>
                 <c:forEach var="schedulePrediction" items="${schedulePredictions}">
                 <c:if test="${not empty schedulePrediction.schedule}">
                     <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
@@ -168,9 +178,9 @@
                         </c:forEach>
                     </c:if>
                 </table>
+                    <br /><br /><br />
                 </c:forEach>
                 <hr>
-                <br /><br /><br />
             </div>
         </div>
     </div>

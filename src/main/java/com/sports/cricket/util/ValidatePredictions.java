@@ -117,8 +117,6 @@ public class ValidatePredictions {
                 }
             }
         }
-
-
         return predictionList;
     }
 

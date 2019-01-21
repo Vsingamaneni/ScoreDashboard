@@ -484,6 +484,116 @@ public class UserController {
         }
     }
 
+    // Save Result
+    @RequestMapping(value = "/saveResult", method = RequestMethod.GET)
+    public String saveResult(ModelMap model, HttpSession httpSession) throws ParseException {
+
+        logger.debug("saveResult() : {}");
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+
+            if (null != model.get("msg")) {
+                model.remove("msg");
+            }
+
+            String value = (String) httpSession.getAttribute("msg");
+            if (null != value) {
+                model.addAttribute("msg", value);
+                httpSession.removeAttribute("msg");
+            }
+            Schedule schedule = new Schedule();
+            httpSession.setAttribute("login", userLogin);
+            httpSession.setAttribute("user", userLogin.getFirstName());
+            httpSession.setAttribute("role", userLogin.getRole());
+            httpSession.setAttribute("session", userLogin);
+            model.addAttribute("schedule", schedule);
+            model.addAttribute("session", userLogin);
+
+            if (userLogin.getRole().equalsIgnoreCase("admin")) {
+
+                List<Schedule> schedules = scheduleService.findAll();
+
+                model.addAttribute("schedules", schedules);
+                if (null != httpSession.getAttribute("errorDetailsList")) {
+                    List<ErrorDetails> errorDetailsList = (List<ErrorDetails>) httpSession.getAttribute("errorDetailsList");
+                    model.addAttribute("errorDetailsList", errorDetailsList);
+                    httpSession.removeAttribute("errorDetailsList");
+                }
+
+                httpSession.setMaxInactiveInterval(5 * 60);
+                return "users/updateResult";
+            } else {
+                return "redirect:/predictions";
+            }
+        }
+    }
+
+    @RequestMapping(value = "/matchResult/update", method = RequestMethod.POST)
+    public String updateMatchResult(@ModelAttribute("schedule") Schedule schedule, ModelMap model, HttpSession httpSession) throws ParseException {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else if (!userLogin.getRole().equalsIgnoreCase("admin")) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            String value = (String) httpSession.getAttribute("msg");
+
+            if (null != value) {
+                model.addAttribute("msg", value);
+            }
+
+            httpSession.removeAttribute("msg");
+            httpSession.setAttribute("login", userLogin);
+            httpSession.setAttribute("user", userLogin.getFirstName());
+            httpSession.setAttribute("session", userLogin);
+            httpSession.setAttribute("role", userLogin.getRole());
+            model.addAttribute("session", userLogin);
+
+            boolean isUpdateSuccess = false;
+            boolean isUpdateResultSuccess = false;
+
+            if (null != schedule
+                    && null != schedule.getWinner()) {
+                List<ErrorDetails> errorDetailsList = ResultValidator.isMatchResultValid(schedule);
+                if (errorDetailsList.size() > 0 ){
+                    httpSession.setAttribute("errorDetailsList" , errorDetailsList);
+                    return "redirect:/saveResult";
+                }
+                Integer totalMatches = scheduleService.totalMatches(schedule.getMatchDay());
+                isUpdateSuccess = scheduleService.updateMatchResult(schedule);
+                SchedulePrediction schedulePrediction = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
+                Result result = MatchUpdates.mapResult(schedule, schedulePrediction);
+
+                isUpdateResultSuccess = scheduleService.addResult(result);
+
+                List<Standings> standingsList = MatchUpdates.updateStandings(schedulePrediction);
+
+                scheduleService.insertPredictions(standingsList);
+
+                if (totalMatches == 1) {
+                    scheduleService.updateMatchDay(schedule.getMatchDay() + 1);
+                }
+            }
+
+            if (isUpdateSuccess && isUpdateResultSuccess) {
+                httpSession.setAttribute("msg", "Match result and standings are updated successfully ..!!");
+            }
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "redirect:/saveResult";
+        }
+    }
+
     // Show Current Predictions
     @RequestMapping(value = "/currentPredictions", method = RequestMethod.GET)
     public String showCurrentPredictions(Model model, HttpSession httpSession) throws ParseException {
@@ -495,14 +605,22 @@ public class UserController {
         model.addAttribute("session", userLogin);
         model.addAttribute("login", userLogin);
         model.addAttribute("userLogin", userLogin);
+
         List<Schedule> currentSchedule = ValidatePredictions.validateSchedule(scheduleService.findAll());
+        List<ErrorDetails> errorDetailsList = new ArrayList<>();
 
         List<SchedulePrediction> schedulePredictionsList = new ArrayList<>();
         for (Schedule schedule : currentSchedule) {
-
-            SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
-            ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
-            schedulePredictionsList.add(matchDetails);
+            if(ValidateDeadline.isDeadLineReached(schedule.getStartDate()) || userLogin.getRole().equalsIgnoreCase("admin")){
+                SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
+                ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
+                schedulePredictionsList.add(matchDetails);
+            } else {
+                ErrorDetails errorDetails = new ErrorDetails();
+                errorDetails.setErrorMessage("The deadline is not reached for " + schedule.getHomeTeam() + " vs " + schedule.getAwayTeam());
+                errorDetailsList.add(errorDetails);
+                model.addAttribute("matchSchedule", errorDetailsList);
+            }
         }
 
         model.addAttribute("schedulePredictions", schedulePredictionsList);
@@ -510,13 +628,8 @@ public class UserController {
         return "users/currentPredictions";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
     public String logoutUser(Model model, HttpSession httpSession) {
-        return "redirect:/logout";
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutUserAgain(Model model, HttpSession httpSession) {
         logger.debug("logoutUser()");
         httpSession.invalidate();
         return "redirect:/";
