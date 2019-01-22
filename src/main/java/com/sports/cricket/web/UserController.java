@@ -256,7 +256,7 @@ public class UserController {
 
         if (success) {
             redirectAttributes.addFlashAttribute("msg", "Hurray, You are In!");
-            return "redirect:/login";
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("msg", "OOOPSS!! Registration Failed!");
             return "redirect:/register";
@@ -626,6 +626,40 @@ public class UserController {
         model.addAttribute("schedulePredictions", schedulePredictionsList);
 
         return "users/currentPredictions";
+    }
+
+    // Display Standings
+    @RequestMapping(value = "/standings", method = RequestMethod.GET)
+    public String standings(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+
+            String value = (String) httpSession.getAttribute("msg");
+
+            if (null != value) {
+                model.addAttribute("msg", value);
+            }
+            httpSession.removeAttribute("msg");
+            httpSession.setAttribute("session", userLogin);
+
+            List<Register> registerList = registrationService.getAllUsers();
+            List<Standings> standingsList = scheduleService.getLeaderBoard();
+
+            List<LeaderBoard> leaderBoardList = LeaderBoardDetails.mapLeaderBoard(standingsList, registerList);
+
+            model.addAttribute("leaderBoardList", leaderBoardList);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/leaderboard";
+        }
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})

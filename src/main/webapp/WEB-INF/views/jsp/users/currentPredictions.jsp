@@ -80,7 +80,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
         </c:if>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
+        <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Logout</a>
         </c:if>
@@ -102,7 +102,7 @@
                 <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br>
+        <br><br>
     </c:if>
 
     <br />
