@@ -281,18 +281,18 @@ public class FormValidator {
         }
 
         if (null != register
-                && null == register.getEmailId()){
+                && null == register.getEmailId() || register.getEmailId() == ""){
             errorDetails = new ErrorDetails();
             errorDetails.setErrorField("EmailId");
-            errorDetails.setErrorMessage("Email ID cannot be null..!");
+            errorDetails.setErrorMessage("Email ID cannot be empty..!");
             errorsList.add(errorDetails);
         }
 
         if (null != register
-                && null == register.getConfirmEmailId()){
+                && null == register.getConfirmEmailId() || register.getConfirmEmailId() == ""){
             errorDetails = new ErrorDetails();
             errorDetails.setErrorField("Confirm EmailId");
-            errorDetails.setErrorMessage("Confirm Email ID cannot be null..!");
+            errorDetails.setErrorMessage("Confirm Email ID cannot be empty..!");
             errorsList.add(errorDetails);
         }
 

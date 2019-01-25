@@ -227,7 +227,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
             register.setSaltKey(encryptedPassword.getSalt());
         }
 
-        String sql = "UPDATE REGISTER SET encryptedPass = '" +register.getEncryptedPass() +"', saltKey = '" +register.getSaltKey() +"' where emailId = '" + register.getEmailId() +"'";
+        String sql = "UPDATE REGISTER SET encryptedPass = '" +register.getEncryptedPass() +"', saltKey = '" +register.getSaltKey() +"' where email = '" + register.getEmailId() +"'";
 
         int row = jdbcTemplate.update(sql);
 

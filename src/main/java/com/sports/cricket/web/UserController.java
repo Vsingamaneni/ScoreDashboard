@@ -72,6 +72,10 @@ public class UserController {
     // Show index page
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showHomePage(Model model, HttpSession httpSession) {
+        if (null != httpSession.getAttribute("msg")){
+            model.addAttribute("msg", httpSession.getAttribute("msg"));
+            httpSession.removeAttribute("msg");
+        }
         if (null != httpSession
                 && null == httpSession.getAttribute("session")) {
             UserLogin userLogin = new UserLogin();
@@ -206,36 +210,6 @@ public class UserController {
         }
     }
 
-    // Show Register page
-    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
-    public String schedule(ModelMap model, HttpSession httpSession) throws ParseException {
-        logger.debug("schedule()");
-
-        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
-
-        if (null == userLogin) {
-            return "redirect:/";
-        } else {
-            model.addAttribute("session", userLogin);
-            model.addAttribute("login", userLogin);
-            model.addAttribute("userLogin", userLogin);
-
-            if (userLogin.getIsActive().equalsIgnoreCase("N")) {
-                httpSession.setAttribute("msg", "You Need to be active to predict for matches");
-                return "users/contact_admin";
-            }
-
-            List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
-            schedules = ScheduleListMapper.mapScheduleStauts(schedules);
-
-            model.addAttribute("schedules", schedules);
-
-            httpSession.setMaxInactiveInterval(5 * 60);
-
-            return "users/schedule";
-        }
-    }
-
     // Validate the registration details
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("registerForm") Register register, ModelMap model, HttpSession httpSession, final RedirectAttributes redirectAttributes) {
@@ -280,6 +254,117 @@ public class UserController {
         logger.debug("Register User()");
         model.addAttribute("registerForm", register);
         return "users/register";
+    }
+
+    // Forget Password
+    @RequestMapping(value = "/forget", method = {RequestMethod.GET, RequestMethod.POST})
+    public String forgetPassword(Model model, HttpSession httpSession) {
+
+        if ( null != httpSession.getAttribute("errorDetailsList")){
+            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>)httpSession.getAttribute("errorDetailsList");
+            model.addAttribute("errorDetailsList", errorDetailsList);
+            httpSession.removeAttribute("errorDetailsList");
+            return "users/forget";
+        }
+
+        Register register = new Register();
+
+        logger.debug("forgetPassword()");
+        model.addAttribute("registerForm", register);
+
+        if (null == httpSession.getAttribute("login")) {
+            return "users/forget";
+        } else {
+            return "redirect:/resetPassword";
+        }
+    }
+
+    // Rest Password
+    @RequestMapping(value = "/resetPassword", method = {RequestMethod.POST})
+    public String resetPassword(@ModelAttribute("registerForm") Register register, Model model, HttpSession httpSession) {
+
+        logger.debug("resetPassword()");
+        Register userDetails;
+
+        List<ErrorDetails> errorDetailsList = formValidator.isEmailValid(register);
+
+        if (errorDetailsList.size() > 0){
+            httpSession.setAttribute("errorDetailsList", errorDetailsList);
+            return "redirect:/forget";
+        } else {
+            userDetails = registrationService.getUser(register.getEmailId());
+        }
+
+        logger.debug("forgetPassword()");
+        model.addAttribute("registerForm", register);
+        model.addAttribute("userDetails", userDetails);
+
+        if (null == httpSession.getAttribute("login")) {
+            return "users/reset";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    // Update Password
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    public String updatePassword(@ModelAttribute("registerForm") Register register, Model model, HttpSession httpSession) {
+
+        logger.debug("inside updatePassword()");
+        boolean isUpdateSuccess = false;
+
+        List<ErrorDetails> errorDetailsList = formValidator.isUpdateValid(register, registrationService);
+
+        if (errorDetailsList.size() > 0){
+            httpSession.setAttribute("errorDetailsList", errorDetailsList);
+            return "redirect:/forget";
+        }
+
+        if (null != register.getEmailId()) {
+            isUpdateSuccess = registrationService.updateUser(register);
+        }
+
+        logger.debug("forgetPassword()");
+        model.addAttribute("registerForm", register);
+        model.addAttribute("isUpdateSuccess", isUpdateSuccess);
+        model.addAttribute("msg", "You have successfully Updated your password ..!!");
+        httpSession.setAttribute("msg", "You have successfully Updated your password ..!!");
+
+        if (null == httpSession.getAttribute("session")) {
+            return "redirect:/";
+        } else {
+            return "redirect:/predictions";
+        }
+    }
+
+    // Show Register page
+    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    public String schedule(ModelMap model, HttpSession httpSession) throws ParseException {
+        logger.debug("schedule()");
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            model.addAttribute("login", userLogin);
+            model.addAttribute("userLogin", userLogin);
+
+            if (userLogin.getIsActive().equalsIgnoreCase("N")) {
+                httpSession.setAttribute("msg", "You Need to be active to predict for matches");
+                return "users/contact_admin";
+            }
+
+            List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
+            schedules = ScheduleListMapper.mapScheduleStauts(schedules);
+
+            model.addAttribute("schedules", schedules);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+
+            return "users/schedule";
+        }
     }
 
     // Display predictions
