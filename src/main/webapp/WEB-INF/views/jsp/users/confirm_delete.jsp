@@ -75,7 +75,6 @@
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
@@ -111,14 +110,12 @@
         <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
         <br /><br /><br />
 
-        <div style="margin: 0 auto;">
-
-            <div class='container'>
+            <div class='container' style="width: 80%; margin: 0 auto;">
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
                         <h5 style="text-align: left;">Make sure you don't miss the deadline !!</h5>
                     </div>
-                    <div class='panel-body'>
+                    <div class='panel-body' >
                         <form action="${updateUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
                             <div class='form-group'>
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_event'>Match</label>
@@ -169,7 +166,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
     </c:if>
     <br>

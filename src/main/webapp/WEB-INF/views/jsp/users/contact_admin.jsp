@@ -66,7 +66,6 @@
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>

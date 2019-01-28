@@ -571,7 +571,7 @@ public class UserController {
 
     // Save Result
     @RequestMapping(value = "/saveResult", method = RequestMethod.GET)
-    public String saveResult(ModelMap model, HttpSession httpSession) throws ParseException {
+    public String saveResult(ModelMap model, HttpSession httpSession){
 
         logger.debug("saveResult() : {}");
 

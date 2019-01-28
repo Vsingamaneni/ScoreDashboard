@@ -69,12 +69,11 @@
         <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
         <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/matchDayList" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
         <c:if test="${role.equalsIgnoreCase('admin')}">
             <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
@@ -128,7 +127,6 @@
                 <c:if test="${not empty schedulePrediction.schedule}">
                     <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
                     <hr>
-                    <br />
                         <span style="display:flex;">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
@@ -140,12 +138,14 @@
                     <br />
                 </c:if>
                     <c:if test="${schedulePrediction.deadlinReached}">
-                    <button class="btn btn-info">${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} win: ${schedulePrediction.homeWinAmount}</button>
-                    <button class="btn btn-primary">${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} win : ${schedulePrediction.awayWinAmount}</button>
-                    <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                        <button class="btn btn-primary" style="color:white;background-color:gray;border-color:darkgoldenrod;">DRAW win : ${schedulePrediction.drawWinAmount}</button>
+                        <span style="display:flex;">
+                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeWinAmount}" style=" margin: 0 auto;" class="btn btn-info">
+                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayWinAmount}" style=" margin: 0 auto;" class="btn btn-primary">
+                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
+                            <input type="button" value="DRAW : ${schedulePrediction.drawWinAmount}"  style="margin:0 auto; color:white;background-color:gray;border-color:darkgoldenrod;" class="btn btn-danger">
+                        </c:if>
+                        </span>
                     </c:if>
-                </c:if>
                     <br /><br />
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <tr align="center">

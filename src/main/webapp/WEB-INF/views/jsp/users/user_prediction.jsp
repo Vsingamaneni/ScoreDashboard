@@ -15,16 +15,17 @@
     <<title>Score Finder</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="icon" type="image/x-icon" href="/resources/login/images/icons/cricket.ico"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
     <link rel="stylesheet" href="/resources/core/css/table.css"/>
-    <link rel="stylesheet" href="/resources/core/css/format_css.css"/>
-    <%--<link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>--%>
+    <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+        a href{text-decoration: none;}
     </style>
 </head>
 
@@ -70,24 +71,23 @@
     </div>
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
-        <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
-        <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+        <a href="/schedule" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
+        <a href="/predictions" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Results</a>
         <c:if test="${role.equalsIgnoreCase('admin')}">
-            <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
+            <a href="/saveResult" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
-        <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+        <a href="/standings" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
+            <a href="/logout" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
         </c:if>
     </div>
 </nav>
@@ -126,21 +126,18 @@
         </c:forEach>
         <br />
 
-
-        <div style="margin: 0 auto;">
-
-            <div class='container'>
+        <div class='container' style="width: 80%; margin: 0 auto;">
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
-                        <h5 style="text-align: left;">Good Luck !!</h5>
+                        <h5 style="text-align: center;">Good Luck !!</h5>
                     </div>
-                    <div class='panel-body'>
+                    <div class='panel-body' >
                         <form action="${predictionUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
                             <div class='form-group'>
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_event'>Match</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_event' name="event" style="min-width:150px;">
-                                        <option>${fn:toUpperCase(scheduleForm.homeTeam)} vs ${fn:toUpperCase(scheduleForm.awayTeam)}</option>
+                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)} vs ${fn:toUpperCase(scheduleForm.awayTeam)}</option>
                                     </select>
                                 </div>
                             </div>
@@ -153,7 +150,7 @@
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_name' name="firstName" style="min-width:150px; ">
                                         <option>   --- SELECT ---    </option>
-                                        <option>${user_name}</option>
+                                        <option style="text-align: center">${user_name}</option>
                                     </select>
                                 </div>
                             </div>
@@ -162,8 +159,8 @@
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_selected' name="selected" style="min-width:150px; ">
                                         <option>   --- SELECT ---    </option>
-                                        <option>${fn:toUpperCase(scheduleForm.homeTeam)}</option>
-                                        <option>${fn:toUpperCase(scheduleForm.awayTeam)}</option>
+                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}</option>
+                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.awayTeam)}</option>
                                     </select>
                                 </div>
                             </div>
@@ -184,7 +181,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
     </c:if>
     <br>

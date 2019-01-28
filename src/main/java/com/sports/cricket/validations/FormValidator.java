@@ -297,7 +297,7 @@ public class FormValidator {
         }
 
         if (null != register
-                && null != register.getConfirmEmailId() && null != register.getEmailId()){
+                && null != register.getConfirmEmailId() && null != register.getEmailId() && register.getEmailId() != "" && register.getConfirmEmailId() != ""){
             if (!register.getEmailId().trim().equalsIgnoreCase(register.getConfirmEmailId().trim())) {
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("Email Mismatch");

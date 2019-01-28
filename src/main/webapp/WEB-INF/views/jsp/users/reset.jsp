@@ -78,7 +78,7 @@
 
                 <div class="container-login100-form-btn m-t-32">
                     <button class="login100-form-btn" type='submit' onclick="post('${updatePasswordUrl}')">Reset Password</button>
-                    <button class="login100-form-btn" type='submit' formaction="/">Cancel</button>
+                    &nbsp;<button class="login100-form-btn" type='submit' formaction="/">Cancel</button>
                 </div>
 
             </form>
