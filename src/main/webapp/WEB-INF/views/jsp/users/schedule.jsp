@@ -65,6 +65,9 @@
         <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
         <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
         <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
+        <c:if test="${ not user_name.equalsIgnoreCase('user')}">
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+        </c:if>
         <c:if test="${role.equalsIgnoreCase('admin')}">
             <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
         </c:if>

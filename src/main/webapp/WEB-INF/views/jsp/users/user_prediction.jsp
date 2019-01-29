@@ -113,7 +113,7 @@
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Select your team. </h2>
+        <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Select your team. </h2>
         <br /><br /><br />
 
         <c:if test="${not empty errorDetailsList}">
@@ -129,7 +129,7 @@
         <div class='container' style="width: 80%; margin: 0 auto;">
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
-                        <h5 style="text-align: center;">Good Luck !!</h5>
+                        <h1 style="text-align: center;">Good Luck Dude</h1>
                     </div>
                     <div class='panel-body' >
                         <form action="${predictionUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>

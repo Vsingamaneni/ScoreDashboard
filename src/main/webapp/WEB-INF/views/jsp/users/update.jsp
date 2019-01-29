@@ -71,23 +71,23 @@
     </div>
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
-        <a href="/schedule" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
-        <a href="/predictions" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+        <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
+        <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; MatchDay Predictions</a>
         </c:if>
         <c:if test="${role.equalsIgnoreCase('admin')}">
-            <a href="/saveResult" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
+            <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp; Update Result</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
-            <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
-        <a href="/standings" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+        <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/logout" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
+            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
         </c:if>
     </div>
 </nav>
