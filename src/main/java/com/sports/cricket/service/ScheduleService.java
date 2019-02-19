@@ -29,6 +29,8 @@ public interface ScheduleService {
 
     boolean authorizeMember(Integer memberId);
 
+    boolean deactivateMember(Integer memberId);
+
     List<Prediction> getPredictionsByMatch(Integer matchId);
 
     List<Prediction> getPredictionsByMatchDay(Integer matchDay);

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 1/11/19
-  Time: 5:41 PM
+  Date: 2/11/19
+  Time: 6:51 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -12,7 +12,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
-    <<title>Score Finder</title>
+    <<title>History</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
@@ -78,7 +78,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
         </c:if>
-        <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
         <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
         <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Users</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
@@ -91,21 +91,6 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
-    <c:if test="${isActivated.equalsIgnoreCase('N')}">
-        <div class="w3-row-padding w3-margin-bottom">
-            <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                </div>
-                <div class="w3-clear"></div>
-                <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
-            </div>
-        </div>
-        <br><br>
-    </c:if>
-
-    <br />
     <c:if test="${not empty msg}">
         <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
             <h4><strong>${msg}</strong></h4>
@@ -115,72 +100,39 @@
 
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
-            <div style="width:100%">
-                <h1 style="text-align:center;">Match Day Predictions</h1>
-                <c:if test="${not empty matchSchedule}">
-                    <c:forEach var="errors" items="${matchSchedule}">
-                    <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;" role="alert">
-                        <h4><strong>${errors.errorMessage}</strong></h4>
-                    </div>
-                    </c:forEach>
-                </c:if>
-                <c:forEach var="schedulePrediction" items="${schedulePredictions}">
-                <c:if test="${not empty schedulePrediction.schedule}">
-                    <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
-                    <hr>
-                        <span style="display:flex;">
-                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
-                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        </c:if>
-                        <input type="button" value="DEFAULT : ${schedulePrediction.notPredicted}" style=" margin: 0 auto;" class="btn btn-danger">
-                        </span>
-                    <br />
-                </c:if>
-                    <c:if test="${schedulePrediction.deadlinReached}">
-                        <span style="display:flex;">
-                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeWinAmount}" style=" margin: 0 auto;" class="btn btn-info">
-                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayWinAmount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawWinAmount}"  style="margin:0 auto; color:white;background-color:gray;border-color:darkgoldenrod;" class="btn btn-danger">
-                        </c:if>
-                        </span>
-                    </c:if>
-                    <br /><br />
-                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <tr align="center">
-                        <thead>
-                        <th>#Game</th>
-                        <th>Name</th>
-                        <th>Fixture</th>
-                        <th>Choice</th>
-                        <th>Predicted Time</th>
-                        <th>Action</th>
-                        </thead>
-                    </tr>
-                    <c:if test="${not empty schedulePrediction}">
-                        <c:forEach var="predictions" items="${schedulePrediction.prediction}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;">
-                                <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>
-                                <td style="text-align:left;"> <b>${predictions.firstName} </b></td>
-                                <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
-                                <td style="text-align:left;"><b>${predictions.selected} </b> </td>
-                                <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
-                                <td style="text-align:left;">
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/view" var="userUrl" />
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/update" var="updateUrl" />
+            <div style="width:90%">
+                <br /><br />
+                <h1 style="text-align: center;">Hello ${user_name}, Below is your summary ..! </h1>
+                <br />
 
-                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
-                                    <c:if test="${predictions.canPredict == true}">
-                                    <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-                                    </c:if>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Match#</th>
+                        <th>Fixture</th>
+                        <th>Selected</th>
+                        <th>Winner</th>
+                        <th>Won</th>
+                        <th>Lost</th>
+                        <th>Net</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty standingsList}">
+                        <c:forEach var="standings" items="${standingsList}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${standings.matchNumber}</td>
+                                <td style="text-align:left;"> ${standings.homeTeam} vs ${standings.awayTeam}</td>
+                                <td style="text-align:left;"> ${standings.selected}</td>
+                                <td style="text-align:left;"> ${standings.winner}</td>
+                                <td style="text-align:left;">${standings.wonAmount}</td>
+                                <td style="text-align:left;">${standings.lostAmount}</td>
+                                <td style="text-align:left;">${standings.netAmount} </td>
                             </tr>
                         </c:forEach>
                     </c:if>
                 </table>
-                    <br /><br /><br />
-                </c:forEach>
+                <br /><br /><br />
                 <hr>
             </div>
         </div>

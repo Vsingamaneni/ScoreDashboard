@@ -233,30 +233,14 @@ public class ScheduleDaoImpl implements ScheduleDao {
     public boolean authorizeMember(Integer memberID) {
 
         String sql = "UPDATE REGISTER SET isActive = 'Y' , isAdminActivated = 'Y' where memberId = ?";
+        return executeQuery(sql, memberID);
+    }
 
+    @Override
+    public boolean deactivateMember(Integer id) {
 
-        Connection conn = null;
-        int rows = 0;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, memberID);
-
-            rows = ps.executeUpdate();
-            ps.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
-        }
-
-        return (rows == 1 ? true : false);
+        String sql = "UPDATE REGISTER SET isActive = 'N' , isAdminActivated = 'N' where memberId = ?";
+        return executeQuery(sql, id);
     }
 
     @Override
@@ -459,20 +443,33 @@ public class ScheduleDaoImpl implements ScheduleDao {
         return schedules;
     }
 
-    private SqlParameterSource getSqlParameterByModel(Prediction prediction) {
-
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("memberId", prediction.getMemberId());
-        paramSource.addValue("matchNumber", prediction.getMatchNumber());
-        paramSource.addValue("homeTeam", prediction.getHomeTeam());
-        paramSource.addValue("awayTeam", prediction.getAwayTeam());
-        paramSource.addValue("selected", prediction.getSelected());
-        paramSource.addValue("predictedTime", getTime().toString());
-
-        return paramSource;
-    }
-
     private LocalDateTime getTime(){
         return java.time.LocalDateTime.now();
+    }
+
+    public boolean executeQuery(String sql, int id){
+        Connection connection = null;
+        int totalRows;
+
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, id);
+            totalRows = statement.executeUpdate();
+
+            statement.close();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {}
+            }
+        }
+
+        return (totalRows == 1 ? true : false);
     }
 }

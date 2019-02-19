@@ -31,6 +31,8 @@ public interface ScheduleDao {
 
     boolean authorizeMember(Integer memberID);
 
+    boolean deactivateMember(Integer memberID);
+
     List<Prediction> getPredictionsByMatch(Integer matchId);
 
     boolean updateMatchResult(Schedule schedule);

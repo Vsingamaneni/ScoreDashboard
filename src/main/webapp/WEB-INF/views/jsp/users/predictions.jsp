@@ -78,8 +78,9 @@
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Register</a>
         </c:if>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+        <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
         <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Standings</a>
+        <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; Users</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
         </c:if>
@@ -103,14 +104,14 @@
                 <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br>
+        <br><br>
     </c:if>
 
-    <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
+    <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
 
     <br />
     <c:if test="${not empty msg}">
-        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
+        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#4CAF50;" role="alert">
             <h4><strong>${msg}</strong></h4>
         </div>
     </c:if>

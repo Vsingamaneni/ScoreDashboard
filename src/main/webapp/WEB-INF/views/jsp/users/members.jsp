@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 1/11/19
-  Time: 5:41 PM
+  Date: 2/12/19
+  Time: 9:53 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -31,7 +31,7 @@
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item w3-right">Score Finder</span>
+    <span class="w3-bar-item w3-right">Members List</span>
 </div>
 
 <c:if test="${not empty session}">
@@ -91,21 +91,6 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
-    <c:if test="${isActivated.equalsIgnoreCase('N')}">
-        <div class="w3-row-padding w3-margin-bottom">
-            <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                </div>
-                <div class="w3-clear"></div>
-                <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
-            </div>
-        </div>
-        <br><br>
-    </c:if>
-
-    <br />
     <c:if test="${not empty msg}">
         <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
             <h4><strong>${msg}</strong></h4>
@@ -115,72 +100,56 @@
 
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
-            <div style="width:100%">
-                <h1 style="text-align:center;">Match Day Predictions</h1>
-                <c:if test="${not empty matchSchedule}">
-                    <c:forEach var="errors" items="${matchSchedule}">
-                    <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;" role="alert">
-                        <h4><strong>${errors.errorMessage}</strong></h4>
-                    </div>
-                    </c:forEach>
-                </c:if>
-                <c:forEach var="schedulePrediction" items="${schedulePredictions}">
-                <c:if test="${not empty schedulePrediction.schedule}">
-                    <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
-                    <hr>
-                        <span style="display:flex;">
-                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
-                        <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        </c:if>
-                        <input type="button" value="DEFAULT : ${schedulePrediction.notPredicted}" style=" margin: 0 auto;" class="btn btn-danger">
-                        </span>
-                    <br />
-                </c:if>
-                    <c:if test="${schedulePrediction.deadlinReached}">
-                        <span style="display:flex;">
-                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeWinAmount}" style=" margin: 0 auto;" class="btn btn-info">
-                        <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayWinAmount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawWinAmount}"  style="margin:0 auto; color:white;background-color:gray;border-color:darkgoldenrod;" class="btn btn-danger">
-                        </c:if>
-                        </span>
-                    </c:if>
-                    <br /><br />
+            <div style="width:90%">
+                <br /><br />
+                <h1 style="text-align: center;">Registered Users</h1>
+                <br />
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <tr align="center">
-                        <thead>
-                        <th>#Game</th>
-                        <th>Name</th>
-                        <th>Fixture</th>
-                        <th>Choice</th>
-                        <th>Predicted Time</th>
-                        <th>Action</th>
-                        </thead>
+                    <thead>
+                    <tr>
+                        <th>Member #</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Admin Activated</th>
+                        <th>Status</th>
                     </tr>
-                    <c:if test="${not empty schedulePrediction}">
-                        <c:forEach var="predictions" items="${schedulePrediction.prediction}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;">
-                                <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>
-                                <td style="text-align:left;"> <b>${predictions.firstName} </b></td>
-                                <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
-                                <td style="text-align:left;"><b>${predictions.selected} </b> </td>
-                                <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
-                                <td style="text-align:left;">
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/view" var="userUrl" />
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/update" var="updateUrl" />
+                    </thead>
 
-                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
-                                    <c:if test="${predictions.canPredict == true}">
-                                    <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
+                    <c:forEach var="register" items="${registerList}">
+                        <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                            <td style="text-align:left;"> ${register.memberId}</td>
+                            <td style="text-align:left;">${register.fName}</td>
+                            <td style="text-align:left;">${register.lName}</td>
+                            <td style="text-align:left;">${register.isAdminActivated}</td>
+                            <td style="text-align:left;">
+                                <spring:url value="/member/${register.memberId}/authorize" var="activateUrl"/>
+                                <spring:url value="/member/${register.memberId}/deactivate" var="deactivateUrl"/>
+                                <c:if test="${role.equalsIgnoreCase('admin')}">
+                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
+                                        <button class="btn btn-info" onclick="location.href='${activateUrl}'">Authorize
+                                        </button>
                                     </c:if>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
+                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
+                                        <button class="btn btn-info" onclick="">Active</button> &nbsp;&nbsp;
+                                        <button class="btn btn-danger" onclick="location.href='${deactivateUrl}'">Opt Out</button>
+                                    </c:if>
+                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
+                                        <button class="btn btn-danger" onclick="">In Active</button>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${!role.equalsIgnoreCase('admin')}">
+                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
+                                        <button class="btn btn-info" onclick="">Active</button>
+                                    </c:if>
+                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
+                                        <button class="btn btn-danger" onclick="">In Active</button>
+                                    </c:if>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </table>
-                    <br /><br /><br />
-                </c:forEach>
+                <br /><br /><br />
                 <hr>
             </div>
         </div>

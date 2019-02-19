@@ -205,9 +205,25 @@ public class UserController {
             model.addAttribute("session", userLogin);
             model.addAttribute("userLogin", userLogin);
 
-            httpSession.setMaxInactiveInterval(5 * 60);
+            httpSession.setMaxInactiveInterval(10 * 60);
             return "users/welcome";
         }
+    }
+
+    // Show All Users
+    @RequestMapping(value = "/showAllUsers", method = RequestMethod.GET)
+    public String showAllUsers(Model model, HttpSession httpSession) {
+
+        logger.debug("showAllUsers()");
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        model.addAttribute("session", userLogin);
+        model.addAttribute("login", userLogin);
+        List<Register> registerList = registrationService.getAllUsers();
+        model.addAttribute("registerList", registerList);
+
+        return "users/members";
     }
 
     // Validate the registration details
@@ -254,6 +270,49 @@ public class UserController {
         logger.debug("Register User()");
         model.addAttribute("registerForm", register);
         return "users/register";
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/member/{memberId}/authorize", method = RequestMethod.GET)
+    public String authorizeMember(@PathVariable("memberId") Integer memberId, Model model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            boolean isAuthSuccess = scheduleService.authorizeMember(memberId);
+
+            model.addAttribute("session", userLogin);
+            model.addAttribute("isAuthSuccess", isAuthSuccess);
+            if (isAuthSuccess){
+                userLogin.setIsAdminActivated("Y");
+            }
+            httpSession.setAttribute("login", userLogin);
+
+            return "redirect:/showAllUsers";
+        }
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/member/{memberId}/deactivate", method = RequestMethod.GET)
+    public String deactivateMember(@PathVariable("memberId") Integer memberId, Model model, HttpSession httpSession) {
+
+        UserLogin user = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == user) {
+            return "redirect:/";
+        } else {
+            boolean isAuthSuccess = scheduleService.deactivateMember(memberId);
+
+            model.addAttribute("session", user);
+            if (isAuthSuccess){
+                user.setIsAdminActivated("N");
+            }
+            httpSession.setAttribute("session", user);
+
+            return "redirect:/showAllUsers";
+        }
     }
 
     // Forget Password
@@ -744,6 +803,37 @@ public class UserController {
 
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/leaderboard";
+        }
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    public String showHistory(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            //model.addAttribute("msg", "User logged in");
+            String value = (String) httpSession.getAttribute("msg");
+            if (null != value) {
+                model.addAttribute("msg", value);
+            }
+            httpSession.removeAttribute("msg");
+            httpSession.setAttribute("session", userLogin);
+
+            List<Standings> standingsList = LeaderBoardDetails.getStandings(scheduleService.getLeaderBoard(), userLogin.getMemberId());
+            standingsList = MatchUpdates.mapStandings(standingsList);
+
+            model.addAttribute("standingsList", standingsList);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/history";
         }
     }
 

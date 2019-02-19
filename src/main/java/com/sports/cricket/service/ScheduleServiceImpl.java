@@ -71,6 +71,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public boolean deactivateMember(Integer memberId) {
+        return scheduleDao.deactivateMember(memberId);
+    }
+
+    @Override
     public List<Prediction> getPredictionsByMatch(Integer matchId) {
         return scheduleDao.getPredictionsByMatch(matchId);
     }
