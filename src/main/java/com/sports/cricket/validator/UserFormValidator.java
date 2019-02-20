@@ -9,7 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-//http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#validation-mvc-configuring
 @Component
 public class UserFormValidator implements Validator {
 
@@ -57,11 +56,6 @@ public class UserFormValidator implements Validator {
 		if (user.getFramework() == null || user.getFramework().size() < 2) {
 			errors.rejectValue("framework", "Valid.userForm.framework");
 		}
-
-		if (user.getSkill() == null || user.getSkill().size() < 3) {
-			errors.rejectValue("skill", "Valid.userForm.skill");
-		}
-
 	}
 
 }

@@ -72,6 +72,7 @@
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
         <a href="/" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+        <a href="/account" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Account</a>
         <a href="/schedule" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
         <a href="/predictions" class="w3-bar-item w3-button w3-padding" style="text-decoration: none;"><i class="fa fa-bell fa-fw"></i>&nbsp; Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">

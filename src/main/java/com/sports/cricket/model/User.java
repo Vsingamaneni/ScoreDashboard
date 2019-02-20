@@ -36,9 +36,6 @@ public class User {
 	// form:select - form:option - dropdown - single select
 	String country;
 
-	// form:select - multiple=true - dropdown - multiple select
-	List<String> skill;
-
 	public boolean isNew() {
 		return (this.id == null);
 	}
@@ -131,20 +128,12 @@ public class User {
 		this.country = country;
 	}
 
-	public List<String> getSkill() {
-		return skill;
-	}
-
-	public void setSkill(List<String> skill) {
-		this.skill = skill;
-	}
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address
 				+ ", password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", newsletter=" + newsletter + ", framework=" + framework + ", sex=" + sex
-				+ ", number=" + number + ", country=" + country + ", skill=" + skill + "]" + isNew();
+				+ ", number=" + number + ", country=" + country  + isNew();
 	}
 
 }

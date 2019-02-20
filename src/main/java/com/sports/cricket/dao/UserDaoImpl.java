@@ -131,7 +131,6 @@ public class UserDaoImpl implements UserDao {
 		paramSource.addValue("sex", user.getSex());
 		paramSource.addValue("number", user.getNumber());
 		paramSource.addValue("country", user.getCountry());
-		paramSource.addValue("skill", convertListToDelimitedString(user.getSkill()));
 
 		return paramSource;
 	}
@@ -150,7 +149,6 @@ public class UserDaoImpl implements UserDao {
 			user.setNumber(rs.getInt("number"));
 			user.setPassword(rs.getString("password"));
 			user.setSex(rs.getString("sex"));
-			user.setSkill(convertDelimitedStringToList(rs.getString("skill")));
 			return user;
 		}
 	}

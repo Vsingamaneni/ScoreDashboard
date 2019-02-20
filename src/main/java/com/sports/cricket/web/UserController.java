@@ -160,6 +160,31 @@ public class UserController {
     }
 
     // Show user profile page
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String account(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin){
+            return "redirect:/";
+        } else {
+            httpSession.setMaxInactiveInterval(10 * 60);
+            //Register user = registrationService.getUser(userLogin.getEmail());
+            List<Standings> standingsList = scheduleService.getLeaderBoard();
+            List<Restrictions> restrictions = registrationService.getRestrictions();
+
+            userLogin.setLimitReached(LeaderBoardDetails.isLimitReached(standingsList, userLogin.getMemberId(), restrictions.get(0).getMaxLimit()));
+            httpSession.setAttribute("role", userLogin.getRole());
+            httpSession.setAttribute("session", userLogin);
+            model.addAttribute("session", userLogin);
+            return "users/account";
+        }
+    }
+
+    // Show user profile page
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String userProfile(ModelMap model, HttpSession httpSession) {
 
@@ -217,6 +242,10 @@ public class UserController {
         logger.debug("showAllUsers()");
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin){
+            return "redirect:/";
+        }
 
         model.addAttribute("session", userLogin);
         model.addAttribute("login", userLogin);
