@@ -316,8 +316,9 @@ public class UserController {
             model.addAttribute("isAuthSuccess", isAuthSuccess);
             if (isAuthSuccess){
                 userLogin.setIsAdminActivated("Y");
+                userLogin.setIsActive("Y");
             }
-            httpSession.setAttribute("login", userLogin);
+            httpSession.setAttribute("session", userLogin);
 
             return "redirect:/showAllUsers";
         }
@@ -336,7 +337,7 @@ public class UserController {
 
             model.addAttribute("session", user);
             if (isAuthSuccess){
-                user.setIsAdminActivated("N");
+                user.setIsActive("N");
             }
             httpSession.setAttribute("session", user);
 
@@ -360,7 +361,7 @@ public class UserController {
         logger.debug("forgetPassword()");
         model.addAttribute("registerForm", register);
 
-        if (null == httpSession.getAttribute("login")) {
+        if (null == httpSession.getAttribute("session")) {
             return "users/forget";
         } else {
             return "redirect:/resetPassword";
@@ -387,7 +388,7 @@ public class UserController {
         model.addAttribute("registerForm", register);
         model.addAttribute("userDetails", userDetails);
 
-        if (null == httpSession.getAttribute("login")) {
+        if (null == httpSession.getAttribute("session")) {
             return "users/reset";
         } else {
             return "redirect:/";
@@ -436,13 +437,12 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("session", userLogin);
-            model.addAttribute("login", userLogin);
             model.addAttribute("userLogin", userLogin);
 
-            if (userLogin.getIsActive().equalsIgnoreCase("N")) {
+            /*if (userLogin.getIsActive().equalsIgnoreCase("N")) {
                 httpSession.setAttribute("msg", "You Need to be active to predict for matches");
                 return "users/contact_admin";
-            }
+            }*/
 
             List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
             schedules = ScheduleListMapper.mapScheduleStauts(schedules);
@@ -479,9 +479,9 @@ public class UserController {
                 httpSession.removeAttribute("msg");
             }
 
-            if(userLogin.getIsActive().equalsIgnoreCase("N")){
+            /*if(userLogin.getIsActive().equalsIgnoreCase("N")){
                 return "users/predictions";
-            }
+            }*/
 
             List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
             List<Prediction> predictions = scheduleService.findPredictions(userLogin.getMemberId());

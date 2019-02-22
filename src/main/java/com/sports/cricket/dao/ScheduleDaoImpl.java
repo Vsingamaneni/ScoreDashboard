@@ -239,7 +239,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
     @Override
     public boolean deactivateMember(Integer id) {
 
-        String sql = "UPDATE REGISTER SET isActive = 'N' , isAdminActivated = 'N' where memberId = ?";
+        String sql = "UPDATE REGISTER SET isActive = 'N' where memberId = ?";
         return executeQuery(sql, id);
     }
 

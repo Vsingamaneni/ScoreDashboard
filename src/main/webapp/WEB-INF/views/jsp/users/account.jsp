@@ -56,6 +56,8 @@
     <c:set var="user_name" value="${session.firstName}"/>
     <c:set var="role" value="${session.role}"/>
     <c:set var="isActivated" value="${session.isAdminActivated}"/>
+    <spring:url value="/member/${session.memberId}/authorize" var="activateUrl"/>
+    <spring:url value="/member/${session.memberId}/deactivate" var="deactivateUrl"/>
 </c:if>
 
 <c:if test="${empty session}">
@@ -84,32 +86,32 @@
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
            onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+        <a href="/" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
         <a href="/account" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Account</a>
-        <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
-        <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp;
+        <a href="/schedule" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; Schedule</a>
+        <a href="/predictions" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp;
             Predictions</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp;
+            <a href="/currentPredictions" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp;
                 MatchDay Predictions</a>
         </c:if>
         <c:if test="${role.equalsIgnoreCase('admin')}">
-            <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp;
+            <a href="/saveResult" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>&nbsp;
                 Update Result</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp;
+            <a href="#" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; login</a>
+            <a href="#" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i>&nbsp;
                 Register</a>
         </c:if>
-        <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp;
+        <a href="/history" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp;
             History</a>
-        <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp;
+        <a href="/standings" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp;
             Standings</a>
-        <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp;
+        <a href="/showAllUsers" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp;
             Users</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
-            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
+            <a href="/logout" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw"></i>&nbsp; Logout</a>
         </c:if>
     </div>
 </nav>
@@ -133,20 +135,46 @@
     <br/>
 
     <div class='container' style="width: 80%; margin: 0 auto;">
-        <%--<h2 style="text-align:center">${fn:toUpperCase(user_name)} Profile</h2>--%>
+        <h2 style="text-align:center">Profile</h2>
 
         <div class="card">
             <img src="/resources/core/images/avatar1.png" alt="John" style="width:100%">
             <h1>${fn:toUpperCase(user_name)}</h1>
             <p class="title">${fn:toUpperCase(role)}</p>
-            <%--<p>Harvard University</p>--%>
-            <c:if test="${!userLogin.limitReached}">
-            <p><button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                Active</button></p>
+
+            <c:if test="${!session.limitReached}">
+                <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
+                    <p>
+                        <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                            Active
+                        </button>
+                    </p>
+                </c:if>
+                <c:if test="${session.isActive.equalsIgnoreCase('N')}">
+                    <p>
+                        <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                            Activate
+                        </button>
+                    </p>
+                </c:if>
             </c:if>
-            <c:if test="${userLogin.limitReached}">
-                <p><button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #970A05; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                    Opt Out</button></p>
+            <c:if test="${session.limitReached}">
+                <c:if test="${session.isActive.equalsIgnoreCase('N')}">
+                    <p>
+                        <button onclick="location.href='${activateUrl}'"
+                                style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                            Activate
+                        </button>
+                    </p>
+                </c:if>
+                <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
+                <p>
+                    <button onclick="location.href='${deactivateUrl}'"
+                            style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #970A05; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                        Opt Out
+                    </button>
+                </p>
+                </c:if>
             </c:if>
         </div>
 

@@ -98,7 +98,6 @@
         </div>
     </c:if>
 
-
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:90%">
@@ -155,7 +154,6 @@
             </div>
         </div>
     </div>
-
 
     <hr>
 
