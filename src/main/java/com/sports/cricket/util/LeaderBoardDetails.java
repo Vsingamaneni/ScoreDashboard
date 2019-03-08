@@ -3,6 +3,7 @@ package com.sports.cricket.util;
 import com.sports.cricket.model.LeaderBoard;
 import com.sports.cricket.model.Register;
 import com.sports.cricket.model.Standings;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,6 +89,18 @@ public class LeaderBoardDetails {
                 return -1;
             }
         }
+    }
+
+    public static LeaderBoard getCurrentUserStandings(List<LeaderBoard> leaderBoardList, Integer memberId){
+        if (!CollectionUtils.isEmpty(leaderBoardList)){
+            for(LeaderBoard leaderBoard : leaderBoardList){
+                if (leaderBoard.getMemberId() == memberId){
+                    return leaderBoard;
+                }
+            }
+        }
+
+        return null;
     }
 
 }

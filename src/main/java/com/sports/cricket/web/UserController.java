@@ -774,6 +774,9 @@ public class UserController {
         logger.debug("showCurrentPredictions()");
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null == userLogin){
+            return "redirect:/";
+        }
 
         model.addAttribute("session", userLogin);
         model.addAttribute("login", userLogin);
@@ -829,6 +832,8 @@ public class UserController {
             List<LeaderBoard> leaderBoardList = LeaderBoardDetails.mapLeaderBoard(standingsList, registerList);
 
             model.addAttribute("leaderBoardList", leaderBoardList);
+            LeaderBoard leaderBoard = LeaderBoardDetails.getCurrentUserStandings(leaderBoardList, userLogin.getMemberId());
+            model.addAttribute("leader", leaderBoard);
 
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/leaderboard";

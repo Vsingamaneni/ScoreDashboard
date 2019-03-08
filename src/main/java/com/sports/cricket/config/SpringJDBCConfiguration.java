@@ -20,12 +20,11 @@ public class SpringJDBCConfiguration {
         dataSource.setUsername("root");
         dataSource.setPassword("");
 
-       /* Microsoft Azure Connection
-        dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        //Microsoft Azure Connection
+/*        dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSource.setUrl("jdbc:sqlserver://ipl.database.windows.net:1433;databaseName=ipl-test");
         dataSource.setUsername("ipl");
-        dataSource.setPassword("Sweety143:");
-        */
+        dataSource.setPassword("Sweety143:");*/
 
         return dataSource;
     }

@@ -43,7 +43,7 @@ public class UserListMapper {
                 stringBuffer = new StringBuffer();
                 stringBuffer.append(register.getCountry());
                 if (hmap.containsKey(stringBuffer.toString())){
-                    hmap.put(stringBuffer.toString(), hmap.get((stringBuffer.toString()) + 1));
+                    hmap.put(stringBuffer.toString(), hmap.get(stringBuffer.toString()) + 1);
                 } else {
                     hmap.put(stringBuffer.toString(), 1);
                 }

@@ -39,9 +39,9 @@ public class ValidatePredictions {
         if(!CollectionUtils.isEmpty(scheduleList)){
             for(Schedule schedule : scheduleList){
                 if(null != schedule.getStartDate()){
-                    if(ValidateDeadline.isPredictionValid(schedule.getStartDate())){
+                    if(null == schedule.getWinner() && ValidateDeadline.isPredictionValid(schedule.getStartDate())){
                         schedule.setCanPredict(true);
-                    }else{
+                    } else{
                         schedule.setCanPredict(false);
                     }
                     validSchedule.add(schedule);

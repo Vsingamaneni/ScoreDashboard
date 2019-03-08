@@ -11,6 +11,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <<title>Score Finder</title>
     <meta charset="UTF-8">
@@ -103,8 +105,43 @@
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:90%">
                 <br /><br />
-                <h1 style="text-align: center;">Leader Board</h1>
+                <h1 style="text-align: center;">Your Position</h1>
 
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Won</th>
+                        <th>Lost</th>
+                        <th>Net</th>
+                        <th>Member</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty leader}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${leader.rank}</td>
+                                <td style="text-align:left;"> ${leader.firstName}</td>
+                                <td style="text-align:left;"> ${leader.lastName}</td>
+                                <td style="text-align:left;">${leader.wonAmount}</td>
+                                <td style="text-align:left;">${leader.lostAmount}</td>
+                                <td style="text-align:left;">${leader.total}</td>
+                                <td style="text-align:left;">
+                                    <c:if test="${fn:containsIgnoreCase(leader.isActive, 'y')}">
+                                        <button class="btn btn-info">ACTIVE</button>
+                                    </c:if>
+                                    <c:if test="${!fn:containsIgnoreCase(leader.isActive, 'y')}">
+                                        <button class="btn btn-danger">NOT ACTIVE</button>
+                                    </c:if>
+                                </td>
+                            </tr>
+                    </c:if>
+                </table>
+
+                <br /><br /><br />
+                <h1 style="text-align: center;">Leader Board</h1>
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
                     <tr>

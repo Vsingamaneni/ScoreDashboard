@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Score Dashboard</title>
+    <title>Scoreboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -66,12 +66,12 @@
                 </div>
 
                 <div class="container-login100-form-btn m-t-32">
-                    <button class="login100-form-btn" type='submit' onclick="post('${loginUrl}')">Login</button>
+                    <button class="login100-form-btn" style="height: 90%; background: -webkit-linear-gradient(left, #4f5027, #1f715a, #65fa45); background: -o-linear-gradient(left, #19500f, #297150, #42fa91); background: -moz-linear-gradient(left,#4f5027, #297150, #42fa91); background: linear-gradient(left, #4f5027, #297150, #42fa91);" type='submit' onclick="post('${loginUrl}')">Login</button>
                 </div>
 
-                <div class="container-login100-form-btn m-t-32">
-                    <button class="login100-form-btn" formaction="/forget">Reset</button>
-                    <button class="login100-form-btn" formaction="/register">Sign Up</button>
+                <div class="container-login100-form-btn m-t-16">
+                    <button class="login100-form-btn" style="height: 60%; background: -webkit-linear-gradient(left, #4f5027, #711e3b, #fa6119); background: -o-linear-gradient(left, #501c0c, #297150, #42fa91); background: -moz-linear-gradient(left,#4f5027, #297150, #42fa91); background: linear-gradient(left, #4f5027, #297150, #42fa91);" formaction="/forget">Reset</button>
+                    <button class="login100-form-btn" style="height: 60%; background: -webkit-linear-gradient(left, #4f5027, #711e3b, #fa6119); background: -o-linear-gradient(left, #501c0c, #297150, #42fa91); background: -moz-linear-gradient(left,#4f5027, #297150, #42fa91); background: linear-gradient(left, #4f5027, #297150, #42fa91);" formaction="/register">Sign Up</button>
                 </div>
 
             </form>

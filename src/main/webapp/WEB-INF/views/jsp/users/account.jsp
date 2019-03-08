@@ -11,6 +11,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <<title>Score Finder</title>
     <meta charset="UTF-8">
@@ -151,21 +153,39 @@
                     </p>
                 </c:if>
                 <c:if test="${session.isActive.equalsIgnoreCase('N')}">
+                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('N')}">
+                        <p>
+                            <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                                Pending Admin Activation
+                            </button>
+                        </p>
+                    </c:if>
+                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('Y')}">
                     <p>
                         <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
                             Activate
                         </button>
                     </p>
+                    </c:if>
                 </c:if>
             </c:if>
             <c:if test="${session.limitReached}">
                 <c:if test="${session.isActive.equalsIgnoreCase('N')}">
+                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('N')}">
+                        <p>
+                            <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                                Pending Admin Activation
+                            </button>
+                        </p>
+                    </c:if>
+                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('Y')}">
                     <p>
                         <button onclick="location.href='${activateUrl}'"
                                 style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
                             Activate
                         </button>
                     </p>
+                    </c:if>
                 </c:if>
                 <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
                 <p>

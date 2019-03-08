@@ -11,6 +11,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <<title>Score Finder</title>
     <meta charset="UTF-8">
@@ -133,7 +135,7 @@
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
                         <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
+                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto; background-color: #B7733A;" class="btn btn-primary">
                         </c:if>
                         <input type="button" value="DEFAULT : ${schedulePrediction.notPredicted}" style=" margin: 0 auto;" class="btn btn-danger">
                         </span>
