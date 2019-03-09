@@ -105,7 +105,8 @@
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
                     <tr>
-                        <th>Match#</th>
+                        <th></th>
+                        <th>#</th>
                         <th>Fixture</th>
                         <th>Selected</th>
                         <th>Winner</th>
@@ -118,6 +119,15 @@
                     <c:if test="${not empty standingsList}">
                         <c:forEach var="standings" items="${standingsList}">
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <c:if test="${standings.selected.equalsIgnoreCase(standings.winner)}">
+                                    <td style="text-align:left;"> <a href="#" style="text-decoration : none;font-size:20px;color:green;"  class="w3-bar-item w3-button w3-padding"><i class="fa fa-thumbs-up"></i></a></td>
+                                </c:if>
+                                <c:if test="${not standings.selected.equalsIgnoreCase(standings.winner)}">
+                                    <td style="text-align:left;"> <a href="#" style="text-decoration : none;font-size:20px;color:red;"  class="w3-bar-item w3-button w3-padding"><i class="fa fa-thumbs-down"></i></a></td>
+                                </c:if>
+                                <c:if test="${standings.winner.equalsIgnoreCase('draw')}">
+                                    <td style="text-align:left;"> <a href="#" style="text-decoration : none;font-size:20px;color:blue;"  class="w3-bar-item w3-button w3-padding"><i class="fa fa-hand-grab-o"></i></a></td>
+                                </c:if>
                                 <td style="text-align:left;"> ${standings.matchNumber}</td>
                                 <td style="text-align:left;"> ${standings.homeTeam} vs ${standings.awayTeam}</td>
                                 <td style="text-align:left;"> ${standings.selected}</td>
