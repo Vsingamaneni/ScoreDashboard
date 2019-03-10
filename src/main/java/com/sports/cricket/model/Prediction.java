@@ -20,6 +20,8 @@ public class Prediction {
 
     private boolean canPredict;
 
+    private Integer matchDay;
+
     public Integer getPredictionId() {
         return predictionId;
     }
@@ -90,5 +92,13 @@ public class Prediction {
 
     public void setCanPredict(boolean canPredict) {
         this.canPredict = canPredict;
+    }
+
+    public Integer getMatchDay() {
+        return matchDay;
+    }
+
+    public void setMatchDay(Integer matchDay) {
+        this.matchDay = matchDay;
     }
 }

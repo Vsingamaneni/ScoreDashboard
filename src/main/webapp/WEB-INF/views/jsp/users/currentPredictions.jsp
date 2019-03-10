@@ -113,11 +113,43 @@
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:100%">
+                <c:if test="${not role.equalsIgnoreCase('admin')}">
+                    <h1 style="text-align:center;">Admin Predictions</h1>
+                    <br />
+                    <c:if test="${not empty adminPredictions}">
+                        <table class="w3-table w3-striped w3-white"
+                               style="text-align: center; align:center; align-content: center">
+                            <tr align="center">
+                                <thead>
+                                <th>#Game</th>
+                                <th>Name</th>
+                                <th>Fixture</th>
+                                <th>Choice</th>
+                                <th>Predicted Time</th>
+                                </thead>
+                            </tr>
+                            <c:forEach var="predictions" items="${adminPredictions}">
+                                <tr style="color:black;font-size:20px;text-decoration:none;">
+                                    <td style="text-align:left;"><b>${predictions.matchNumber}</b></td>
+                                    <td style="text-align:left;"><b>${predictions.firstName} </b></td>
+                                    <td style="text-align:left;"><b>${predictions.homeTeam}
+                                        vs ${predictions.awayTeam} </b></td>
+                                    <td style="text-align:left;"><b>${predictions.selected} </b></td>
+                                    <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+                    <br /><br />
+                </c:if>
                 <h1 style="text-align:center;">Match Day Predictions</h1>
-                <c:if test="${not empty matchSchedule}">
-                    <c:forEach var="errors" items="${matchSchedule}">
+                <br />
+                <c:if test="${not empty deadLineSchedule}">
+                    <c:forEach var="schedule" items="${deadLineSchedule}">
                     <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;" role="alert">
-                        <h4><strong>${errors.errorMessage}</strong></h4>
+                        <h4>Deadline : ${schedule.deadline}</h4>
+                        <h4>Predictions will be available after deadline..!</h4>
+                        <br /><br />
                     </div>
                     </c:forEach>
                 </c:if>

@@ -108,13 +108,13 @@
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
 
-        <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
+        <h2 style="text-align: center;"> Hey ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
         <br /><br /><br />
 
             <div class='container' style="width: 80%; margin: 0 auto;">
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
-                        <h5 style="text-align: left;">Make sure you don't miss the deadline !!</h5>
+                        <h3 style="text-align: center;">Make sure you don't miss the deadline !!</h3>
                     </div>
                     <div class='panel-body' >
                         <form action="${updateUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
@@ -154,12 +154,12 @@
                             <div class='form-group'>
                                 <div class='col-md-offset-4 col-md-3'>
                                     <button class='btn-lg btn-primary' type='submit' onclick="post('${updateUrl}')">
-                                        Sure?
+                                        Confirm
                                     </button>
                                 </div>
                                 <div class='col-md-3'>
                                     <button class='btn-lg btn-danger' type='submit'>
-                                        <a href="/predictions" style="color:white;text-decoration : none;">Nah</a>
+                                        <a href="/predictions" style="color:white;text-decoration : none;">Cancel</a>
                                     </button>
                                 </div>
                             </div>

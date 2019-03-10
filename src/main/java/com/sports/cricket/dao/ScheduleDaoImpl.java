@@ -85,8 +85,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
         boolean isSuccess = false;
 
-        String sql = "INSERT INTO PREDICTIONS(memberId, matchNumber, homeTeam, awayTeam, firstName, selected, predictedTime)" +
-                    "VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO PREDICTIONS(memberId, matchNumber, homeTeam, awayTeam, firstName, selected, predictedTime, matchday)" +
+                    "VALUES (?,?,?,?,?,?,?,?)";
 
 
         Connection conn = null;
@@ -101,6 +101,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
             ps.setString(5, prediction.getFirstName());
             ps.setString(6, prediction.getSelected());
             ps.setString(7, getTime().toString());
+            ps.setInt(8, prediction.getMatchDay());
 
             ps.executeUpdate();
             ps.close();
@@ -441,6 +442,18 @@ public class ScheduleDaoImpl implements ScheduleDao {
             });
 
         return schedules;
+    }
+
+    @Override
+    public List<Prediction> getAdminPrediction(Integer memberId, Integer matchDay) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberId", memberId);
+        params.put("matchDay", matchDay);
+
+        String sql = "SELECT * FROM PREDICTIONS where memberId =" + memberId + " and matchDay = " +matchDay;
+
+        List<Prediction> predictionList = PredictionListMapper.adminPredictionList(jdbcTemplate, sql);
+        return predictionList;
     }
 
     private LocalDateTime getTime(){

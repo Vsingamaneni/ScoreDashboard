@@ -121,4 +121,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         return scheduleDao.getScheduleByMatchDay(matchDay);
     }
 
+    @Override
+    public List<Prediction> getAdminPrediction(Integer memberId, Integer matchDay) {
+        return scheduleDao.getAdminPrediction(memberId, matchDay);
+    }
+
 }

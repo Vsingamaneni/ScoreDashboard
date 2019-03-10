@@ -127,7 +127,7 @@
         <div class='container' style="width: 80%; margin: 0 auto;">
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
-                        <h1 style="text-align: center;">Good Luck Dude</h1>
+                        <h3 style="text-align: center;">Good Luck Dude</h3>
                     </div>
                     <div class='panel-body' >
                         <form action="${predictionUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
@@ -143,11 +143,12 @@
                             <input type=hidden id="matchNumber" name="matchNumber" value="${scheduleForm.matchNumber}">
                             <input type=hidden id="homeTeam" name="homeTeam" value="${scheduleForm.homeTeam}">
                             <input type=hidden id="awayTeam" name="awayTeam" value="${scheduleForm.awayTeam}">
+                            <input type=hidden id="matchDay" name="matchDay" value="${scheduleForm.matchDay}">
                             <div class='form-group'>
                                 <label class='control-label col-md-2 col-md-offset-2' for='id_name'>Name</label>
                                 <div class='col-md-2'>
                                     <select class='form-control' id='id_name' name="firstName" style="min-width:150px; ">
-                                        <option>   --- SELECT ---    </option>
+                                        <%--<option>   --- SELECT ---    </option>--%>
                                         <option style="text-align: center">${user_name}</option>
                                     </select>
                                 </div>

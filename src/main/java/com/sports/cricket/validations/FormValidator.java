@@ -34,13 +34,13 @@ public class FormValidator {
             if(null == userLogin.getEmail() || userLogin.getEmail().isEmpty()){
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("email");
-                errorDetails.setErrorMessage("Email Id cannot be empty ..!!");
+                errorDetails.setErrorMessage("Dude, Email Id is required!");
                 errorsList.add(errorDetails);
             }else if(null != userLogin.getEmail() && !userLogin.getEmail().isEmpty()){
                 if(!emailValidator.valid(userLogin.getEmail())) {
                     errorDetails = new ErrorDetails();
                     errorDetails.setErrorField("email");
-                    errorDetails.setErrorMessage("Invalid Email ID format ..!!");
+                    errorDetails.setErrorMessage("Invalid Email ID format bruh!");
                     errorsList.add(errorDetails);
                 }
             }
@@ -48,7 +48,7 @@ public class FormValidator {
             if(null == userLogin.getPassword() || userLogin.getPassword().isEmpty()){
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("password");
-                errorDetails.setErrorMessage("Password is empty..!!");
+                errorDetails.setErrorMessage("Password dude?");
                 errorsList.add(errorDetails);
             }
         }

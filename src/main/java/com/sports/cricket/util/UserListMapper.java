@@ -53,7 +53,6 @@ public class UserListMapper {
         return mapFromHashMap(hmap);
     }
 
-
     public static List<MatchDetails> mapFromHashMap(HashMap<String, Integer> hmap) {
         List<MatchDetails> matchDetailsList = new ArrayList<>();
         Set set = hmap.entrySet();

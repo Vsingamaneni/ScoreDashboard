@@ -1,8 +1,9 @@
 package com.sports.cricket.util;
 
-import com.sports.cricket.model.MatchDetails;
-import com.sports.cricket.model.Prediction;
-import com.sports.cricket.model.Schedule;
+import com.sports.cricket.model.*;
+import com.sports.cricket.service.RegistrationService;
+import com.sports.cricket.service.ScheduleService;
+import com.sports.cricket.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 
@@ -34,6 +35,30 @@ public class PredictionListMapper {
         return predictionList;
     }
 
+    public static List<Prediction> adminPredictionList(JdbcTemplate jdbcTemplate, String sql) {
+        List<Prediction> predictionList = jdbcTemplate.query(sql, new Object[]{}, rs -> {
+
+            List<Prediction> predictions = new ArrayList<>();
+            while (rs.next()) {
+                Prediction prediction = new Prediction();
+
+                prediction.setPredictionId(rs.getInt("predictionId"));
+                prediction.setMemberId(rs.getInt("memberId"));
+                prediction.setMatchNumber(rs.getInt("matchNumber"));
+                prediction.setHomeTeam(rs.getString("homeTeam"));
+                prediction.setAwayTeam(rs.getString("awayTeam"));
+                prediction.setFirstName(rs.getString("firstName"));
+                prediction.setSelected(rs.getString("selected"));
+                prediction.setPredictedTime(rs.getString("predictedTime"));
+                prediction.setMatchDay(rs.getInt("matchDay"));
+
+                predictions.add(prediction);
+            }
+            return predictions;
+        });
+        return predictionList;
+    }
+
     public static List<MatchDetails> matchDetails(List<Prediction> predictionList){
         HashMap<String, Integer> hmap = new HashMap<>();
         StringBuffer stringBuffer;
@@ -44,7 +69,7 @@ public class PredictionListMapper {
                         .append(" vs ")
                         .append(prediction.getAwayTeam());
                 if (hmap.containsKey(stringBuffer.toString())){
-                    hmap.put(stringBuffer.toString(), hmap.get((stringBuffer.toString()) + 1));
+                    hmap.put(stringBuffer.toString(), (hmap.get(stringBuffer.toString()) + 1));
                 } else {
                     hmap.put(stringBuffer.toString(), 1);
                 }
@@ -107,5 +132,43 @@ public class PredictionListMapper {
             }
         }
         return matchDetailsList;
+    }
+
+    public static List<Prediction> adminPredictions(RegistrationService registrationService, ScheduleService scheduleService){
+
+        int memberId = getAdminId(registrationService);
+
+        int matchday = getActiveMatchDay(scheduleService);
+
+        List<Prediction> adminPredictions = scheduleService.getAdminPrediction(memberId, matchday);
+
+        return adminPredictions;
+    }
+
+    public static int getAdminId(RegistrationService registrationService){
+        int adminId = 0;
+
+        List<Register> registerList = registrationService.getAllUsers();
+        for (Register register : registerList){
+            if (!register.getRole().equalsIgnoreCase("admin")){
+                continue;
+            }
+            adminId = register.getMemberId();
+        }
+
+        return adminId;
+    }
+
+    public static int getActiveMatchDay(ScheduleService scheduleService){
+        int matchDay = 0;
+
+        List<Schedule> scheduleList = scheduleService.findAll();
+        for (Schedule schedule : scheduleList){
+            if (!schedule.isIsactive()){
+                continue;
+            }
+            matchDay = schedule.getMatchDay();
+        }
+        return matchDay;
     }
 }

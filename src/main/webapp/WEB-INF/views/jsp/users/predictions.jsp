@@ -115,7 +115,7 @@
 
         <!-- Predictions -->
         <header class="w3-container" style="padding-top:22px">
-            <h3><b><i class="fa fa-bell"></i> Predictions </b></h3>
+            <h3><b><i class="fa fa-plus"></i> Predictions </b></h3>
         </header>
 
         <div class="w3-panel">

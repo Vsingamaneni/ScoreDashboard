@@ -175,7 +175,6 @@
                                     </form>
                                 </tr>
                             </table>
-                            <br/><br/>
                         </c:forEach>
                         <br/><br/>
                     </div>

@@ -172,7 +172,6 @@ public class UserController {
             return "redirect:/";
         } else {
             httpSession.setMaxInactiveInterval(10 * 60);
-            //Register user = registrationService.getUser(userLogin.getEmail());
             List<Standings> standingsList = scheduleService.getLeaderBoard();
             List<Restrictions> restrictions = registrationService.getRestrictions();
 
@@ -479,10 +478,6 @@ public class UserController {
                 httpSession.removeAttribute("msg");
             }
 
-            /*if(userLogin.getIsActive().equalsIgnoreCase("N")){
-                return "users/predictions";
-            }*/
-
             List<Schedule> schedules = ValidatePredictions.validateSchedule(scheduleService.scheduleList());
             List<Prediction> predictions = scheduleService.findPredictions(userLogin.getMemberId());
             schedules = ValidatePredictions.isScheduleAfterRegistration(schedules, register.getRegisteredTime());
@@ -783,7 +778,7 @@ public class UserController {
         model.addAttribute("userLogin", userLogin);
 
         List<Schedule> currentSchedule = ValidatePredictions.validateSchedule(scheduleService.findAll());
-        List<ErrorDetails> errorDetailsList = new ArrayList<>();
+        boolean isScheduleDone = false;
 
         List<SchedulePrediction> schedulePredictionsList = new ArrayList<>();
         for (Schedule schedule : currentSchedule) {
@@ -791,12 +786,14 @@ public class UserController {
                 SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
                 ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
                 schedulePredictionsList.add(matchDetails);
-            } else {
-                ErrorDetails errorDetails = new ErrorDetails();
-                errorDetails.setErrorMessage("The deadline is not reached for " + schedule.getHomeTeam() + " vs " + schedule.getAwayTeam());
-                errorDetailsList.add(errorDetails);
-                model.addAttribute("matchSchedule", errorDetailsList);
+                isScheduleDone = true;
             }
+        }
+
+        if (!isScheduleDone) {
+            List<Prediction> adminPredictions = PredictionListMapper.adminPredictions(registrationService, scheduleService);
+            model.addAttribute("adminPredictions", adminPredictions);
+            model.addAttribute("deadLineSchedule", currentSchedule);
         }
 
         model.addAttribute("schedulePredictions", schedulePredictionsList);

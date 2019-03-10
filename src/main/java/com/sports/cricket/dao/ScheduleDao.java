@@ -48,4 +48,6 @@ public interface ScheduleDao {
     List<Standings> getLeaderBoard();
 
     List<Schedule> getScheduleByMatchDay(Integer matchDay);
+
+    List<Prediction> getAdminPrediction(Integer memberId, Integer matchDay);
 }
