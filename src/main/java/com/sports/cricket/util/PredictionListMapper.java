@@ -7,10 +7,11 @@ import com.sports.cricket.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.*;
 
-public class PredictionListMapper {
+public class PredictionListMapper implements Serializable {
 
     public static List<Prediction> predictionList(JdbcTemplate jdbcTemplate, String sql, int matchDay) {
         List<Prediction> predictionList = jdbcTemplate.query(sql, new Object[]{matchDay}, rs -> {

@@ -7,11 +7,12 @@ import com.sports.cricket.service.ScheduleService;
 import com.sports.cricket.util.ValidateDeadline;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidateDeadLine {
+public class ValidateDeadLine implements Serializable {
 
     public static List<Prediction> validatePredictions(Schedule schedule, List<Prediction> predictionList, List<Register> registerList){
 

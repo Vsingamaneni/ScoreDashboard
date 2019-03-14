@@ -2,7 +2,9 @@ package com.sports.cricket.password;
 
 import com.sports.cricket.model.Register;
 
-public class VerifyProvidedPassword {
+import java.io.Serializable;
+
+public class VerifyProvidedPassword implements Serializable {
 
    /* public static void main(String[] args)
     {

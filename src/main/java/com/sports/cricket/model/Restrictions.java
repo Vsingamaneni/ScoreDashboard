@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class Restrictions {
+import java.io.Serializable;
+
+public class Restrictions implements Serializable {
 
     private String securityCode;
 

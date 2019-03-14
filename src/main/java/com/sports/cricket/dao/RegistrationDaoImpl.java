@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegistrationDaoImpl implements RegistrationDao {
+public class RegistrationDaoImpl implements RegistrationDao, Serializable {
 
 
     DataSource dataSource;
@@ -246,7 +247,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
     @Override
     public List<Restrictions> getRestrictions() {
-        String sql = "Select * from restrictions";
+        String sql = "Select * from RESTRICTIONS";
         List<Restrictions> restrictions = null;
 
         restrictions = jdbcTemplate.query(sql,new BeanPropertyRowMapper(Restrictions.class));

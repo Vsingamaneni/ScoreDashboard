@@ -1,5 +1,6 @@
 package com.sports.cricket.dao;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import org.springframework.util.StringUtils;
 import javax.sql.DataSource;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao, Serializable {
 
 	//NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

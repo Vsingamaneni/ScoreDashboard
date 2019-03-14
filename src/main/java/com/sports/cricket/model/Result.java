@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
     private Integer matchNumber;
 

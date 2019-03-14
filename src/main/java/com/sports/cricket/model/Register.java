@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class Register {
+import java.io.Serializable;
+
+public class Register implements Serializable {
 
     private int memberId;
 

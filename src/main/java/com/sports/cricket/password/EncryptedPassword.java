@@ -1,6 +1,8 @@
 package com.sports.cricket.password;
 
-public class EncryptedPassword {
+import java.io.Serializable;
+
+public class EncryptedPassword implements Serializable {
 
     String encryptedPassword;
 

@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class UserLogin {
+import java.io.Serializable;
+
+public class UserLogin implements Serializable {
 
    private String email;
 

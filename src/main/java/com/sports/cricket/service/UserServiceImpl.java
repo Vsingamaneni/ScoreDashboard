@@ -1,5 +1,6 @@
 package com.sports.cricket.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.sports.cricket.dao.UserDao;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Serializable {
 
 	UserDao userDao;
 

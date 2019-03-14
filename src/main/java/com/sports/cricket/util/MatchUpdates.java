@@ -5,10 +5,11 @@ import com.sports.cricket.service.RegistrationService;
 import com.sports.cricket.service.ScheduleService;
 import com.sports.cricket.validations.ValidateDeadLine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchUpdates {
+public class MatchUpdates implements Serializable {
 
     public static SchedulePrediction setUpdates(Schedule schedule, ScheduleService scheduleService, RegistrationService registrationService ){
         SchedulePrediction schedulePrediction = new SchedulePrediction();

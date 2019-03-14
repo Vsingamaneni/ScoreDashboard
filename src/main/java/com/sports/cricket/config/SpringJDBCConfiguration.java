@@ -8,24 +8,34 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import java.io.Serializable;
+
 @Configuration
-public class SpringJDBCConfiguration {
-    @Bean
+public class SpringJDBCConfiguration implements Serializable {
+   /* @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //MySQL database we are using
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        // Google cloud URL - 35.194.225.158
-        dataSource.setUrl("jdbc:mysql://localhost:3306/ipl");
+        // Local
+        *//*dataSource.setUrl("jdbc:mysql://localhost:3306/ipl");
         dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setPassword("");*//*
 
-        //Microsoft Azure Connection
-/*        dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource.setUrl("jdbc:sqlserver://ipl.database.windows.net:1433;databaseName=ipl-test");
-        dataSource.setUsername("ipl");
-        dataSource.setPassword("Sweety143:");*/
+        // Google cloud URL - 104.198.192.106
+        dataSource.setUrl("jdbc:mysql://104.198.192.106:3306/ipl");
+        dataSource.setUsername("root");
+        dataSource.setPassword("sweety");
 
+        return dataSource;
+    }*/
+
+    // Google Cloud connection
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUrl(System.getProperty("ipl"));
+        //dataSource.setUrl("jdbc:mysql://google/ipl?useSSL=false&amp;cloudSqlInstance=scoreboard-ipl-2019:us-east1:scoreboard&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=");
         return dataSource;
     }
 

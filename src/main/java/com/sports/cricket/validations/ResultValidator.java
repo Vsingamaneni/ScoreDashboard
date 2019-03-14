@@ -6,11 +6,12 @@ import com.sports.cricket.model.Schedule;
 import com.sports.cricket.util.ValidateDeadline;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultValidator {
+public class ResultValidator implements Serializable {
 
     static List<ErrorDetails> errorsList = null;
 

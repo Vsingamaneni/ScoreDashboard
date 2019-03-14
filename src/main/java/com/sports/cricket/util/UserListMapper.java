@@ -5,9 +5,10 @@ import com.sports.cricket.model.Prediction;
 import com.sports.cricket.model.Register;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class UserListMapper {
+public class UserListMapper implements Serializable {
 
     public static List<MatchDetails> getUsersList(List<Register> registerList){
         List<MatchDetails> matchUpdates = new ArrayList<>();

@@ -2,7 +2,9 @@ package com.sports.cricket.service;
 
 import com.sports.cricket.model.UserLogin;
 
-public class LoginServiceImpl implements LoginService {
+import java.io.Serializable;
+
+public class LoginServiceImpl implements LoginService, Serializable {
 
 
     @Override

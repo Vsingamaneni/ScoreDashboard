@@ -1,5 +1,6 @@
 package com.sports.cricket.web;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ import com.sports.cricket.validator.UserFormValidator;
 
 @Controller
 @ControllerAdvice
-public class UserController {
+public class UserController implements Serializable {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 

@@ -1,11 +1,12 @@
 package com.sports.cricket.util;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ValidateDeadline {
+public class ValidateDeadline implements Serializable {
 
     // Validates the prediction is valid or not
     public static boolean isPredictionValid(String date) throws ParseException {

@@ -5,11 +5,12 @@ import com.sports.cricket.model.Schedule;
 import com.sports.cricket.model.SchedulePrediction;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidatePredictions {
+public class ValidatePredictions implements Serializable {
 
     public static List<Schedule> validatePrediction(List<Schedule> scheduleList, List<Prediction> predictionList){
 

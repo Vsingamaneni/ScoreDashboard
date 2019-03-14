@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
-public class ScheduleDaoImpl implements ScheduleDao {
+public class ScheduleDaoImpl implements ScheduleDao, Serializable {
 
     DataSource dataSource;
     JdbcTemplate jdbcTemplate;
@@ -38,7 +39,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     @Override
     public List<Schedule> findAll() {
-        String sql = "SELECT * FROM schedule where isActive = TRUE";
+        String sql = "SELECT * FROM SCHEDULE where isActive = TRUE";
 
         List<Schedule> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Schedule.class));
 

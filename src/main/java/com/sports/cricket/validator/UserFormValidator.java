@@ -9,8 +9,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.io.Serializable;
+
 @Component
-public class UserFormValidator implements Validator {
+public class UserFormValidator implements Validator, Serializable {
 
 	@Autowired
 	@Qualifier("emailValidator")

@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class MatchDetails {
+import java.io.Serializable;
+
+public class MatchDetails implements Serializable {
 
     private String match;
 

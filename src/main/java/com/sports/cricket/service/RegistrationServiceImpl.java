@@ -7,10 +7,11 @@ import com.sports.cricket.model.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service("registrationService")
-public class RegistrationServiceImpl implements RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService, Serializable {
 
     RegistrationDao registrationDao;
 

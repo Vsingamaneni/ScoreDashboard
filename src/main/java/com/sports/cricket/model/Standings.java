@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class Standings {
+import java.io.Serializable;
+
+public class Standings implements Serializable {
 
     private Integer id;
 

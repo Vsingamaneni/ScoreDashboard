@@ -1,12 +1,13 @@
 package com.sports.cricket.validator;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
 @Component("emailValidator")
-public class EmailValidator {
+public class EmailValidator implements Serializable {
 
     private Pattern pattern;
     private Matcher matcher;

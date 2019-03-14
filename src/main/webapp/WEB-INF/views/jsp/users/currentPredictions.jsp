@@ -146,11 +146,14 @@
                 <br />
                 <c:if test="${not empty deadLineSchedule}">
                     <c:forEach var="schedule" items="${deadLineSchedule}">
-                    <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;" role="alert">
-                        <h4>Deadline : ${schedule.deadline}</h4>
-                        <h4>Predictions will be available after deadline..!</h4>
-                        <br /><br />
-                    </div>
+                        <table>
+                            <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;"
+                                 role="alert">
+                                <h4>Deadline : ${schedule.deadline}</h4>
+                                <h4>Predictions will be available after deadline..!</h4>
+                                <br/><br/>
+                            </div>
+                        </table>
                     </c:forEach>
                 </c:if>
                 <c:forEach var="schedulePrediction" items="${schedulePredictions}">

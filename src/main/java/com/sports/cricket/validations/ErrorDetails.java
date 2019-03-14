@@ -1,6 +1,8 @@
 package com.sports.cricket.validations;
 
-public class ErrorDetails {
+import java.io.Serializable;
+
+public class ErrorDetails implements Serializable {
 
     private String errorField;
 

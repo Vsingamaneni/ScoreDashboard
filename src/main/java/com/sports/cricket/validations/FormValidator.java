@@ -7,10 +7,11 @@ import com.sports.cricket.model.UserLogin;
 import com.sports.cricket.service.RegistrationService;
 import com.sports.cricket.validator.EmailValidator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormValidator {
+public class FormValidator implements Serializable {
 
     private static final String EMPTY_STRING ="";
 

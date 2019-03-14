@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class LeaderBoard {
+import java.io.Serializable;
+
+public class LeaderBoard implements Serializable {
 
     private Integer rank;
 

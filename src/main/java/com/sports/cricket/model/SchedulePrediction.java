@@ -1,8 +1,9 @@
 package com.sports.cricket.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SchedulePrediction {
+public class SchedulePrediction implements Serializable {
 
     private Schedule schedule;
 

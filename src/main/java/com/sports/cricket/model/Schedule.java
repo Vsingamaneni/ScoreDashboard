@@ -1,6 +1,8 @@
 package com.sports.cricket.model;
 
-public class Schedule {
+import java.io.Serializable;
+
+public class Schedule implements Serializable {
 
     private Integer lineNumber;
 

@@ -8,10 +8,11 @@ import com.sports.cricket.model.Standings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service("scheduleService")
-public class ScheduleServiceImpl implements ScheduleService {
+public class ScheduleServiceImpl implements ScheduleService, Serializable {
 
     ScheduleDao scheduleDao;
 

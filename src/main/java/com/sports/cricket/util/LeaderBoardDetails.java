@@ -5,12 +5,13 @@ import com.sports.cricket.model.Register;
 import com.sports.cricket.model.Standings;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class LeaderBoardDetails {
+public class LeaderBoardDetails implements Serializable {
 
     public static List<LeaderBoard> mapLeaderBoard(List<Standings> standingsList , List<Register> registerList){
 

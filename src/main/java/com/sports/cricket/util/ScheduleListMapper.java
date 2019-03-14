@@ -2,10 +2,11 @@ package com.sports.cricket.util;
 
 import com.sports.cricket.model.Schedule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduleListMapper {
+public class ScheduleListMapper implements Serializable {
 
     public static List<Schedule> mapScheduleStauts(List<Schedule> scheduleList){
 

@@ -1,6 +1,8 @@
 package com.sports.cricket.password;
 
-public class ProtectUserPassword {
+import java.io.Serializable;
+
+public class ProtectUserPassword implements Serializable {
     /*public static void main(String[] args)
     {
         String myPassword = "myPassword123";

@@ -10,11 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import java.io.Serializable;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan({ "com.sports.cricket.web", "com.sports.cricket.service", "com.sports.cricket.dao",
 		"com.sports.cricket.exception", "com.sports.cricket.validator" })
-public class SpringWebConfig implements WebMvcConfigurer {
+public class SpringWebConfig implements WebMvcConfigurer, Serializable {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
