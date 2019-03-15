@@ -172,7 +172,7 @@
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
                                 <td style="text-align:left;">${schedule.matchNumber}</td>
                                 <td style="text-align:left;">${schedule.homeTeam} vs ${schedule.awayTeam}</td>
-                                <td style="text-align:left;">${schedule.startDate}</td>
+                                <td style="text-align:left;">${schedule.deadline}</td>
                                 <td style="text-align:left;">
                                     <spring:url value="/match/${session.memberId}/${schedule.matchNumber}/predict" var="predictUrl" />
                                     <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
