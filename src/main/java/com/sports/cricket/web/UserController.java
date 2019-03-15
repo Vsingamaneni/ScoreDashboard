@@ -824,13 +824,15 @@ public class UserController implements Serializable {
             httpSession.removeAttribute("msg");
             httpSession.setAttribute("session", userLogin);
 
+            Register register = registrationService.getUser(userLogin.getEmail());
+
             List<Register> registerList = registrationService.getAllUsers();
             List<Standings> standingsList = scheduleService.getLeaderBoard();
 
             List<LeaderBoard> leaderBoardList = LeaderBoardDetails.mapLeaderBoard(standingsList, registerList);
 
             model.addAttribute("leaderBoardList", leaderBoardList);
-            LeaderBoard leaderBoard = LeaderBoardDetails.getCurrentUserStandings(leaderBoardList, userLogin.getMemberId());
+            LeaderBoard leaderBoard = LeaderBoardDetails.getCurrentUserStandings(leaderBoardList, register.getMemberId());
             model.addAttribute("leader", leaderBoard);
 
             httpSession.setMaxInactiveInterval(5 * 60);
@@ -859,7 +861,9 @@ public class UserController implements Serializable {
             httpSession.removeAttribute("msg");
             httpSession.setAttribute("session", userLogin);
 
-            List<Standings> standingsList = LeaderBoardDetails.getStandings(scheduleService.getLeaderBoard(), userLogin.getMemberId());
+            Register register = registrationService.getUser(userLogin.getEmail());
+
+            List<Standings> standingsList = LeaderBoardDetails.getStandings(scheduleService.getLeaderBoard(), register.getMemberId());
             standingsList = MatchUpdates.mapStandings(standingsList);
 
             model.addAttribute("standingsList", standingsList);

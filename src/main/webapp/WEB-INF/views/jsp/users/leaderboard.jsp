@@ -117,8 +117,8 @@
                     <c:if test="${not empty leader}">
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
                                 <td style="text-align:left;"> ${leader.rank}</td>
-                                <td style="text-align:left;"> ${leader.firstName}</td>
-                                <td style="text-align:left;"> ${leader.lastName}</td>
+                                <td style="text-align:left;"> ${fn:toUpperCase(leader.firstName)}</td>
+                                <td style="text-align:left;"> ${fn:toUpperCase(leader.lastName)}</td>
                                 <td style="text-align:left;">${leader.wonAmount}</td>
                                 <td style="text-align:left;">${leader.lostAmount}</td>
                                 <td style="text-align:left;">${leader.total}</td>
@@ -153,8 +153,8 @@
                         <c:forEach var="leaderBoard" items="${leaderBoardList}">
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
                                 <td style="text-align:left;"> ${leaderBoard.rank}</td>
-                                <td style="text-align:left;"> ${leaderBoard.firstName}</td>
-                                <td style="text-align:left;"> ${leaderBoard.lastName}</td>
+                                <td style="text-align:left;"> ${fn:toUpperCase(leaderBoard.firstName)}</td>
+                                <td style="text-align:left;"> ${fn:toUpperCase(leaderBoard.lastName)}</td>
                                 <td style="text-align:left;">${leaderBoard.wonAmount}</td>
                                 <td style="text-align:left;">${leaderBoard.lostAmount}</td>
                                 <td style="text-align:left;">${leaderBoard.total}</td>

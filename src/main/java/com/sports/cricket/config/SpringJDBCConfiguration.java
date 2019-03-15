@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 @Configuration
 public class SpringJDBCConfiguration implements Serializable {
-   /* @Bean
+    @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //MySQL database we are using
@@ -22,21 +22,21 @@ public class SpringJDBCConfiguration implements Serializable {
         dataSource.setUsername("root");
         dataSource.setPassword("");
 
-        /* Google cloud URL - 104.198.192.106
-        dataSource.setUrl("jdbc:mysql://104.198.192.106:3306/ipl");
-        dataSource.setUsername("root");
-        dataSource.setPassword("sweety");
+        //Google cloud URL - 104.198.192.106
+       //dataSource.setUrl("jdbc:mysql://35.237.53.198:3306/ipl");
+       //dataSource.setUsername("root");
+       //dataSource.setPassword("");
 
         return dataSource;
-    }*/
+    }
 
     // Google Cloud connection
-    @Bean
+    /*@Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(System.getProperty("ipl"));
         return dataSource;
-    }
+    }*/
 
     @Bean
     public JdbcTemplate jdbcTemplate() {

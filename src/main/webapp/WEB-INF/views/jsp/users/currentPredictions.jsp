@@ -159,7 +159,7 @@
                 </c:if>
                 <c:forEach var="schedulePrediction" items="${schedulePredictions}">
                 <c:if test="${not empty schedulePrediction.schedule}">
-                    <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.startDate}</h1>
+                    <h1 style="text-align:center;">Deadline : ${schedulePrediction.schedule.deadline}</h1>
                     <hr>
                         <span style="display:flex;">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
@@ -190,7 +190,7 @@
                         <c:forEach var="predictions" items="${schedulePrediction.prediction}">
                             <tr style="color:black;font-size:20px;text-decoration:none;">
                                 <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>
-                                <td style="text-align:left;"> <b>${predictions.firstName} </b></td>
+                                <td style="text-align:left;"> <b>${fn:toUpperCase(predictions.firstName)} </b></td>
                                 <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.selected} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
