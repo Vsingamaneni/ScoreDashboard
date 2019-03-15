@@ -98,7 +98,7 @@
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:90%">
                 <br /><br />
-                <h1 style="text-align: center;">Registered Users</h1>
+                <h1 style="text-align: center;">Registered Members</h1>
                 <br />
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
@@ -114,9 +114,9 @@
                     <c:forEach var="register" items="${registerList}">
                         <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
                             <td style="text-align:left;"> ${register.memberId}</td>
-                            <td style="text-align:left;">${register.fName}</td>
-                            <td style="text-align:left;">${register.lName}</td>
-                            <td style="text-align:left;">${register.isAdminActivated}</td>
+                            <td style="text-align:left;">${fn:toUpperCase(register.fName)}</td>
+                            <td style="text-align:left;">${fn:toUpperCase(register.lName)}</td>
+                            <td style="text-align:left;">${fn:toUpperCase(register.isAdminActivated)}</td>
                             <td style="text-align:left;">
                                 <spring:url value="/member/${register.memberId}/authorize" var="activateUrl"/>
                                 <spring:url value="/member/${register.memberId}/deactivate" var="deactivateUrl"/>

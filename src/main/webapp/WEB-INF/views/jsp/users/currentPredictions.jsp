@@ -114,9 +114,9 @@
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:100%">
                 <c:if test="${not role.equalsIgnoreCase('admin')}">
-                    <h1 style="text-align:center;">Admin Predictions</h1>
-                    <br />
                     <c:if test="${not empty adminPredictions}">
+                        <h1 style="text-align:center;">Admin Predictions</h1>
+                        <br />
                         <table class="w3-table w3-striped w3-white"
                                style="text-align: center; align:center; align-content: center">
                             <tr align="center">
@@ -146,14 +146,15 @@
                 <br />
                 <c:if test="${not empty deadLineSchedule}">
                     <c:forEach var="schedule" items="${deadLineSchedule}">
-                        <table>
-                            <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:darkred;"
-                                 role="alert">
-                                <h4>Deadline : ${schedule.deadline}</h4>
-                                <h4>Predictions will be available after deadline..!</h4>
-                                <br/><br/>
-                            </div>
-                        </table>
+                        <div style="width:50%; text-align:center;color:darkred; background-color: #d5e693; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
+                            <table>
+                                <div class="alert alert-${css} alert-dismissible" role="alert">
+                                    <h4>Deadline : ${schedule.deadline}</h4>
+                                    <h4>Predictions will be available after deadline..!</h4>
+                                </div>
+                            </table>
+                        </div>
+                        <br/><br/>
                     </c:forEach>
                 </c:if>
                 <c:forEach var="schedulePrediction" items="${schedulePredictions}">
@@ -163,9 +164,6 @@
                         <span style="display:flex;">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeTeamCount}" style=" margin: 0 auto;" class="btn btn-info">
                         <input type="button" value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayTeamCount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawTeamCount}" style=" margin: 0 auto; background-color: #B7733A;" class="btn btn-primary">
-                        </c:if>
                         <input type="button" value="DEFAULT : ${schedulePrediction.notPredicted}" style=" margin: 0 auto;" class="btn btn-danger">
                         </span>
                     <br />
@@ -174,9 +172,6 @@
                         <span style="display:flex;">
                         <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeWinAmount}" style=" margin: 0 auto;" class="btn btn-info">
                         <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayWinAmount}" style=" margin: 0 auto;" class="btn btn-primary">
-                        <c:if test="${schedulePrediction.schedule.possibleResult == 3}">
-                            <input type="button" value="DRAW : ${schedulePrediction.drawWinAmount}"  style="margin:0 auto; color:white;background-color:gray;border-color:darkgoldenrod;" class="btn btn-danger">
-                        </c:if>
                         </span>
                     </c:if>
                     <br /><br />

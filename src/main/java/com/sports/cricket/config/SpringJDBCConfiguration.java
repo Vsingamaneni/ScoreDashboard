@@ -18,11 +18,11 @@ public class SpringJDBCConfiguration implements Serializable {
         //MySQL database we are using
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         // Local
-        *//*dataSource.setUrl("jdbc:mysql://localhost:3306/ipl");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ipl");
         dataSource.setUsername("root");
-        dataSource.setPassword("");*//*
+        dataSource.setPassword("");
 
-        // Google cloud URL - 104.198.192.106
+        /* Google cloud URL - 104.198.192.106
         dataSource.setUrl("jdbc:mysql://104.198.192.106:3306/ipl");
         dataSource.setUsername("root");
         dataSource.setPassword("sweety");
@@ -35,7 +35,6 @@ public class SpringJDBCConfiguration implements Serializable {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(System.getProperty("ipl"));
-        //dataSource.setUrl("jdbc:mysql://google/ipl?useSSL=false&amp;cloudSqlInstance=scoreboard-ipl-2019:us-east1:scoreboard&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=");
         return dataSource;
     }
 
