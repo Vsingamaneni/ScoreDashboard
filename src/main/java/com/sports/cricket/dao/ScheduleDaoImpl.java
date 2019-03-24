@@ -352,9 +352,9 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
             ps.setString(4, result.getStartDate());
             ps.setString(5, result.getWinner());
             ps.setDouble(6, result.getWinningAmount());
-            ps.setInt(7, result.getHomeTeamCount());
-            ps.setInt(8, result.getAwayTeamCount());
-            ps.setInt(9, result.getNotPredictedCount());
+            ps.setInt(7, (int)result.getHomeTeamCount());
+            ps.setInt(8, (int)result.getAwayTeamCount());
+            ps.setInt(9, (int)result.getNotPredictedCount());
             ps.setInt(10, result.getMatchDay());
 
             ps.executeUpdate();

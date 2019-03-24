@@ -24,15 +24,15 @@ public class LeaderBoardDetails implements Serializable {
             leaderBoard.setMemberId(register.getMemberId());
             leaderBoard.setFirstName(register.getfName());
             leaderBoard.setLastName(register.getlName());
-            leaderBoard.setWonAmount((new Integer(0)).doubleValue());
-            leaderBoard.setLostAmount((new Integer(0)).doubleValue());
+            leaderBoard.setWonAmount(Float.valueOf("0"));
+            leaderBoard.setLostAmount(Float.valueOf("0"));
             for(Standings standings : standingsList){
                 if(standings.getMemberId() == register.getMemberId()){
-                    leaderBoard.setWonAmount(leaderBoard.getWonAmount() + standings.getWonAmount());
-                    leaderBoard.setLostAmount(leaderBoard.getLostAmount() + standings.getLostAmount());
+                    leaderBoard.setWonAmount(Float.valueOf(String.format("%.2f",leaderBoard.getWonAmount() + standings.getWonAmount())));
+                    leaderBoard.setLostAmount(Float.valueOf(String.format("%.2f",leaderBoard.getLostAmount() + standings.getLostAmount())));
                 }
             }
-            leaderBoard.setTotal(leaderBoard.getWonAmount() - leaderBoard.getLostAmount());
+            leaderBoard.setTotal(Float.valueOf(String.format("%.2f",leaderBoard.getWonAmount() - leaderBoard.getLostAmount())));
             leaderBoard.setIsActive(register.getIsActive());
             leaderBoardList.add(leaderBoard);
         }
@@ -84,7 +84,7 @@ public class LeaderBoardDetails implements Serializable {
 
         @Override
         public int compare(LeaderBoard l1, LeaderBoard l2) {
-            if(l1.getWonAmount() < l2.getWonAmount()){
+            if(l1.getTotal() < l2.getTotal()){
                 return 1;
             } else {
                 return -1;

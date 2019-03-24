@@ -12,11 +12,11 @@ public class LeaderBoard implements Serializable {
 
     private String lastName;
 
-    private double wonAmount;
+    private float wonAmount;
 
-    private double lostAmount;
+    private float lostAmount;
 
-    private double total;
+    private float total;
 
     private String isActive;
 
@@ -52,27 +52,27 @@ public class LeaderBoard implements Serializable {
         this.lastName = lastName;
     }
 
-    public double getWonAmount() {
+    public float getWonAmount() {
         return wonAmount;
     }
 
-    public void setWonAmount(double wonAmount) {
+    public void setWonAmount(float wonAmount) {
         this.wonAmount = wonAmount;
     }
 
-    public double getLostAmount() {
+    public float getLostAmount() {
         return lostAmount;
     }
 
-    public void setLostAmount(double lostAmount) {
+    public void setLostAmount(float lostAmount) {
         this.lostAmount = lostAmount;
     }
 
-    public double getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 

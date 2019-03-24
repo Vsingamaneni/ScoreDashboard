@@ -183,7 +183,6 @@
                         <th>Fixture</th>
                         <th>Choice</th>
                         <th>Predicted Time</th>
-                        <th>Action</th>
                         </thead>
                     </tr>
                     <c:if test="${not empty schedulePrediction}">
@@ -194,14 +193,6 @@
                                 <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.selected} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
-                                <td style="text-align:left;">
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/view" var="userUrl" />
-                                        <spring:url value="/prediction/${predictions.predictionId}/${predictions.matchNumber}/update" var="updateUrl" />
-
-                                    <button class="btn btn-info" onclick="location.href='${userUrl}'">View</button>
-                                    <c:if test="${predictions.canPredict == true}">
-                                    <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-                                    </c:if>
                             </tr>
                         </c:forEach>
                     </c:if>

@@ -384,6 +384,15 @@ public class UserController implements Serializable {
             userDetails = registrationService.getUser(register.getEmailId());
         }
 
+        if (null == userDetails){
+            ErrorDetails errorDetails = new ErrorDetails();
+            errorDetails.setErrorMessage("Invalid Email ID!");
+            errorDetails.setErrorField("emailID");
+            errorDetailsList.add(errorDetails);
+            httpSession.setAttribute("errorDetailsList", errorDetailsList);
+            return "redirect:/forget";
+        }
+
         logger.debug("forgetPassword()");
         model.addAttribute("registerForm", register);
         model.addAttribute("userDetails", userDetails);

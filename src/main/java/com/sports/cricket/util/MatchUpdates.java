@@ -39,7 +39,7 @@ public class MatchUpdates implements Serializable {
         } else if (schedule.getWinner().equalsIgnoreCase("draw")) {
             result.setWinningAmount(schedulePrediction.getDrawWinAmount());
         } else if (schedule.getWinner().equalsIgnoreCase("default")) {
-            result.setWinningAmount((new Integer(0)).doubleValue());
+            result.setWinningAmount(Float.valueOf("0"));
         }
 
         result.setHomeTeamCount(schedulePrediction.getHomeTeamCount());
@@ -78,9 +78,9 @@ public class MatchUpdates implements Serializable {
                 }else if(standings.getWinner().equalsIgnoreCase("draw")){
                     standings.setWonAmount(schedulePrediction.getDrawWinAmount());
                 }
-                standings.setLostAmount((new Integer(0)).doubleValue());
+                standings.setLostAmount(Float.valueOf("0"));
             }else{
-                standings.setWonAmount((new Integer(0)).doubleValue());
+                standings.setWonAmount(Float.valueOf("0"));
                 standings.setLostAmount(schedulePrediction.getSchedule().getMatchFee());
             }
 
@@ -92,7 +92,7 @@ public class MatchUpdates implements Serializable {
 
     public static List<Standings> mapStandings(List<Standings> standingsList){
 
-        double netAmount = 0;
+        float netAmount = 0;
 
         for (Standings standings : standingsList){
             netAmount = netAmount - standings.getLostAmount() + standings.getWonAmount();
@@ -100,17 +100,5 @@ public class MatchUpdates implements Serializable {
         }
 
         return standingsList;
-    }
-
-    public static List<Schedule> setLineNumbersToSchedule(List<Schedule> scheduleList){
-
-        int count = 0;
-
-        for (Schedule schedule : scheduleList){
-            schedule.setLineNumber(count);
-            count = count+1;
-        }
-
-        return scheduleList;
     }
 }

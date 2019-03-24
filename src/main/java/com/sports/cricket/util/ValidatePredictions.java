@@ -59,10 +59,10 @@ public class ValidatePredictions implements Serializable {
         String awayTeam = schedule.getAwayTeam();
         String notSelected = "default";
 
-        Integer homeTeamCount = 0;
-        Integer awayTeamCount = 0;
-        Integer drawCount = 0;
-        Integer notSelectedCount = 0;
+        float homeTeamCount = 0;
+        float awayTeamCount = 0;
+        float drawCount = 0;
+        float notSelectedCount = 0;
 
         for(Prediction prediction : predictionList){
             if(prediction.getSelected().equalsIgnoreCase(homeTeam)){
@@ -87,13 +87,15 @@ public class ValidatePredictions implements Serializable {
                 if (homeTeamCount == 0 ){
                     schedulePrediction.setHomeWinAmount(0);
                 }else {
-                    schedulePrediction.setHomeWinAmount((schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount)) / homeTeamCount);
+                    float homeWin = (schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount)) / homeTeamCount;
+                    schedulePrediction.setHomeWinAmount(Float.valueOf(String.format("%.2f",homeWin)));
                 }
 
                 if (awayTeamCount == 0 ) {
                     schedulePrediction.setAwayWinAmount(0);
                 }else {
-                    schedulePrediction.setAwayWinAmount((schedule.getMatchFee() * (homeTeamCount + drawCount + notSelectedCount)) / awayTeamCount);
+                    float awayWin = (schedule.getMatchFee() * (homeTeamCount + drawCount + notSelectedCount)) / awayTeamCount;
+                    schedulePrediction.setAwayWinAmount(Float.valueOf(String.format("%.2f",awayWin)));
                 }
 
                 if (drawCount == 0 ) {

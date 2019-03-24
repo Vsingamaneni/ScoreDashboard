@@ -14,15 +14,15 @@ public class Result implements Serializable {
 
     private String winner;
 
-    private Double winningAmount;
+    private float winningAmount;
 
-    private Integer homeTeamCount;
+    private float homeTeamCount;
 
-    private Integer awayTeamCount;
+    private float awayTeamCount;
 
-    private Integer drawTeamCount;
+    private float drawTeamCount;
 
-    private Integer notPredictedCount;
+    private float notPredictedCount;
 
     private Integer matchDay;
 
@@ -66,43 +66,43 @@ public class Result implements Serializable {
         this.winner = winner;
     }
 
-    public Double getWinningAmount() {
+    public float getWinningAmount() {
         return winningAmount;
     }
 
-    public void setWinningAmount(Double winningAmount) {
+    public void setWinningAmount(float winningAmount) {
         this.winningAmount = winningAmount;
     }
 
-    public Integer getHomeTeamCount() {
+    public float getHomeTeamCount() {
         return homeTeamCount;
     }
 
-    public void setHomeTeamCount(Integer homeTeamCount) {
+    public void setHomeTeamCount(float homeTeamCount) {
         this.homeTeamCount = homeTeamCount;
     }
 
-    public Integer getAwayTeamCount() {
+    public float getAwayTeamCount() {
         return awayTeamCount;
     }
 
-    public void setAwayTeamCount(Integer awayTeamCount) {
+    public void setAwayTeamCount(float awayTeamCount) {
         this.awayTeamCount = awayTeamCount;
     }
 
-    public Integer getDrawTeamCount() {
+    public float getDrawTeamCount() {
         return drawTeamCount;
     }
 
-    public void setDrawTeamCount(Integer drawTeamCount) {
+    public void setDrawTeamCount(float drawTeamCount) {
         this.drawTeamCount = drawTeamCount;
     }
 
-    public Integer getNotPredictedCount() {
+    public float getNotPredictedCount() {
         return notPredictedCount;
     }
 
-    public void setNotPredictedCount(Integer notPredictedCount) {
+    public void setNotPredictedCount(float notPredictedCount) {
         this.notPredictedCount = notPredictedCount;
     }
 

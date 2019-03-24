@@ -9,19 +9,19 @@ public class SchedulePrediction implements Serializable {
 
     private List<Prediction> prediction;
 
-    private Integer homeTeamCount;
+    private float homeTeamCount;
 
-    private Integer awayTeamCount;
+    private float awayTeamCount;
 
-    private Integer drawTeamCount;
+    private float drawTeamCount;
 
-    private Integer notPredicted;
+    private float notPredicted;
 
-    private double homeWinAmount;
+    private float homeWinAmount;
 
-    private double awayWinAmount;
+    private float awayWinAmount;
 
-    private double drawWinAmount;
+    private float drawWinAmount;
 
     private boolean isDeadlinReached;
 
@@ -41,59 +41,59 @@ public class SchedulePrediction implements Serializable {
         this.prediction = prediction;
     }
 
-    public Integer getHomeTeamCount() {
+    public float getHomeTeamCount() {
         return homeTeamCount;
     }
 
-    public void setHomeTeamCount(Integer homeTeamCount) {
+    public void setHomeTeamCount(float homeTeamCount) {
         this.homeTeamCount = homeTeamCount;
     }
 
-    public Integer getAwayTeamCount() {
+    public float getAwayTeamCount() {
         return awayTeamCount;
     }
 
-    public void setAwayTeamCount(Integer awayTeamCount) {
+    public void setAwayTeamCount(float awayTeamCount) {
         this.awayTeamCount = awayTeamCount;
     }
 
-    public Integer getDrawTeamCount() {
+    public float getDrawTeamCount() {
         return drawTeamCount;
     }
 
-    public void setDrawTeamCount(Integer drawTeamCount) {
+    public void setDrawTeamCount(float drawTeamCount) {
         this.drawTeamCount = drawTeamCount;
     }
 
-    public Integer getNotPredicted() {
+    public float getNotPredicted() {
         return notPredicted;
     }
 
-    public void setNotPredicted(Integer notPredicted) {
+    public void setNotPredicted(float notPredicted) {
         this.notPredicted = notPredicted;
     }
 
-    public double getHomeWinAmount() {
+    public float getHomeWinAmount() {
         return homeWinAmount;
     }
 
-    public void setHomeWinAmount(double homeWinAmount) {
+    public void setHomeWinAmount(float homeWinAmount) {
         this.homeWinAmount = homeWinAmount;
     }
 
-    public double getAwayWinAmount() {
+    public float getAwayWinAmount() {
         return awayWinAmount;
     }
 
-    public void setAwayWinAmount(double awayWinAmount) {
+    public void setAwayWinAmount(float awayWinAmount) {
         this.awayWinAmount = awayWinAmount;
     }
 
-    public double getDrawWinAmount() {
+    public float getDrawWinAmount() {
         return drawWinAmount;
     }
 
-    public void setDrawWinAmount(double drawWinAmount) {
+    public void setDrawWinAmount(float drawWinAmount) {
         this.drawWinAmount = drawWinAmount;
     }
 

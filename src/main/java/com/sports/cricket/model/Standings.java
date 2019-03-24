@@ -22,11 +22,11 @@ public class Standings implements Serializable {
 
     private String winner;
 
-    private double wonAmount;
+    private float wonAmount;
 
-    private double lostAmount;
+    private float lostAmount;
 
-    private double netAmount;
+    private float netAmount;
 
     public Integer getId() {
         return id;
@@ -100,27 +100,27 @@ public class Standings implements Serializable {
         this.winner = winner;
     }
 
-    public double getWonAmount() {
+    public float getWonAmount() {
         return wonAmount;
     }
 
-    public void setWonAmount(double wonAmount) {
+    public void setWonAmount(float wonAmount) {
         this.wonAmount = wonAmount;
     }
 
-    public double getLostAmount() {
+    public float getLostAmount() {
         return lostAmount;
     }
 
-    public void setLostAmount(double lostAmount) {
+    public void setLostAmount(float lostAmount) {
         this.lostAmount = lostAmount;
     }
 
-    public double getNetAmount() {
+    public float getNetAmount() {
         return netAmount;
     }
 
-    public void setNetAmount(double netAmount) {
+    public void setNetAmount(float netAmount) {
         this.netAmount = netAmount;
     }
 }
