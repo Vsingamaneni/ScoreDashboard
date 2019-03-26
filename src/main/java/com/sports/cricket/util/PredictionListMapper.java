@@ -172,4 +172,17 @@ public class PredictionListMapper implements Serializable {
         }
         return matchDay;
     }
+
+    public static List<Prediction> sortPredictions(List<Prediction> predictionList){
+        Collections.sort(predictionList, new MatchDayPredictions());
+        return predictionList;
+    }
+
+    static class MatchDayPredictions implements Comparator<Prediction> {
+
+        @Override
+        public int compare(Prediction p1, Prediction p2) {
+            return p1.getFirstName().compareTo(p2.getFirstName());
+        }
+    }
 }

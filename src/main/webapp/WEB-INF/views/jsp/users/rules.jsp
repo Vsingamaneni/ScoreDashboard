@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 2/12/19
-  Time: 9:53 PM
+  Date: 3/25/19
+  Time: 8:46 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -30,12 +30,6 @@
 
 <body class="w3-light-grey">
 
-<!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item w3-right">Members List</span>
-</div>
-
 <c:if test="${not empty session}">
     <c:set var="user_name" value="${session.firstName}"/>
     <c:set var="role" value="${session.role}"/>
@@ -45,6 +39,12 @@
 <c:if test="${empty session}">
     <c:set var="user_name" value="User"/>
 </c:if>
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+    <span class="w3-bar-item w3-right">Score Finder</span>
+</div>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -89,68 +89,47 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-    <c:if test="${not empty msg}">
-        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
-            <h4><strong>${msg}</strong></h4>
-        </div>
-    </c:if>
-
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:90%">
                 <br /><br />
-                <h1 style="text-align: center;">Registered Members</h1>
+                <h1 style="text-align: center;">Rules</h1>
                 <br />
-                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <thead>
-                    <tr>
-                        <th>Member #</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Admin Activated</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
+                <div style="width:70%; text-align:left;color:darkred; background-color: #24e67b; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
+                    <table>
+                        <div class="alert alert-${css} alert-dismissible" role="alert">
+                            <h4>
+                                <ul>
+                                    <h4>Match Fee</h4>
+                                    <b><ul>
+                                        <li>Group Stage : 200</li>
+                                        <li>Qualifiers  : 300</li>
+                                        <li>Eliminator  : 400</li>
+                                        <li>Final       : 500</li>
+                                    </ul></b>
+                                    <br/>
+                                    <li>You should make an entry for every match before an hour of the actual match time.</li>
+                                    <li>You can predict/update the upcoming matches any time.</li>
+                                    <li>Predictions will be closed an hour before the match time.</li>
+                                    <li>If you are not able to predict before the deadline, you will be placed in loosing team by default.</li>
+                                    <br />
+                                    <p> <i>Example </i></p>
+                                    <b><li>Match : RCB vs CSK</li>
+                                        <li>Predictions : <i>RCB : 50, CSK : 20, Default : 3</i></li>
+                                    <li>RCB WIN : Sum of CSK and Default multiplied by the match fee shared among the RCB selected folks. </li>
+                                    <li>Vice versa for a CSK Win </li></b>
+                                </ul>
+                            </h4>
 
-                    <c:forEach var="register" items="${registerList}">
-                        <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                            <td style="text-align:left;"> ${register.memberId}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.fName)}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.lName)}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.isAdminActivated)}</td>
-                            <td style="text-align:left;">
-                                <spring:url value="/member/${register.memberId}/authorize" var="activateUrl"/>
-                                <spring:url value="/member/${register.memberId}/deactivate" var="deactivateUrl"/>
-                                <c:if test="${role.equalsIgnoreCase('admin')}">
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="location.href='${activateUrl}'">Authorize
-                                        </button>
-                                    </c:if>
-                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="">Active</button> &nbsp;&nbsp;
-                                        <button class="btn btn-danger" onclick="location.href='${deactivateUrl}'">Opt Out</button>
-                                    </c:if>
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-danger" onclick="">In Active</button>
-                                    </c:if>
-                                </c:if>
-                                <c:if test="${!role.equalsIgnoreCase('admin')}">
-                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="">Active</button>
-                                    </c:if>
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-danger" onclick="">In Active</button>
-                                    </c:if>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-                <br /><br /><br />
+                        </div>
+                    </table>
+                </div>
+                <br /><br />
                 <hr>
             </div>
         </div>
     </div>
+
 
     <hr>
 

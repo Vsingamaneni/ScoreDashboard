@@ -76,6 +76,7 @@
             <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
             <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
             <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-child"></i>&nbsp; Users</a>
+            <a href="/rules" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Rules</a>
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i>&nbsp; Logout</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
@@ -101,12 +102,11 @@
                 <h4>Hello ${user_name}, You need to be active in order to predict for matches. !! Please contact the admin !</h4>
             </div>
         </div>
-        <br><br>
+        <br>
     </c:if>
 
-    <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Have a glance at your predictions so far. </h2>
+    <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, your match day predictions are below. </h2>
 
-    <br />
     <c:if test="${not empty msg}">
         <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#4CAF50;" role="alert">
             <h4><strong>${msg}</strong></h4>
@@ -115,7 +115,7 @@
 
         <!-- Predictions -->
         <header class="w3-container" style="padding-top:22px">
-            <h3><b><i class="fa fa-plus"></i> Predictions </b></h3>
+            <h3><b><i class="fa fa-plus"></i> MatchDay Predictions </b></h3>
         </header>
 
         <div class="w3-panel">

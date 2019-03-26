@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sports.cricket.model.*;
@@ -20,12 +19,10 @@ import com.sports.cricket.validator.LoginValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sports.cricket.service.UserService;
@@ -493,6 +490,8 @@ public class UserController implements Serializable {
             schedules = ValidatePredictions.isScheduleAfterRegistration(schedules, register.getRegisteredTime());
             List<Schedule> finalSchedule = ValidatePredictions.validatePrediction(schedules, predictions);
             predictions = ValidateDeadLine.mapScheduleToPredictions(schedules, predictions);
+            int matchDay = ScheduleValidation.getMatchDay(schedules);
+            predictions = ScheduleValidation.setCurrentMatchDayPredictions(predictions, matchDay);
 
             model.addAttribute("predictions", predictions);
             model.addAttribute("schedules", finalSchedule);
@@ -795,6 +794,8 @@ public class UserController implements Serializable {
             if(ValidateDeadline.isDeadLineReached(schedule.getStartDate()) || userLogin.getRole().equalsIgnoreCase("admin")){
                 SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
                 ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
+                List<Prediction> predictionList = PredictionListMapper.sortPredictions(matchDetails.getPrediction());
+                matchDetails.setPrediction(predictionList);
                 schedulePredictionsList.add(matchDetails);
                 isScheduleDone = true;
             }
@@ -880,6 +881,17 @@ public class UserController implements Serializable {
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/history";
         }
+    }
+
+    // Show Rules
+    @RequestMapping(value = "/rules", method = RequestMethod.GET)
+    public String showRules(ModelMap model, HttpSession httpSession){
+        logger.debug("show Rules");
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        model.addAttribute("session", userLogin);
+        httpSession.setAttribute("session", userLogin);
+        httpSession.setMaxInactiveInterval(5 * 60);
+        return "users/rules";
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})

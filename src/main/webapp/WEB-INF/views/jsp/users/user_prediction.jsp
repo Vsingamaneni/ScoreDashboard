@@ -82,6 +82,7 @@
             <a href="/history" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
             <a href="/standings" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
             <a href="/showAllUsers" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-child"></i>&nbsp; Users</a>
+            <a href="/rules" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Rules</a>
             <a href="/logout" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i>&nbsp; Logout</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
