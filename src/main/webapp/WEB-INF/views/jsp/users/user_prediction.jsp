@@ -40,7 +40,7 @@
 </div>
 
 <c:if test="${not empty session}">
-    <c:set var="user_name" value="${session.firstName}"/>
+    <c:set var="user_name" value="${session.firstName} ${session.lastName}"/>
     <c:set var="role" value="${session.role}"/>
     <c:set var="isActivated" value="${session.isAdminActivated}"/>
 </c:if>

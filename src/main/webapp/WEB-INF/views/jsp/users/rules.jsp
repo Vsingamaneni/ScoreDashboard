@@ -95,7 +95,7 @@
                 <br /><br />
                 <h1 style="text-align: center;">Rules</h1>
                 <br />
-                <div style="width:70%; text-align:left;color:darkred; background-color: #24e67b; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
+                <div style="width:100%; text-align:left;color:darkred; background-color: #24e67b; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
                     <table>
                         <div class="alert alert-${css} alert-dismissible" role="alert">
                             <h4>
