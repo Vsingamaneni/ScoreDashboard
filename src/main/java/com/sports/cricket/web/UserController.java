@@ -503,7 +503,7 @@ public class UserController implements Serializable {
 
     // show update form
     @RequestMapping(value = "/match/{memberId}/{matchNumber}/predict", method = RequestMethod.GET)
-    public String predictMatch(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
+    public String predictMatch(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) throws ParseException {
 
         logger.debug("predictMatch() : {}", memberId, matchNumber);
 
@@ -520,6 +520,10 @@ public class UserController implements Serializable {
             }
 
             Schedule schedule = scheduleService.findById(matchNumber);
+            if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+                httpSession.setAttribute("msg", "Prediction deadline is reached, cannot predict/update");
+                return "redirect:/predictions";
+            }
 
             Prediction prediction = new Prediction();
 
@@ -565,7 +569,7 @@ public class UserController implements Serializable {
 
     // Update prediction form
     @RequestMapping(value = "/prediction/{memberId}/{matchNumber}/update", method = RequestMethod.GET)
-    public String updatePrediction(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) {
+    public String updatePrediction(@PathVariable("memberId") Integer memberId, @PathVariable("matchNumber") Integer matchNumber, Model model, HttpSession httpSession) throws ParseException {
 
         logger.debug("updatePrediction() : {}", memberId, matchNumber);
 
@@ -582,7 +586,12 @@ public class UserController implements Serializable {
         }
 
         Schedule schedule = scheduleService.findById(matchNumber);
+        if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+            httpSession.setAttribute("msg", "Prediction deadline is reached, cannot predict/update");
+            return "redirect:/predictions";
+        }
         Prediction prediction = scheduleService.getPrediction(memberId, matchNumber);
+
 
         model.addAttribute("scheduleForm", schedule);
         model.addAttribute("predictionForm", prediction);

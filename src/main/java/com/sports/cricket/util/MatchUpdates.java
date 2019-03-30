@@ -96,7 +96,7 @@ public class MatchUpdates implements Serializable {
 
         for (Standings standings : standingsList){
             netAmount = netAmount - standings.getLostAmount() + standings.getWonAmount();
-            standings.setNetAmount(netAmount);
+            standings.setNetAmount(Float.valueOf(String.format("%.2f",netAmount)));
         }
 
         return standingsList;
