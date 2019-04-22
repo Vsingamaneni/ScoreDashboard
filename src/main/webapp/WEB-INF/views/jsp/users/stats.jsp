@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 1/21/19
-  Time: 8:59 PM
+  Date: 4/21/19
+  Time: 8:35 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -99,80 +99,112 @@
 
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
-            <div style="width:90%">
+            <div style="width:100%">
                 <br /><br />
-                <h1 style="text-align: center;">Your Position</h1>
 
+                <h1 style="text-align: center;">Personal Stats</h1>
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Won</th>
-                        <th>Lost</th>
-                        <th>Net</th>
-                        <th>Member</th>
+                        <th>Team</th>
+                        <th># Selected</th>
+                        <th># Won</th>
+                        <th># Lost</th>
                     </tr>
                     </thead>
 
-                    <c:if test="${not empty leader}">
+                    <c:if test="${not empty userStats}">
+                        <c:forEach var="statsDetails" items="${userStats.userStats}">
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                                <td style="text-align:left;"> ${leader.rank}</td>
-                                <td style="text-align:left;"> ${fn:toUpperCase(leader.firstName)}</td>
-                                <td style="text-align:left;"> ${fn:toUpperCase(leader.lastName)}</td>
-                                <td style="text-align:left;">${leader.wonAmount}</td>
-                                <td style="text-align:left;">${leader.lostAmount}</td>
-                                <td style="text-align:left;">${leader.total}</td>
-                                <td style="text-align:left;">
-                                    <c:if test="${fn:containsIgnoreCase(leader.isActive, 'y')}">
-                                        <button class="btn btn-info">ACTIVE</button>
-                                    </c:if>
-                                    <c:if test="${!fn:containsIgnoreCase(leader.isActive, 'y')}">
-                                        <button class="btn btn-danger">NOT ACTIVE</button>
-                                    </c:if>
-                                </td>
-                            </tr>
-                    </c:if>
-                </table>
-
-                <br /><br /><br />
-                <h1 style="text-align: center;">Leader Board</h1>
-                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Won</th>
-                        <th>Lost</th>
-                        <th>Net</th>
-                        <th>Member</th>
-                    </tr>
-                    </thead>
-
-                    <c:if test="${not empty leaderBoardList}">
-                        <c:forEach var="leaderBoard" items="${leaderBoardList}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                                <td style="text-align:left;"> ${leaderBoard.rank}</td>
-                                <td style="text-align:left;"> ${fn:toUpperCase(leaderBoard.firstName)}</td>
-                                <td style="text-align:left;"> ${fn:toUpperCase(leaderBoard.lastName)}</td>
-                                <td style="text-align:left;">${leaderBoard.wonAmount}</td>
-                                <td style="text-align:left;">${leaderBoard.lostAmount}</td>
-                                <td style="text-align:left;">${leaderBoard.total}</td>
-                                <td style="text-align:left;">
-                                    <c:if test="${fn:containsIgnoreCase(leaderBoard.isActive, 'y')}">
-                                        <button class="btn btn-info">ACTIVE</button>
-                                    </c:if>
-                                    <c:if test="${!fn:containsIgnoreCase(leaderBoard.isActive, 'y')}">
-                                        <button class="btn btn-danger">NOT ACTIVE</button>
-                                    </c:if>
-                                </td>
+                                <td style="text-align:left;"> ${statsDetails.key}</td>
+                                <td style="text-align:left;"> ${statsDetails.value.selectedCount}</td>
+                                <td style="text-align:left;"> ${statsDetails.value.wonCount}</td>
+                                <td style="text-align:left;"> ${statsDetails.value.lostCount}</td>
                             </tr>
                         </c:forEach>
                     </c:if>
                 </table>
-                <br /><br /><br />
+                <br /><br />
+
+                <h1 style="text-align: center;">Defaulters</h1>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty defaultLists}">
+                        <c:forEach var="statsDetails" items="${defaultLists}">
+                        <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                            <td style="text-align:left;"> ${statsDetails.name}</td>
+                            <td style="text-align:left;"> ${statsDetails.defaultCount}</td>
+                        </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br /><br />
+
+                <h1 style="text-align: center;">Highest Wins</h1>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty winAndLossCount}">
+                        <c:forEach var="statsDetails" items="${winAndLossCount}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${statsDetails.name}</td>
+                                <td style="text-align:left;"> ${statsDetails.winCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br /><br />
+
+                <h1 style="text-align: center;">Highest Losses</h1>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty lossDetails}">
+                        <c:forEach var="statsDetails" items="${lossDetails}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${statsDetails.name}</td>
+                                <td style="text-align:left;"> ${statsDetails.lossCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br /><br />
+
+                <h1 style="text-align: center;">Highest Won Amount</h1>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty winAndLossAmounts}">
+                        <c:forEach var="statsDetails" items="${winAndLossAmounts}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${statsDetails.name}</td>
+                                <td style="text-align:left;"> ${statsDetails.wonAmount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br /><br />
                 <hr>
             </div>
         </div>

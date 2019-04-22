@@ -859,6 +859,51 @@ public class UserController implements Serializable {
         }
     }
 
+    // Stats
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public String statistics(ModelMap model, HttpSession httpSession) {
+
+        UserLogin login = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == login) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", login);
+            httpSession.setAttribute("session", login);
+
+            Register register = registrationService.getUser(login.getEmail());
+
+            List<Register> registerList = registrationService.getAllUsers();
+            List<Standings> standingsList = scheduleService.getLeaderBoard();
+
+            // get the Users based on the default count
+            List<StatsDetails> defaultLists = StatisticsDetails.getDefaults(standingsList, registerList);
+            model.addAttribute("defaultLists", defaultLists);
+
+            List<StatsDetails> winAndLossCount = StatisticsDetails.getWinsAndLosses(standingsList, registerList);
+            StatisticsDetails.pickTopTenWinningCount(winAndLossCount);
+            model.addAttribute("winAndLossCount", winAndLossCount.subList(0,10));
+
+            List<StatsDetails> lossDetails = new ArrayList<>(winAndLossCount);
+
+            StatisticsDetails.pickTopTenLoosingCount(lossDetails);
+            model.addAttribute("lossDetails", lossDetails.subList(0,10));
+
+            List<StatsDetails> winAndLossAmounts = StatisticsDetails.getHighestWinning(standingsList, registerList);
+            StatisticsDetails.pickTopTenWonAmounts(winAndLossAmounts);
+            model.addAttribute("winAndLossAmounts", winAndLossAmounts.subList(0, 10));
+
+            StatsDetails userStats = StatisticsDetails.getIndividualStats(standingsList,register);
+            model.addAttribute("userStats", userStats);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/stats";
+        }
+    }
+
     // Display predictions
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String showHistory(ModelMap model, HttpSession httpSession) {

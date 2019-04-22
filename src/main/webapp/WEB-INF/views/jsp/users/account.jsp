@@ -96,6 +96,7 @@
             <a href="/history" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
             <a href="/standings" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
             <a href="/showAllUsers" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-child"></i>&nbsp; Users</a>
+            <a href="/statistics" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-pie-chart"></i>&nbsp; Stats</a>
             <a href="/rules" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Rules</a>
             <a href="/logout" style="text-decoration : none;" style="text-decoration : none;"class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i>&nbsp; Logout</a>
         </c:if>
@@ -131,7 +132,7 @@
             <h1>${fn:toUpperCase(user_name)}</h1>
             <p class="title">${fn:toUpperCase(role)}</p>
 
-            <c:if test="${!session.limitReached}">
+            <c:if test="${session.limitReached == false}">
                 <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
                     <p>
                         <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
@@ -156,7 +157,7 @@
                     </c:if>
                 </c:if>
             </c:if>
-            <c:if test="${session.limitReached}">
+            <c:if test="${session.limitReached == true}">
                 <c:if test="${session.isActive.equalsIgnoreCase('N')}">
                     <c:if test="${session.isAdminActivated.equalsIgnoreCase('N')}">
                         <p>
