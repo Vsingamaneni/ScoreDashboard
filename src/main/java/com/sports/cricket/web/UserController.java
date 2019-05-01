@@ -174,6 +174,9 @@ public class UserController implements Serializable {
             List<Restrictions> restrictions = registrationService.getRestrictions();
 
             userLogin.setLimitReached(LeaderBoardDetails.isLimitReached(standingsList, userLogin.getMemberId(), restrictions.get(0).getMaxLimit()));
+
+            userLogin = UserListMapper.setLoginStatus(userLogin);
+
             httpSession.setAttribute("role", userLogin.getRole());
             httpSession.setAttribute("session", userLogin);
             model.addAttribute("session", userLogin);
@@ -930,6 +933,7 @@ public class UserController implements Serializable {
             List<Standings> standingsList = LeaderBoardDetails.getStandings(scheduleService.getLeaderBoard(), register.getMemberId());
             standingsList = MatchUpdates.mapStandings(standingsList);
 
+            standingsList = LeaderBoardDetails.setResults(standingsList);
             model.addAttribute("standingsList", standingsList);
 
             httpSession.setMaxInactiveInterval(5 * 60);

@@ -3,6 +3,7 @@ package com.sports.cricket.util;
 import com.sports.cricket.model.MatchDetails;
 import com.sports.cricket.model.Prediction;
 import com.sports.cricket.model.Register;
+import com.sports.cricket.model.UserLogin;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
@@ -66,5 +67,24 @@ public class UserListMapper implements Serializable {
             matchDetailsList.add(userDetails);
         }
         return matchDetailsList;
+    }
+
+    public static UserLogin setLoginStatus(UserLogin userLogin) {
+
+        if (userLogin.getIsAdminActivated().equalsIgnoreCase("Y")) {
+            if (userLogin.getIsActive().equalsIgnoreCase("Y")) {
+                if (userLogin.isLimitReached()) {
+                    userLogin.setStatus("optout");
+                } else if (userLogin.getIsActive().equalsIgnoreCase("Y")) {
+                    userLogin.setStatus("active");
+                }
+            } else {
+                userLogin.setStatus("activate");
+            }
+        } else {
+            userLogin.setStatus("admin_activation_pending");
+        }
+
+        return userLogin;
     }
 }

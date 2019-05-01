@@ -104,4 +104,20 @@ public class LeaderBoardDetails implements Serializable {
         return null;
     }
 
+    public static List<Standings> setResults(List<Standings> standingsList){
+
+        for (Standings standings: standingsList){
+            if (standings.getSelected().equalsIgnoreCase(standings.getWinner())){
+                standings.setResult("win");
+            } else if (!standings.getSelected().equalsIgnoreCase(standings.getWinner())
+                    && !standings.getWinner().equalsIgnoreCase("draw")){
+                standings.setResult("loss");
+            } else if (standings.getWinner().equalsIgnoreCase("draw")){
+                standings.setResult("draw");
+            }
+        }
+
+        return standingsList;
+    }
+
 }

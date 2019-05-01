@@ -26,6 +26,8 @@ public class UserLogin implements Serializable {
 
    private String isAdminActivated;
 
+   private String status;
+
     public String getEmail() {
         return email;
     }
@@ -112,5 +114,13 @@ public class UserLogin implements Serializable {
 
     public void setIsAdminActivated(String isAdminActivated) {
         this.isAdminActivated = isAdminActivated;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -132,58 +132,38 @@
             <h1>${fn:toUpperCase(user_name)}</h1>
             <p class="title">${fn:toUpperCase(role)}</p>
 
-            <c:if test="${session.limitReached == false}">
-                <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
+            <c:choose>
+                <c:when test="${session.status.equalsIgnoreCase('admin_activation_pending')}">
+                    <p>
+                        <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                            Pending Admin Activation
+                        </button>
+                    </p>
+                </c:when>
+                <c:when test="${session.status.equalsIgnoreCase('active')}">
                     <p>
                         <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
                             Active
                         </button>
                     </p>
-                </c:if>
-                <c:if test="${session.isActive.equalsIgnoreCase('N')}">
-                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('N')}">
-                        <p>
-                            <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                                Pending Admin Activation
-                            </button>
-                        </p>
-                    </c:if>
-                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('Y')}">
-                    <p>
-                        <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                            Activate
-                        </button>
-                    </p>
-                    </c:if>
-                </c:if>
-            </c:if>
-            <c:if test="${session.limitReached == true}">
-                <c:if test="${session.isActive.equalsIgnoreCase('N')}">
-                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('N')}">
-                        <p>
-                            <button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #42973E; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                                Pending Admin Activation
-                            </button>
-                        </p>
-                    </c:if>
-                    <c:if test="${session.isAdminActivated.equalsIgnoreCase('Y')}">
+                </c:when>
+                <c:when test="${session.status.equalsIgnoreCase('activate')}">
                     <p>
                         <button onclick="location.href='${activateUrl}'"
                                 style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #091697; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
                             Activate
                         </button>
                     </p>
-                    </c:if>
-                </c:if>
-                <c:if test="${session.isActive.equalsIgnoreCase('Y')}">
-                <p>
-                    <button onclick="location.href='${deactivateUrl}'"
-                            style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #970A05; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
-                        Opt Out
-                    </button>
-                </p>
-                </c:if>
-            </c:if>
+                </c:when>
+                <c:when test="${session.status.equalsIgnoreCase('optout')}">
+                    <p>
+                        <button onclick="location.href='${deactivateUrl}'"
+                                style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #970A05; text-align: center; cursor: pointer; width: 100%; font-size: 18px;">
+                            Opt Out
+                        </button>
+                    </p>
+                </c:when>
+            </c:choose>
         </div>
 
     </div>

@@ -79,7 +79,10 @@ public class MatchUpdates implements Serializable {
                     standings.setWonAmount(schedulePrediction.getDrawWinAmount());
                 }
                 standings.setLostAmount(Float.valueOf("0"));
-            }else{
+            } else if (standings.getWinner().equalsIgnoreCase("draw")){
+                standings.setWonAmount(Float.valueOf("0"));
+                standings.setLostAmount(Float.valueOf("0"));
+            } else {
                 standings.setWonAmount(Float.valueOf("0"));
                 standings.setLostAmount(schedulePrediction.getSchedule().getMatchFee());
             }

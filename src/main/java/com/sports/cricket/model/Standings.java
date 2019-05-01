@@ -28,6 +28,8 @@ public class Standings implements Serializable {
 
     private float netAmount;
 
+    private String result;
+
     public Integer getId() {
         return id;
     }
@@ -122,5 +124,13 @@ public class Standings implements Serializable {
 
     public void setNetAmount(float netAmount) {
         this.netAmount = netAmount;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }
