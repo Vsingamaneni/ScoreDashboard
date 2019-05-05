@@ -2,6 +2,7 @@ package com.sports.cricket.dao;
 
 import com.sports.cricket.model.Register;
 import com.sports.cricket.model.Restrictions;
+import com.sports.cricket.model.Review;
 import com.sports.cricket.model.UserLogin;
 import com.sports.cricket.password.EncryptedPassword;
 import com.sports.cricket.password.ProtectUserPassword;
@@ -263,6 +264,98 @@ public class RegistrationDaoImpl implements RegistrationDao, Serializable {
         int row = jdbcTemplate.update(sql);
 
         return (row ==1) ? true : false;
+    }
+
+    @Override
+    public boolean saveReview(Review review) {
+        System.out.println("Inside Review save");
+
+        String sql = "INSERT INTO REVIEW(memberId, name, feedback, interested, improvements, ideas) "
+                + "VALUES ( ?,?,?,?,?,?)";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, review.getMemberId());
+            ps.setString(2, review.getName());
+            ps.setString(3, review.getFeedback());
+            ps.setString(4, review.getInterested());
+            ps.setString(5, review.getImprovements());
+            ps.setString(6, review.getIdeas());
+
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+
+        System.out.println("Review Update Done");
+
+        return true;
+    }
+
+    @Override
+    public Review getReview(int memberId) {
+        System.out.println("Inside retrieving User");
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("memberId", memberId);
+
+        String getReview = "SELECT * FROM REVIEW where memberId = '" + memberId + "'";
+
+        Connection conn = null;
+        Statement statement;
+        ResultSet resultSet;
+        Review review =null;
+
+        try {
+            conn = dataSource.getConnection();
+            conn.prepareStatement(getReview);
+
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(getReview);
+
+            while(resultSet.next()){
+                review = new Review();
+                review.setMemberId(resultSet.getInt("memberId"));
+                review.setFeedback(resultSet.getString("feedback"));
+                review.setInterested(resultSet.getString("interested"));
+                review.setImprovements(resultSet.getString("improvements"));
+                review.setIdeas(resultSet.getString("ideas"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+
+        return review;
+    }
+
+    @Override
+    public List<Review> getAllReviews() {
+
+        String sql = "Select * from REVIEW";
+
+        List<Review> reviews = jdbcTemplate.query(sql,new BeanPropertyRowMapper(Review.class));
+
+        return reviews;
     }
 
     private LocalDateTime getTime(){

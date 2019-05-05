@@ -3,6 +3,7 @@ package com.sports.cricket.service;
 import com.sports.cricket.dao.RegistrationDao;
 import com.sports.cricket.model.Register;
 import com.sports.cricket.model.Restrictions;
+import com.sports.cricket.model.Review;
 import com.sports.cricket.model.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,21 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     public boolean optOutUser(Integer memberId, String optOut) {
         return registrationDao.optOutUser(memberId, optOut);
     }
+
+    @Override
+    public boolean saveReview(Review review) {
+        return registrationDao.saveReview(review);
+    }
+
+    @Override
+    public Review getReview(int memberId) {
+        return registrationDao.getReview(memberId);
+    }
+
+    @Override
+    public List<Review> getAllReviews() {
+        return registrationDao.getAllReviews();
+    }
+
 
 }

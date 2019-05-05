@@ -1,45 +1,85 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 12/28/18
-  Time: 11:50 AM
+  Date: 5/4/19
+  Time: 10:49 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Contact Admin</title>
+    <title>User Review</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
+    <link rel="stylesheet" href="/resources/core/css/table.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/resources/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/resources/login/css/main.css">
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
     </style>
 </head>
 
 <body class="w3-light-grey">
+
+<c:if test="${not empty session}">
+    <c:set var="user_name" value="${session.firstName}"/>
+    <c:set var="role" value="${session.role}"/>
+    <c:set var="isActivated" value="${session.isAdminActivated}"/>
+</c:if>
+
+<c:if test="${empty session}">
+    <c:set var="user_name" value="User"/>
+</c:if>
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
     <span class="w3-bar-item w3-right">Score Finder</span>
 </div>
-
-<c:if test="${not empty session}">
-    <c:set var="user_name" value="${session.firstName}"/>
-    <c:set var="role" value="${session.role}"/>
-</c:if>
-
-<c:if test="${empty session}">
-    <c:set var="user_name" value="User"/>
-</c:if>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -87,49 +127,50 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 auto">
+            <div style="width:90%">
+                <br /><br />
+                <h1 style="text-align: center;">Review</h1>
 
-    <!-- Header -->
-    <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
-    </header>
+                <div class="container">
+                    <form class="login100-form validate-form p-b-33 p-t-5"  action="/saveReview" modelAttribute="userReview" method="POST">
 
-    <div class="w3-row-padding w3-margin-bottom">
-            <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-                <div class="w3-right">
+                    <label for="reviewRating">Overall Rating</label>
+                        <select id="reviewRating" name="reviewRating">
+                            <option>Very Satisfied (5)</option>
+                            <option>Satisfied (4)</option>
+                            <option>Average (3)</option>
+                            <option>Unsatisfied (2)</option>
+                            <option>Very Unsatisfied (1)</option>
+                        </select>
+
+
+                        <label for="interested">Interested for next season?</label>
+                        <select id="interested" name="interested">
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+
+                        <label for="improve">How can we improve</label>
+                        <textarea id="improve" name="improve" placeholder="What didnt you like / How can we improve this model?" style="height:200px"></textarea>
+
+                        <label for="ideas">New model suggestions</label>
+                        <textarea id="ideas" name="ideas" placeholder="Any suggestions for a new model next year?" style="height:200px"></textarea>
+                        <div class="container-login100-form-btn m-t-32">
+                            <button class="login100-form-btn" type='submit' action="/saveReview">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="w3-clear"></div>
-                <h4>Hello ${user_name}, Please Contact Admin to activate your account !!</h4>
-            </div>
-    </div>
 
-    <div class="w3-row-padding w3-margin-bottom">
-        <div class="w3-container w3-blue w3-text-white w3-padding-16">
-            <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-            <div class="w3-right">
+                <hr>
             </div>
-            <div class="w3-clear"></div>
-            <h4>Feel free to check the upcoming matches and sort out your preferences !!</h4>
         </div>
     </div>
 
-    <div class="w3-row-padding w3-margin-bottom">
-        <div class="w3-container w3-orange w3-text-white w3-padding-16">
-            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-            <div class="w3-right">
-            </div>
-            <div class="w3-clear"></div>
-            <h4>You will be joining with ${session.memberId -1} other members !! </h4>
-        </div>
-    </div>
 
     <hr>
-    <hr>
 
-    <br>
-    <br>
-    <br>
-    <br>
     <br>
 
     <!-- Footer -->
@@ -167,3 +208,5 @@
 
 </body>
 </html>
+
+

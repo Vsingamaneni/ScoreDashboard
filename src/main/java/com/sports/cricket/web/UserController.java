@@ -42,18 +42,12 @@ public class UserController implements Serializable {
 
     FormValidator formValidator = new FormValidator();
 
-    private UserService userService;
     private ScheduleService scheduleService;
     private RegistrationService registrationService;
 
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
     @Autowired
@@ -501,6 +495,125 @@ public class UserController implements Serializable {
 
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/predictions";
+        }
+    }
+
+    // Take review
+    @RequestMapping(value = "/userReview", method = RequestMethod.GET)
+    public String userReview(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            Register register = registrationService.getUser(userLogin.getEmail());
+            userLogin.setIsActive(register.getIsActive());
+
+            Review review = registrationService.getReview(userLogin.getMemberId());
+
+            if (null != review){
+                httpSession.setAttribute("review", review);
+                return "redirect:/review";
+            }
+
+            UserReview userReview = new UserReview();
+
+            model.addAttribute("userReview", userReview);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/userreview";
+        }
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/saveReview", method = RequestMethod.POST)
+    public String saveReview(@ModelAttribute("userReview") UserReview userRating, ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            Review review = new Review();
+
+            if (null != userRating){
+                review.setMemberId(userLogin.getMemberId());
+                review.setFeedback(userRating.getReviewRating());
+                review.setInterested(userRating.getInterested());
+                review.setImprovements(userRating.getImprove());
+                review.setIdeas(userRating.getIdeas());
+                review.setName(userLogin.getFirstName() + " " + userLogin.getLastName());
+            }
+
+            boolean isReviewSaved = registrationService.saveReview(review);
+
+            if (isReviewSaved){
+                return "redirect:/review";
+            }
+
+            //model.addAttribute("rating", rating);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/review";
+        }
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/showReviews", method = RequestMethod.GET)
+    public String showReview(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            if (!userLogin.getRole().equalsIgnoreCase("admin")){
+                return "redirect:/";
+            }
+
+            List<Review> reviewList = registrationService.getAllReviews();
+            Review interestedCount = ReviewListMapper.countInterested(reviewList);
+
+            model.addAttribute("interestedCount", interestedCount);
+            model.addAttribute("reviewList", reviewList);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/showreviews";
+        }
+    }
+
+    // Display predictions
+    @RequestMapping(value = "/review", method = RequestMethod.GET)
+    public String doReview(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            Review review = (Review) httpSession.getAttribute("review");
+
+            List<Review> reviewList = registrationService.getAllReviews();
+            Review overAllReview = ReviewListMapper.mapReviews(reviewList);
+
+            model.addAttribute("rating", review);
+            model.addAttribute("overAllReview", overAllReview);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/review";
         }
     }
 

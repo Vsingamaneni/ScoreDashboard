@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 2/12/19
-  Time: 9:53 PM
+  Date: 5/4/19
+  Time: 7:00 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Registered Users</title>
+    <title>Display Review</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
@@ -25,26 +25,70 @@
     <link rel="stylesheet" href="/resources/core/css/table.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+        .star-ratings-sprite {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+            font-size: 0;
+            height: 21px;
+            line-height: 0;
+            overflow: hidden;
+            text-indent: -999em;
+            width: 110px;
+            margin: 0 auto;
+        }
+
+        .rating {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x 0 100%;
+            float: left;
+             height: 21px;
+             display:block;
+         }
+
+        /* Place text to the right */
+        .right {
+            text-align: right;
+        }
+
+        /* The bar container */
+        .bar-container {
+            background-color: #f1f1f1;
+            text-align: center;
+            color: white;
+        }
+
+        /* Individual bars */
+        .bar-5 {width: ${overAllReview.fivePercent}%; height: 18px; background-color: #4CAF50;}
+        .bar-4 {width: ${overAllReview.fourPercent}%; height: 18px; background-color: #2196F3;}
+        .bar-3 {width: ${overAllReview.threePercent}%; height: 18px; background-color: #00bcd4;}
+        .bar-2 {width: ${overAllReview.twoPercent}%; height: 18px; background-color: #ff9800;}
+        .bar-1 {width: ${overAllReview.onePercent}%; height: 18px; background-color: #f44336;}
+
     </style>
 </head>
 
 <body class="w3-light-grey">
 
-<!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item w3-right">Members List</span>
-</div>
-
 <c:if test="${not empty session}">
     <c:set var="user_name" value="${session.firstName}"/>
     <c:set var="role" value="${session.role}"/>
     <c:set var="isActivated" value="${session.isAdminActivated}"/>
+    <fmt:parseNumber var = "totalCount" integerOnly = "true" type = "number" value = "${overAllReview.totalCount}" />
+    <fmt:parseNumber var = "fiveStar" integerOnly = "true" type = "number" value = "${overAllReview.fiveStar}" />
+    <fmt:parseNumber var = "fourStar" integerOnly = "true" type = "number" value = "${overAllReview.fourStar}" />
+    <fmt:parseNumber var = "threeStar" integerOnly = "true" type = "number" value = "${overAllReview.threeStar}" />
+    <fmt:parseNumber var = "twoStar" integerOnly = "true" type = "number" value = "${overAllReview.twoStar}" />
+    <fmt:parseNumber var = "oneStar" integerOnly = "true" type = "number" value = "${overAllReview.oneStar}" />
 </c:if>
 
 <c:if test="${empty session}">
     <c:set var="user_name" value="User"/>
 </c:if>
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+    <span class="w3-bar-item w3-right">Score Finder</span>
+</div>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -92,68 +136,81 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-    <c:if test="${not empty msg}">
-        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
-            <h4><strong>${msg}</strong></h4>
-        </div>
-    </c:if>
-
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
             <div style="width:90%">
                 <br /><br />
-                <h1 style="text-align: center;">Registered Members</h1>
-                <br />
-                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                    <thead>
-                    <tr>
-                        <th>Member #</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Admin Activated</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
 
-                    <c:forEach var="register" items="${registerList}">
-                        <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                            <td style="text-align:left;"> ${register.memberId}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.fName)}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.lName)}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.isAdminActivated)}</td>
-                            <td style="text-align:left;">
-                                <spring:url value="/member/${register.memberId}/authorize" var="activateUrl"/>
-                                <spring:url value="/member/${register.memberId}/deactivate" var="deactivateUrl"/>
-                                <c:if test="${role.equalsIgnoreCase('admin')}">
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="location.href='${activateUrl}'">Authorize
-                                        </button>
-                                    </c:if>
-                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="">Active</button> &nbsp;&nbsp;
-                                        <button class="btn btn-danger" onclick="location.href='${deactivateUrl}'">Opt Out</button>
-                                    </c:if>
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-danger" onclick="">In Active</button>
-                                    </c:if>
-                                </c:if>
-                                <c:if test="${!role.equalsIgnoreCase('admin')}">
-                                    <c:if test="${register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-info" onclick="">Active</button>
-                                    </c:if>
-                                    <c:if test="${!register.isActive.equalsIgnoreCase('Y')}">
-                                        <button class="btn btn-danger" onclick="">In Active</button>
-                                    </c:if>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-                <br /><br /><br />
+                <div style="text-align: center;">
+                    <h2>Overall User Rating</h2>
+                    <div class="star-ratings-sprite"><span style="width:${overAllReview.overallPercent}%" class="rating"></span></div>
+                    <p><b>${overAllReview.overall} average based on ${totalCount} reviews.</b></p>
+                </div>
+
+                <hr style="border:3px solid #f1f1f1">
+
+                <div>
+                    <div class="side">
+                        <div>5 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-5"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>${fiveStar}</div>
+                    </div>
+                    <div class="side">
+                        <div>4 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-4"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>${fourStar}</div>
+                    </div>
+                    <div class="side">
+                        <div>3 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-3"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>${threeStar}</div>
+                    </div>
+                    <div class="side">
+                        <div>2 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-2"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>${twoStar}</div>
+                    </div>
+                    <div class="side">
+                        <div>1 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-1"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>${oneStar}</div>
+                    </div>
+                </div>
                 <hr>
             </div>
         </div>
     </div>
+
 
     <hr>
 
@@ -194,3 +251,4 @@
 
 </body>
 </html>
+
