@@ -46,6 +46,8 @@ public class Review implements Serializable {
 
     private int no;
 
+    private boolean showResponse;
+
     public int getMemberId() {
         return memberId;
     }
@@ -216,5 +218,13 @@ public class Review implements Serializable {
 
     public void setNo(int no) {
         this.no = no;
+    }
+
+    public boolean isShowResponse() {
+        return showResponse;
+    }
+
+    public void setShowResponse(boolean showResponse) {
+        this.showResponse = showResponse;
     }
 }

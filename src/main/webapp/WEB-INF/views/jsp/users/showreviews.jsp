@@ -112,20 +112,22 @@
 
                 <h1>User Reviews</h1>
                 <c:forEach var="review" items="${reviewList}">
-                    <div style="background-color: lightgrey; width: 100%; border: 3px solid green; padding: 20px; margin: 20px; border-radius: 25px;">
-                        <p><b>${review.name}</b> says ...</p>
-                        <c:if test="${not empty review.improvements}">
-                            <blockquote>
-                                    ${review.improvements}
-                            </blockquote>
-                        </c:if>
+                    <c:if test="${review.showResponse}">
+                        <div style="background-color: lightgrey; width: 100%; border: 3px solid green; padding: 20px; margin: 20px; border-radius: 25px;">
+                            <p><b>${review.name}</b> says ...</p>
+                            <c:if test="${not empty review.improvements}">
+                                <blockquote>
+                                        ${review.improvements}
+                                </blockquote>
+                            </c:if>
 
-                        <c:if test="${not empty review.ideas}">
-                            <blockquote>
-                                    ${review.ideas}
-                            </blockquote>
-                        </c:if>
-                    </div>
+                            <c:if test="${not empty review.ideas}">
+                                <blockquote>
+                                        ${review.ideas}
+                                </blockquote>
+                            </c:if>
+                        </div>
+                    </c:if>
                 </c:forEach>
                 <hr>
             </div>

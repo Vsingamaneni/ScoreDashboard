@@ -2,6 +2,7 @@ package com.sports.cricket.util;
 
 import com.sports.cricket.model.Review;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -75,5 +76,15 @@ public class ReviewListMapper {
         }
 
         return review;
+    }
+
+    public static void setPreview(List<Review> reviewList){
+        if (!CollectionUtils.isEmpty(reviewList)){
+            for (Review review : reviewList){
+                if (!StringUtils.isEmpty(review.getImprovements()) || !StringUtils.isEmpty(review.getIdeas())){
+                    review.setShowResponse(true);
+                }
+            }
+        }
     }
 }

@@ -583,6 +583,7 @@ public class UserController implements Serializable {
 
             List<Review> reviewList = registrationService.getAllReviews();
             Review interestedCount = ReviewListMapper.countInterested(reviewList);
+            ReviewListMapper.setPreview(reviewList);
 
             model.addAttribute("interestedCount", interestedCount);
             model.addAttribute("reviewList", reviewList);
