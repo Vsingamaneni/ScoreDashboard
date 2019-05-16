@@ -31,12 +31,9 @@ public class SettlementUtil {
 
     public static List<Settlement> mapSettlement(TrackSettlement trackSettlement, Settlement toSettlement, Settlement fromSettlement){
         List<Settlement> settlementList = new ArrayList<>();
-        toSettlement.setNet(toSettlement.getNet() - trackSettlement.getSettledAmount());
-        if (fromSettlement.getNet() > 0) {
-            fromSettlement.setNet(fromSettlement.getNet() - trackSettlement.getSettledAmount());
-        } else {
-            fromSettlement.setNet(fromSettlement.getNet() + trackSettlement.getSettledAmount());
-        }
+        toSettlement.setNet(toSettlement.getNet() + trackSettlement.getSettledAmount());
+        fromSettlement.setNet(fromSettlement.getNet() + (trackSettlement.getSettledAmount() * -1));
+
         settlementList.add(toSettlement);
         settlementList.add(fromSettlement);
 
