@@ -1,10 +1,7 @@
 package com.sports.cricket.service;
 
 import com.sports.cricket.dao.ScheduleDao;
-import com.sports.cricket.model.Prediction;
-import com.sports.cricket.model.Result;
-import com.sports.cricket.model.Schedule;
-import com.sports.cricket.model.Standings;
+import com.sports.cricket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,6 +112,31 @@ public class ScheduleServiceImpl implements ScheduleService, Serializable {
     @Override
     public List<Standings> getLeaderBoard() {
         return scheduleDao.getLeaderBoard();
+    }
+
+    @Override
+    public List<Settlement> getSettlement() {
+        return scheduleDao.getSettlement();
+    }
+
+    @Override
+    public List<TrackSettlement> getSettlementsTrack() {
+        return scheduleDao.getSettlementsTrack();
+    }
+
+    @Override
+    public Settlement getSettlement(Integer memberId) {
+        return scheduleDao.getSettlement(memberId);
+    }
+
+    @Override
+    public boolean updateSettlement(List<Settlement> settlementList) {
+        return scheduleDao.updateSettlement(settlementList);
+    }
+
+    @Override
+    public boolean addSettlement(TrackSettlement trackSettlement) {
+        return scheduleDao.addSettlement(trackSettlement);
     }
 
     @Override

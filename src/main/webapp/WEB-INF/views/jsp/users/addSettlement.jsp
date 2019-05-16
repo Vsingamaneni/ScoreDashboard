@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 1/19/19
-  Time: 5:46 PM
+  Date: 5/15/19
+  Time: 6:54 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Update Result</title>
+    <title>Add Settlement</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/resources/login/images/icons/cricket.ico"/>
@@ -85,7 +85,7 @@
             </c:if>
             <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
             <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
-            <a href="/settlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Settlement</a>
+            <a href="/settlement" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Settlement</a>
             <a href="/displaySettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Settlement History</a>
             <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-child"></i>&nbsp; Users</a>
             <a href="/statistics" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-pie-chart"></i>&nbsp; Stats</a>
@@ -105,7 +105,7 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-    <h2> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Update match result. </h2>
+    <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Ready to add a settlement? </h2>
 
     <c:if test="${not empty msg}">
     <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -130,58 +130,55 @@
         <div class='container'>
             <div class='panel panel-primary dialog-panel'>
                 <div class='panel-heading' style="background-color: #082a3e;">
-                    <h1 style="text-align: center;">Update Match Result</h1>
+                    <h1 style="text-align: center;">Add Settlement</h1>
                 </div>
                 <div class="w3-panel">
                     <div class="w3-row-padding" style="width:100%;margin:0 auto">
-                        <c:forEach var="schedule" items="${schedules}">
+                        <form class="login100-form validate-form p-b-33 p-t-5" action="/saveSettlement" modelAttribute="trackSettlement" method="POST">
                             <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
-                                <thead>
-                                <tr>
-                                    <th>Match#</th>
-                                    <th>Fixture</th>
-                                    <th>Winner</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                                    <form action="/matchResult/update/" modelAttribute="schedule" method="POST"
-                                          class='form-horizontal' role='form'>
-                                        <td style="text-align:left;"> ${schedule.matchNumber}</td>
-                                        <td style="text-align:left;">${fn:toUpperCase(schedule.homeTeam)}
-                                            vs ${fn:toUpperCase(schedule.awayTeam)}</td>
-                                        <input type=hidden id="matchNumber" name="matchNumber"
-                                               value="${schedule.matchNumber}">
-                                        <input type=hidden id="homeTeam" name="homeTeam" value="${schedule.homeTeam}">
-                                        <input type=hidden id="awayTeam" name="awayTeam" value="${schedule.awayTeam}">
-                                        <input type=hidden id="matchDay" name="matchDay" value="${schedule.matchDay}">
-                                        <input type=hidden id="matchFee" name="matchFee" value="${schedule.matchFee}">
-                                        <input type=hidden id="startDate" name="startDate"
-                                               value="${schedule.startDate}">
-                                        <td style="text-align:left;">
-                                            <select class='form-control' id='id_winner' name="winner"
-                                                    style=" width:100px;">
-                                                <option>-SELECT-</option>
-                                                <option>${fn:toUpperCase(schedule.homeTeam)}</option>
-                                                <option>${fn:toUpperCase(schedule.awayTeam)}</option>
-                                                <option>DRAW</option>
-                                            </select>
-                                        </td>
-                                        <td style="text-align:left;">
-                                            <button type="submit" class="btn-lg btn-primary" style= "border-radius: 8px;"><a
-                                                    style="color:white;font-size:15px;text-decoration:none;font-family:Comic Sans MS">Update</a>
-                                            </button>
-                                        </td>
-                                    </form>
+
+                                <div class="wrap-input100 validate-input" data-validate = "To">
+                                    To : <select class='form-control' id='id_to' name="toDetails"
+                                                 style=" width:50%;">
+                                    <c:forEach var="settlement" items="${settlementDetails}">
+                                        <option>${settlement.memberId} - ${settlement.name} (${settlement.net})</option>
+                                    </c:forEach>
+                                </select>
+                                </div>
+
+                                <br />
+                                <div class="wrap-input100 validate-input" data-validate = "From">
+                                    From : <select class='form-control' id='id_from' name="fromDetails"
+                                                   style=" width:50%;">
+                                    <c:forEach var="settlement" items="${settlementDetails}">
+                                        <option>${settlement.memberId} - ${settlement.name} (${settlement.net})</option>
+                                    </c:forEach>
+                                </select>
+                                </div>
+
+                                <br />
+
+                                <div class="wrap-input100 validate-input" data-validate="Settle Amount">
+                                    <input class="input100" type="text" placeholder="Settle Amount" name="settledAmount">
+                                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                                </div>
+
+                                <br />
+
+                                <div class="container-login100-form-btn m-t-32">
+                                    <button type="submit" class="btn-lg btn-primary" style= "border-radius: 8px;"><a
+                                            style="color:white;font-size:15px;text-decoration:none;font-family:Comic Sans MS">Settle</a>
+                                    </button>
+                                </div>
+
                                 </tr>
                             </table>
-                        </c:forEach>
+                        </form>
                         <br/><br/>
                     </div>
                 </div>
             </div>
         </div>
-
         <br>
 
         <!-- Footer -->

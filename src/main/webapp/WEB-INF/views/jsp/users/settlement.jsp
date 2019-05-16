@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: v0s004a
-  Date: 4/30/18
-  Time: 12:03 AM
+  Date: 5/15/19
+  Time: 1:55 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page session="false" %>
@@ -14,16 +14,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Score Finder</title>
+    <title>Settlement</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="/resources/login/images/icons/cricket.ico"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
+    <link rel="stylesheet" href="/resources/core/css/table.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-        a href{text-decoration: none;}
     </style>
 </head>
 
@@ -38,6 +39,7 @@
 <c:if test="${not empty session}">
     <c:set var="user_name" value="${session.firstName}"/>
     <c:set var="role" value="${session.role}"/>
+    <c:set var="isActivated" value="${session.isAdminActivated}"/>
 </c:if>
 
 <c:if test="${empty session}">
@@ -53,8 +55,8 @@
         <div class="w3-col s8 w3-bar">
             <span>Welcome, <strong>${user_name}</strong></span><br>
             <a href="/" class="w3-bar-item w3-button"><i class="fa fa-home"></i></a>
-            <a href="/schedule" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i></a>
-            <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i></a>
+            <a href="/schedule" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i></a>
+            <a href="/logout" style="text-decoration : none;" style="text-decoration : none;"class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i></a>
         </div>
     </div>
     <hr>
@@ -93,128 +95,73 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
-    <!-- Header -->
-    <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
-    </header>
-
-    <c:if test="${not empty userActiveDetails}">
-        <c:forEach var="userDetails" items="${userActiveDetails}">
-            <c:if test="${userDetails.match.equalsIgnoreCase('active')}">
-                <c:set var="activeUser" value="${userDetails.count}"/>
-            </c:if>
-            <c:if test="${userDetails.match.equalsIgnoreCase('inactive')}">
-                <c:set var="inActiveUser" value="${userDetails.count}"/>
-            </c:if>
-        </c:forEach>
+    <c:if test="${not empty msg}">
+        <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#204d74;" role="alert">
+            <h4><strong>${msg}</strong></h4>
+        </div>
     </c:if>
 
-    <div class="w3-row-padding w3-margin-bottom">
-        <div class="w3-quarter">
-            <div class="w3-container w3-blue w3-padding-16">
-                <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                    <c:if test="${not empty matchDay}">
-                    <h3>${matchDay}</h3>
-                    </c:if>
-                    <c:if test="${empty matchDay}">
-                        <h3>N/A</h3>
-                    </c:if>
-                </div>
-                <div class="w3-clear"></div>
-                <h4>MatchDay</h4>
-            </div>
-        </div>
-        <div class="w3-quarter">
-            <div class="w3-container w3-teal w3-padding-16">
-                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                    <c:if test="${not empty matchDetailsList}">
-                        <c:forEach var="matchDetails" items="${matchDetailsList}">
-                           <h3>${matchDetails.match} : ${matchDetails.count}</h3>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${ empty matchDetailsList}">
-                            <h3>N/A</h3>
-                    </c:if>
-                </div>
-                <div class="w3-clear"></div>
-                <h4>Predictions</h4>
-            </div>
-        </div>
-        <div class="w3-quarter">
-            <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                    <h3>${activeUser}</h3>
-                </div>
-                <div class="w3-clear"></div>
-                <h4>Active</h4>
-            </div>
-        </div>
-        <div class="w3-quarter">
-            <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-                <div class="w3-right">
-                    <h3>${inActiveUser}</h3>
-                </div>
-                <div class="w3-clear"></div>
-                <h4>InActive</h4>
-            </div>
-        </div>
-    </div>
 
     <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 auto">
-            <div class="w3-twothird">
-                <h5>Feeds</h5>
-                <table class="w3-table w3-striped w3-white">
-                    <c:forEach var="matchDetails" items="${newsFeed}">
-                        <c:if test="${not empty matchDetails.match}" >
-                            <c:if test="${fn:containsIgnoreCase(matchDetails.match, 'is now closed')}" >
-                                <tr>
-                                    <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-                                    <td>${matchDetails.match}</td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${fn:containsIgnoreCase(matchDetails.match, 'is open')}" >
-                                <tr>
-                                    <td><i class="fa fa-bell w3-text-green w3-large"></i></td>
-                                    <td>${matchDetails.match}</td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${fn:containsIgnoreCase(matchDetails.match, 'is updated')}" >
-                                <tr>
-                                    <td><i class="fa fa-bell w3-text-blue w3-large"></i></td>
-                                    <td>${matchDetails.match}</td>
-                                </tr>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+            <div style="width:90%">
+                <br /><br />
+                <h1 style="text-align: center;">Your Settlement Details</h1>
+
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Name</th>
+                        <th>Net Amount</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty memberSettlement}">
+                        <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                            <td style="text-align:left;"> ${memberSettlement.memberId}</td>
+                            <td style="text-align:left;"> ${fn:toUpperCase(memberSettlement.name)}</td>
+                            <td style="text-align:left;">${memberSettlement.net}</td>
+                        </tr>
+                    </c:if>
                 </table>
+
+                <br /><br /><br />
+                <h1 style="text-align: center;">Settlements</h1>
+                <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
+                    <thead>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Name</th>
+                        <th>Net</th>
+                    </tr>
+                    </thead>
+
+                    <c:if test="${not empty settlementDetails}">
+                        <c:forEach var="settlement" items="${settlementDetails}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
+                                <td style="text-align:left;"> ${settlement.memberId}</td>
+                                <td style="text-align:left;"> ${fn:toUpperCase(settlement.name)}</td>
+                                <td style="text-align:left;">${settlement.net}</td>
+                                <td style="text-align:left;">
+                                    <c:if test="${fn:containsIgnoreCase(settlement.status, 'SETTLED')}">
+                                        <button class="btn btn-info">SETTLED</button>
+                                    </c:if>
+                                    <c:if test="${fn:containsIgnoreCase(settlement.status, 'IN_PROGRESS')}">
+                                        <button class="btn btn-primary">IN PROGRESS</button>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br /><br /><br />
+                <hr>
             </div>
         </div>
     </div>
-    <hr>
 
-    <hr>
 
-    <div class="w3-container">
-        <h5>Users Geo</h5>
-        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-            <c:forEach var="geoDetails" items="${geoDetails}">
-                <c:if test="${not empty geoDetails.match}">
-                    <tr>
-                        <td>${geoDetails.match}</td>
-                        <td>${geoDetails.count}</td>
-                    </tr>
-                </c:if>
-            </c:forEach>
-        </table><br>
-        <!-- <button class="w3-button w3-dark-grey">More Countries &nbsp;<i class="fa fa-arrow-right"></i></button> -->
-    </div>
-    <hr>
     <hr>
 
     <br>

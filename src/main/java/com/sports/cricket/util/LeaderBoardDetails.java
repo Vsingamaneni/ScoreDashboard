@@ -1,8 +1,6 @@
 package com.sports.cricket.util;
 
-import com.sports.cricket.model.LeaderBoard;
-import com.sports.cricket.model.Register;
-import com.sports.cricket.model.Standings;
+import com.sports.cricket.model.*;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
@@ -80,6 +78,10 @@ public class LeaderBoardDetails implements Serializable {
         return false;
     }
 
+    public static void sortSettlement(List<Settlement> settlementList){
+        Collections.sort(settlementList, new SettlementComp());
+    }
+
     static class LeaderBoardComp implements Comparator<LeaderBoard> {
 
         @Override
@@ -91,6 +93,19 @@ public class LeaderBoardDetails implements Serializable {
             }
         }
     }
+
+    static class SettlementComp implements Comparator<Settlement> {
+
+        @Override
+        public int compare(Settlement l1, Settlement l2) {
+            if(l1.getNet() < l2.getNet()){
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
 
     public static LeaderBoard getCurrentUserStandings(List<LeaderBoard> leaderBoardList, Integer memberId){
         if (!CollectionUtils.isEmpty(leaderBoardList)){
@@ -118,6 +133,17 @@ public class LeaderBoardDetails implements Serializable {
         }
 
         return standingsList;
+    }
+
+    public static Settlement getMemberSettlement(List<Settlement> settlementList, UserLogin userLogin){
+        if (!CollectionUtils.isEmpty(settlementList)){
+            for (Settlement settlement : settlementList){
+                if (settlement.getMemberId() == userLogin.getMemberId()){
+                    return settlement;
+                }
+            }
+        }
+        return null;
     }
 
 }

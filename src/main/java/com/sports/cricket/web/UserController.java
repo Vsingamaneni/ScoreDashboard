@@ -3,6 +3,7 @@ package com.sports.cricket.web;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -938,7 +939,7 @@ public class UserController implements Serializable {
         return "users/currentPredictions";
     }
 
-    // Display Standings
+    // Display Settlement
     @RequestMapping(value = "/standings", method = RequestMethod.GET)
     public String standings(ModelMap model, HttpSession httpSession) {
 
@@ -973,6 +974,129 @@ public class UserController implements Serializable {
 
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/leaderboard";
+        }
+    }
+
+    // Add Settlement
+    @RequestMapping(value = "/addSettlement", method = RequestMethod.GET)
+    public String addSettlement(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            TrackSettlement trackSettlement = new TrackSettlement();
+
+            List<Settlement> settlementDetails = scheduleService.getSettlement();
+            LeaderBoardDetails.sortSettlement(settlementDetails);
+
+            model.addAttribute("settlementDetails", settlementDetails);
+            model.addAttribute("trackSettlement", trackSettlement);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/addSettlement";
+        }
+    }
+
+    // Save Settlement
+    @RequestMapping(value = "/saveSettlement", method = RequestMethod.POST)
+    public String saveSettlement(@ModelAttribute("trackSettlement") TrackSettlement trackSettlement, ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            List<Register> allUsers = registrationService.getAllUsers();
+
+            trackSettlement = SettlementUtil.parseSettlementDetails(trackSettlement, allUsers);
+
+            Settlement toSettlement = scheduleService.getSettlement(trackSettlement.getMemberId());
+            Settlement fromSettlement = scheduleService.getSettlement(trackSettlement.getSettledMemberId());
+            List<Settlement> settlementList = SettlementUtil.mapSettlement(trackSettlement, toSettlement,fromSettlement);
+
+            scheduleService.updateSettlement(settlementList);
+            scheduleService.addSettlement(trackSettlement);
+
+            httpSession.setAttribute("msg", "Settlement Added Successfully !!");
+            httpSession.setMaxInactiveInterval(5 * 60);
+
+            return "redirect:/settlement";
+        }
+    }
+
+    // Display Settlement
+    @RequestMapping(value = "/settlement", method = RequestMethod.GET)
+    public String settlement(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            String value = (String) httpSession.getAttribute("msg");
+            if (null != value) {
+                model.addAttribute("msg", value);
+                httpSession.removeAttribute("msg");
+            }
+
+            List<Settlement> settlementDetails = scheduleService.getSettlement();
+            LeaderBoardDetails.sortSettlement(settlementDetails);
+            SettlementUtil.setStatus(settlementDetails);
+
+            Settlement memberSettlement = LeaderBoardDetails.getMemberSettlement(settlementDetails, userLogin);
+
+            model.addAttribute("memberSettlement", memberSettlement);
+            model.addAttribute("settlementDetails", settlementDetails);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/settlement";
+        }
+    }
+
+    // Settlement Details
+    @RequestMapping(value = "/displaySettlement", method = RequestMethod.GET)
+    public String displaySettlement(ModelMap model, HttpSession httpSession) {
+
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            httpSession.setAttribute("session", userLogin);
+
+            List<TrackSettlement> displaySettlements = scheduleService.getSettlementsTrack();
+
+            List<TrackSettlement> mySettlementHistory = SettlementUtil.mySettlementHistory(displaySettlements, userLogin);
+
+            model.addAttribute("displaySettlements", displaySettlements);
+            model.addAttribute("mySettlementHistory", mySettlementHistory);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/display";
         }
     }
 

@@ -1,9 +1,6 @@
 package com.sports.cricket.service;
 
-import com.sports.cricket.model.Prediction;
-import com.sports.cricket.model.Result;
-import com.sports.cricket.model.Schedule;
-import com.sports.cricket.model.Standings;
+import com.sports.cricket.model.*;
 
 import java.util.List;
 
@@ -46,6 +43,16 @@ public interface ScheduleService {
     boolean insertPredictions(List<Standings> standingsList);
 
     List<Standings> getLeaderBoard();
+
+    List<Settlement> getSettlement();
+
+    List<TrackSettlement> getSettlementsTrack();
+
+    Settlement getSettlement(Integer memberId);
+
+    boolean updateSettlement(List<Settlement> settlementList);
+
+    boolean addSettlement(TrackSettlement trackSettlement);
 
     List<Schedule> getScheduleByMatchDay(Integer matchDay);
 

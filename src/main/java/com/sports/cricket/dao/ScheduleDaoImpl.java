@@ -1,9 +1,6 @@
 package com.sports.cricket.dao;
 
-import com.sports.cricket.model.Prediction;
-import com.sports.cricket.model.Result;
-import com.sports.cricket.model.Schedule;
-import com.sports.cricket.model.Standings;
+import com.sports.cricket.model.*;
 import com.sports.cricket.util.PredictionListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -13,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
 import java.io.Serializable;
@@ -413,6 +411,110 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
         List<Standings> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Standings.class));
 
         return result;
+    }
+
+    @Override
+    public List<Settlement> getSettlement() {
+        String sql = "SELECT * FROM SETTLEMENT";
+
+        List<Settlement> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Settlement.class));
+
+        return result;
+    }
+
+    @Override
+    public List<TrackSettlement> getSettlementsTrack() {
+        String sql = "SELECT * FROM TRACK_SETTLEMENT";
+
+        List<TrackSettlement> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(TrackSettlement.class));
+
+        return result;
+    }
+
+    @Override
+    public Settlement getSettlement(Integer memberId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("memberId", memberId);
+
+        String sql = "SELECT * FROM SETTLEMENT where memberId = ?";
+
+        Settlement settlement = null;
+        try {
+            settlement = (Settlement) jdbcTemplate.queryForObject(sql, new Object[]{memberId}, new BeanPropertyRowMapper(Settlement.class));
+        } catch (EmptyResultDataAccessException e) {
+        }
+
+        return settlement;
+    }
+
+    @Override
+    public boolean updateSettlement(List<Settlement> settlementList) {
+        if (!CollectionUtils.isEmpty(settlementList)) {
+            for (Settlement settlement : settlementList) {
+                String sql = "UPDATE SETTLEMENT SET net = ? where memberId = ?";
+
+                Connection conn = null;
+
+                try {
+                    conn = dataSource.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setDouble(1, settlement.getNet());
+                    ps.setInt(2, settlement.getMemberId());
+
+                    ps.executeUpdate();
+                    ps.close();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean addSettlement(TrackSettlement trackSettlement) {
+        boolean isSuccess = false;
+
+        String sql = "INSERT INTO TRACK_SETTLEMENT(memberId, name, settledMemberId, settledName, settledAmount, settledTime)" +
+                "VALUES (?,?,?,?,?,?)";
+
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, trackSettlement.getMemberId());
+            ps.setString(2, trackSettlement.getName());
+            ps.setInt(3, trackSettlement.getSettledMemberId());
+            ps.setString(4, trackSettlement.getSettledName());
+            ps.setDouble(5, trackSettlement.getSettledAmount());
+            ps.setString(6, trackSettlement.getSettledTime());
+
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                    isSuccess = true;
+                } catch (SQLException e) {}
+            }
+        }
+
+        return isSuccess;
     }
 
     @Override
