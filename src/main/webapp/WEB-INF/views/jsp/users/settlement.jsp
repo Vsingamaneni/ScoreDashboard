@@ -111,17 +111,26 @@
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
                     <tr>
-                        <th>Member Id</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Net Amount</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
 
                     <c:if test="${not empty memberSettlement}">
                         <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                            <td style="text-align:left;"> ${memberSettlement.memberId}</td>
+                            <td style="text-align:left;"> ${memberSettlement.id}</td>
                             <td style="text-align:left;"> ${fn:toUpperCase(memberSettlement.name)}</td>
                             <td style="text-align:left;">${memberSettlement.net}</td>
+                            <td style="text-align:left;">
+                                <c:if test="${fn:containsIgnoreCase(memberSettlement.status, 'SETTLED')}">
+                                    <button class="btn btn-info">SETTLED</button>
+                                </c:if>
+                                <c:if test="${fn:containsIgnoreCase(memberSettlement.status, 'IN_PROGRESS')}">
+                                    <button class="btn btn-primary">IN PROGRESS</button>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:if>
                 </table>
@@ -131,16 +140,17 @@
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <thead>
                     <tr>
-                        <th>Member Id</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Net</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
 
                     <c:if test="${not empty settlementDetails}">
                         <c:forEach var="settlement" items="${settlementDetails}">
                             <tr style="color:black;font-size:20px;text-decoration:none;font-family:Comic Sans MS">
-                                <td style="text-align:left;"> ${settlement.memberId}</td>
+                                <td style="text-align:left;"> ${settlement.id}</td>
                                 <td style="text-align:left;"> ${fn:toUpperCase(settlement.name)}</td>
                                 <td style="text-align:left;">${settlement.net}</td>
                                 <td style="text-align:left;">

@@ -12,6 +12,9 @@ import java.util.List;
 
 public class SettlementUtil {
 
+    private static final String SETTLED = "SETTLED";
+    private static final String NOT_SETTLED = "IN_PROGRESS";
+
     public static TrackSettlement parseSettlementDetails(TrackSettlement trackSettlement, List<Register> allUsers){
 
         int length = trackSettlement.getToDetails().indexOf("-");
@@ -44,12 +47,33 @@ public class SettlementUtil {
         if (!CollectionUtils.isEmpty(settlementList)){
             for (Settlement settlement : settlementList){
                 if (settlement.getNet() == 0.0){
-                    settlement.setStatus("SETTLED");
+                    settlement.setStatus(SETTLED);
                 } else {
-                    settlement.setStatus("IN_PROGRESS");
+                    settlement.setStatus(NOT_SETTLED);
                 }
             }
         }
+    }
+
+    public static void setNumbers(List<Settlement> settlementList){
+        int id = 1;
+        if (!CollectionUtils.isEmpty(settlementList)){
+            for (Settlement settlement : settlementList){
+                settlement.setId(id);
+                id = id+1;
+            }
+        }
+    }
+
+    public static List<Settlement> pickNonSettled(List<Settlement> settlementList){
+        List<Settlement> settlements = new ArrayList<>();
+        for (Settlement settlement : settlementList){
+            if (settlement.getStatus() == SETTLED){
+                continue;
+            }
+            settlements.add(settlement);
+        }
+        return settlements;
     }
 
     public static List<TrackSettlement> mySettlementHistory(List<TrackSettlement> trackSettlementList, UserLogin userLogin){

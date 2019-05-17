@@ -2,6 +2,8 @@ package com.sports.cricket.model;
 
 public class Settlement {
 
+    private int id;
+
     private int memberId;
 
     private String name;
@@ -40,5 +42,13 @@ public class Settlement {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

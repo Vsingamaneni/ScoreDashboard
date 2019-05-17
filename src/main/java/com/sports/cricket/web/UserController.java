@@ -1064,6 +1064,8 @@ public class UserController implements Serializable {
             SettlementUtil.setStatus(settlementDetails);
 
             Settlement memberSettlement = LeaderBoardDetails.getMemberSettlement(settlementDetails, userLogin);
+            settlementDetails = SettlementUtil.pickNonSettled(settlementDetails);
+            SettlementUtil.setNumbers(settlementDetails);
 
             model.addAttribute("memberSettlement", memberSettlement);
             model.addAttribute("settlementDetails", settlementDetails);
