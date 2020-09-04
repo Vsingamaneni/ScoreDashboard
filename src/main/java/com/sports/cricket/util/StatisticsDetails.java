@@ -35,7 +35,11 @@ public class StatisticsDetails {
 
         Collections.sort(defaultLists, DEFAULT_COUNT);
 
-        return defaultLists.subList(0,10);
+        if (defaultLists.size() > 10) {
+            return defaultLists.subList(0, 10);
+        } else {
+            return defaultLists;
+        }
     }
 
     public static List<StatsDetails> getWinsAndLosses(List<Standings> standingsList, List<Register> registerList){
@@ -100,7 +104,11 @@ public class StatisticsDetails {
 
     public static List<StatsDetails> pickTopTenLoosingCount(List<StatsDetails> statsDetails){
         Collections.sort(statsDetails, COUNT_LOST_TEN);
-        return statsDetails.subList(0,10);
+        if (statsDetails.size() > 10) {
+            return statsDetails.subList(0, 10);
+        } else {
+            return statsDetails;
+        }
     }
 
     public static void pickTopTenWonAmounts(List<StatsDetails> statsDetails){

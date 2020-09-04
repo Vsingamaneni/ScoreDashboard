@@ -335,8 +335,8 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
 
         boolean isSuccess = false;
 
-        String sql = "INSERT INTO RESULTS(matchNumber, homeTeam, awayTeam, startDate, winner, winningAmount, homeTeamCount, awayTeamCount, notPredictedCount, matchDay, drawTeamCount)" +
-                "VALUES (?,?,?,?,?,?,?,?,?,?," +result.getDrawTeamCount()+")";
+        String sql = "INSERT INTO RESULTS(matchNumber, homeTeam, awayTeam, startDate, winner, winningAmount, adminAmount, homeTeamCount, awayTeamCount, notPredictedCount, matchDay, drawTeamCount)" +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?," +result.getDrawTeamCount()+")";
 
 
         Connection conn = null;
@@ -350,10 +350,11 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
             ps.setString(4, result.getStartDate());
             ps.setString(5, result.getWinner());
             ps.setDouble(6, result.getWinningAmount());
-            ps.setInt(7, (int)result.getHomeTeamCount());
-            ps.setInt(8, (int)result.getAwayTeamCount());
-            ps.setInt(9, (int)result.getNotPredictedCount());
-            ps.setInt(10, result.getMatchDay());
+            ps.setDouble(7, result.getAdminQuota());
+            ps.setInt(8, (int)result.getHomeTeamCount());
+            ps.setInt(9, (int)result.getAwayTeamCount());
+            ps.setInt(10, (int)result.getNotPredictedCount());
+            ps.setInt(11, result.getMatchDay());
 
             ps.executeUpdate();
             ps.close();

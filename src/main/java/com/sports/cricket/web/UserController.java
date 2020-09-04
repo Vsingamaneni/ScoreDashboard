@@ -1128,16 +1128,28 @@ public class UserController implements Serializable {
 
             List<StatsDetails> winAndLossCount = StatisticsDetails.getWinsAndLosses(standingsList, registerList);
             StatisticsDetails.pickTopTenWinningCount(winAndLossCount);
-            model.addAttribute("winAndLossCount", winAndLossCount.subList(0,10));
+            if (winAndLossCount.size() > 10) {
+                model.addAttribute("winAndLossCount", winAndLossCount.subList(0, 10));
+            } else {
+                model.addAttribute("winAndLossCount", winAndLossCount);
+            }
 
             List<StatsDetails> lossDetails = new ArrayList<>(winAndLossCount);
 
             StatisticsDetails.pickTopTenLoosingCount(lossDetails);
-            model.addAttribute("lossDetails", lossDetails.subList(0,10));
+            if (lossDetails.size() > 10) {
+                model.addAttribute("lossDetails", lossDetails.subList(0, 10));
+            } else {
+                model.addAttribute("lossDetails", lossDetails);
+            }
 
             List<StatsDetails> winAndLossAmounts = StatisticsDetails.getHighestWinning(standingsList, registerList);
             StatisticsDetails.pickTopTenWonAmounts(winAndLossAmounts);
-            model.addAttribute("winAndLossAmounts", winAndLossAmounts.subList(0, 10));
+            if (winAndLossAmounts.size() > 10) {
+                model.addAttribute("winAndLossAmounts", winAndLossAmounts.subList(0, 10));
+            } else {
+                model.addAttribute("winAndLossAmounts", winAndLossAmounts);
+            }
 
             StatsDetails userStats = StatisticsDetails.getIndividualStats(standingsList,register);
             model.addAttribute("userStats", userStats);

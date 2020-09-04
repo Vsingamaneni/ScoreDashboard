@@ -87,15 +87,21 @@ public class ValidatePredictions implements Serializable {
                 if (homeTeamCount == 0 ){
                     schedulePrediction.setHomeWinAmount(0);
                 }else {
-                    float homeWin = (schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount)) / homeTeamCount;
+                    float homeTeamTotal = (schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount));
+                    float adminQuota = homeTeamTotal * 0.05f;
+                    float homeWin = (homeTeamTotal - adminQuota) / homeTeamCount;
                     schedulePrediction.setHomeWinAmount(Float.valueOf(String.format("%.2f",homeWin)));
+                    schedulePrediction.setAdminHomeQuota(Float.valueOf(String.format("%.2f", adminQuota)));
                 }
 
                 if (awayTeamCount == 0 ) {
                     schedulePrediction.setAwayWinAmount(0);
                 }else {
-                    float awayWin = (schedule.getMatchFee() * (homeTeamCount + drawCount + notSelectedCount)) / awayTeamCount;
+                    float awayTeamTotal = (schedule.getMatchFee() * (homeTeamCount + drawCount + notSelectedCount));
+                    float adminQuota = awayTeamTotal * 0.05f;
+                    float awayWin = (awayTeamTotal - adminQuota) / awayTeamCount;
                     schedulePrediction.setAwayWinAmount(Float.valueOf(String.format("%.2f",awayWin)));
+                    schedulePrediction.setAdminAwayQuota(Float.valueOf(String.format("%.2f", adminQuota)));
                 }
 
                 if (drawCount == 0 ) {

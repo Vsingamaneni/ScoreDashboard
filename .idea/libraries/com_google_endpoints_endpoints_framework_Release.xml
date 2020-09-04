@@ -41,6 +41,7 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.12/snakeyaml-1.12.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-nop/1.7.21/slf4j-nop-1.7.21.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/flogger/flogger-system-backend/0.3.1/flogger-system-backend-0.3.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

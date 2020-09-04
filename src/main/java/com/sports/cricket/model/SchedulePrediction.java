@@ -25,6 +25,10 @@ public class SchedulePrediction implements Serializable {
 
     private boolean isDeadlinReached;
 
+    private float adminHomeQuota;
+
+    private float adminAwayQuota;
+
     public Schedule getSchedule() {
         return schedule;
     }
@@ -103,5 +107,21 @@ public class SchedulePrediction implements Serializable {
 
     public void setDeadlinReached(boolean deadlinReached) {
         isDeadlinReached = deadlinReached;
+    }
+
+    public float getAdminHomeQuota() {
+        return adminHomeQuota;
+    }
+
+    public void setAdminHomeQuota(float adminHomeQuota) {
+        this.adminHomeQuota = adminHomeQuota;
+    }
+
+    public float getAdminAwayQuota() {
+        return adminAwayQuota;
+    }
+
+    public void setAdminAwayQuota(float adminAwayQuota) {
+        this.adminAwayQuota = adminAwayQuota;
     }
 }
