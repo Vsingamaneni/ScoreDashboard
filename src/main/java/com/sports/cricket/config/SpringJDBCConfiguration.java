@@ -31,7 +31,7 @@ public class SpringJDBCConfiguration implements Serializable {
 /*    @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(System.getProperty("ipl"));
+        dataSource.setUrl(System.getProperty("auto"));
         return dataSource;
     }*/
 

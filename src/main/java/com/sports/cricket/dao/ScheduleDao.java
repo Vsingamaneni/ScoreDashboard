@@ -40,6 +40,8 @@ public interface ScheduleDao {
 
     boolean addResult(Result result);
 
+    List<Result> getResults();
+
     boolean insertPredictions(List<Standings> standingsList);
 
     List<Standings> getLeaderBoard();

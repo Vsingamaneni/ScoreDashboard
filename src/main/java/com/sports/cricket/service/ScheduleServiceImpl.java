@@ -105,6 +105,11 @@ public class ScheduleServiceImpl implements ScheduleService, Serializable {
     }
 
     @Override
+    public List<Result> getResults() {
+        return scheduleDao.getResults();
+    }
+
+    @Override
     public boolean insertPredictions(List<Standings> standingsList) {
        return scheduleDao.insertPredictions(standingsList);
     }

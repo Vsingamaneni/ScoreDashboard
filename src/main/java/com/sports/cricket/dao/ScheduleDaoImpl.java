@@ -374,6 +374,15 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
     }
 
     @Override
+    public List<Result> getResults() {
+        String sql = "SELECT * FROM RESULTS";
+
+        List<Result> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Result.class));
+
+        return result;
+    }
+
+    @Override
     public boolean insertPredictions(List<Standings> standingsList) {
 
         String sql = "INSERT INTO STANDINGS (memberId, matchNumber, homeTeam, awayTeam, matchDate, predictedDate, selected, winner, wonAmount, lostAmount) " +

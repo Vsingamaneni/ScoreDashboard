@@ -972,6 +972,12 @@ public class UserController implements Serializable {
             LeaderBoard leaderBoard = LeaderBoardDetails.getCurrentUserStandings(leaderBoardList, register.getMemberId());
             model.addAttribute("leader", leaderBoard);
 
+            if (null != userLogin.getRole()
+                    && userLogin.getRole().equalsIgnoreCase("admin")){
+                List<Result> resultList = scheduleService.getResults();
+                model.addAttribute("resultsList", resultList);
+            }
+
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/leaderboard";
         }
