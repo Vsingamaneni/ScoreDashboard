@@ -81,7 +81,7 @@
                 <div class="wrap-input100 validate-input" data-validate="Country">
                     <div align="center">
                         <select style="text-align: center; text-align-last: center;" class='input50' name="country">
-                            <option>Select Country</option>
+                            <option style="text-align: center;">Select Country</option>
                             <option>India</option>
                             <option>United States</option>
                             <option>England</option>

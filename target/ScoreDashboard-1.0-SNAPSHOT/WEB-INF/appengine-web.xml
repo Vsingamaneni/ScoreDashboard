@@ -9,6 +9,6 @@
 <service>default</service>
 
 <system-properties>
-    <property name="auto" value="jdbc:mysql://google/ipl?useSSL=false&amp;cloudSqlInstance=scorecard-288613:us-central1:scorecard&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=" />
+    <property name="auto" value="jdbc:mysql://google/ipl?serverTimezone=CDT?useSSL=false&amp;cloudSqlInstance=scorecard-288613:us-central1:scorecard&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=" />
 </system-properties>
 </appengine-web-app>

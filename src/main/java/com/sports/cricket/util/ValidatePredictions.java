@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ValidatePredictions implements Serializable {
 
-    public static List<Schedule> validatePrediction(List<Schedule> scheduleList, List<Prediction> predictionList){
+    public static List<Schedule> validatePrediction(List<Schedule> scheduleList, List<Prediction> predictionList) {
 
         boolean isFound = false;
         List<Schedule> finalSchedule = new ArrayList<>();
@@ -37,12 +37,12 @@ public class ValidatePredictions implements Serializable {
 
         List<Schedule> validSchedule = new ArrayList<>();
 
-        if(!CollectionUtils.isEmpty(scheduleList)){
-            for(Schedule schedule : scheduleList){
-                if(null != schedule.getStartDate()){
-                    if(null == schedule.getWinner() && ValidateDeadline.isPredictionValid(schedule.getStartDate())){
+        if (!CollectionUtils.isEmpty(scheduleList)) {
+            for (Schedule schedule : scheduleList) {
+                if (null != schedule.getStartDate()) {
+                    if (null == schedule.getWinner() && ValidateDeadline.isPredictionValid(schedule.getStartDate())) {
                         schedule.setCanPredict(true);
-                    } else{
+                    } else {
                         schedule.setCanPredict(false);
                     }
                     validSchedule.add(schedule);
@@ -53,7 +53,7 @@ public class ValidatePredictions implements Serializable {
         return validSchedule;
     }
 
-    public static SchedulePrediction setCount(Schedule schedule, List<Prediction> predictionList, SchedulePrediction schedulePrediction){
+    public static SchedulePrediction setCount(Schedule schedule, List<Prediction> predictionList, SchedulePrediction schedulePrediction) {
 
         String homeTeam = schedule.getHomeTeam();
         String awayTeam = schedule.getAwayTeam();
@@ -64,15 +64,15 @@ public class ValidatePredictions implements Serializable {
         float drawCount = 0;
         float notSelectedCount = 0;
 
-        for(Prediction prediction : predictionList){
-            if(prediction.getSelected().equalsIgnoreCase(homeTeam)){
-                homeTeamCount = homeTeamCount+1;
-            }else if(prediction.getSelected().equalsIgnoreCase(awayTeam)){
-                awayTeamCount = awayTeamCount+1;
-            }else if(prediction.getSelected().equalsIgnoreCase("draw")){
-                drawCount = drawCount+1;
-            }else if(prediction.getSelected().equalsIgnoreCase(notSelected)){
-                notSelectedCount = notSelectedCount+1;
+        for (Prediction prediction : predictionList) {
+            if (prediction.getSelected().equalsIgnoreCase(homeTeam)) {
+                homeTeamCount = homeTeamCount + 1;
+            } else if (prediction.getSelected().equalsIgnoreCase(awayTeam)) {
+                awayTeamCount = awayTeamCount + 1;
+            } else if (prediction.getSelected().equalsIgnoreCase("draw")) {
+                drawCount = drawCount + 1;
+            } else if (prediction.getSelected().equalsIgnoreCase(notSelected)) {
+                notSelectedCount = notSelectedCount + 1;
             }
         }
 
@@ -82,46 +82,68 @@ public class ValidatePredictions implements Serializable {
         schedulePrediction.setNotPredicted(notSelectedCount);
 
         try {
-            if(ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+            if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())) {
                 schedulePrediction.setDeadlinReached(true);
-                if (homeTeamCount == 0 ){
-                    schedulePrediction.setHomeWinAmount(0);
-                }else {
-                    float homeTeamTotal = (schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount));
+                if (homeTeamCount == 0) {
+                    if (notSelectedCount != 0) {
+                        float homeTeamTotal = notSelectedCount * schedule.getMatchFee();
+                        float adminQuota = homeTeamTotal * 0.05f;
+                        float homeWin = (homeTeamTotal - adminQuota);
+                        schedulePrediction.setHomeWinAmount(Float.valueOf(String.format("%.2f", homeWin)));
+                        schedulePrediction.setAdminHomeQuota(Float.valueOf(String.format("%.2f", adminQuota)));
+                    } else {
+                        schedulePrediction.setHomeWinAmount(0);
+                    }
+                } else {
+                    float homeTeamTotal = PreditionsUtil.getHomeTeamTotal(predictionList, schedule) + notSelectedCount * schedule.getMatchFee() + drawCount * schedule.getMatchFee();
                     float adminQuota = homeTeamTotal * 0.05f;
-                    float homeWin = (homeTeamTotal - adminQuota) / homeTeamCount;
-                    schedulePrediction.setHomeWinAmount(Float.valueOf(String.format("%.2f",homeWin)));
+                    float homeWin = (homeTeamTotal - adminQuota);
+                    schedulePrediction.setHomeWinAmount(Float.valueOf(String.format("%.2f", homeWin)));
                     schedulePrediction.setAdminHomeQuota(Float.valueOf(String.format("%.2f", adminQuota)));
                 }
 
-                if (awayTeamCount == 0 ) {
-                    schedulePrediction.setAwayWinAmount(0);
-                }else {
-                    float awayTeamTotal = (schedule.getMatchFee() * (homeTeamCount + drawCount + notSelectedCount));
+                if (awayTeamCount == 0) {
+                    if (notSelectedCount != 0) {
+                        float awayTeamTotal = notSelectedCount * schedule.getMatchFee();
+                        float adminQuota = awayTeamTotal * 0.05f;
+                        float awayWin = (awayTeamTotal - adminQuota);
+                        schedulePrediction.setAwayWinAmount(Float.valueOf(String.format("%.2f", awayWin)));
+                        schedulePrediction.setAdminAwayQuota(Float.valueOf(String.format("%.2f", adminQuota)));
+                    } else {
+                        schedulePrediction.setAwayWinAmount(0);
+                        schedulePrediction.setAdminAwayQuota(0);
+                    }
+                } else {
+                    float awayTeamTotal = PreditionsUtil.getAwayTeamTotal(predictionList, schedule) + notSelectedCount * schedule.getMatchFee() + drawCount * schedule.getMatchFee();
                     float adminQuota = awayTeamTotal * 0.05f;
-                    float awayWin = (awayTeamTotal - adminQuota) / awayTeamCount;
-                    schedulePrediction.setAwayWinAmount(Float.valueOf(String.format("%.2f",awayWin)));
+                    float awayWin = (awayTeamTotal - adminQuota);
+                    schedulePrediction.setAwayWinAmount(Float.valueOf(String.format("%.2f", awayWin)));
                     schedulePrediction.setAdminAwayQuota(Float.valueOf(String.format("%.2f", adminQuota)));
                 }
 
-                if (drawCount == 0 ) {
+                if (drawCount == 0) {
                     schedulePrediction.setDrawWinAmount(0);
-                }else {
+                } else {
                     schedulePrediction.setDrawWinAmount((schedule.getMatchFee() * (homeTeamCount + awayTeamCount + notSelectedCount)) / drawCount);
                 }
+
+                float defaultAmount = notSelectedCount * Float.valueOf(String.format("%.2f", (schedule.getMatchFee() - (schedule.getMatchFee() * .05))));
+                schedulePrediction.setDefaultQuota(defaultAmount);
+
+                PreditionsUtil.mapExpectedWinTotal(predictionList, schedulePrediction);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return  schedulePrediction;
+        return schedulePrediction;
     }
 
-    public static List<Prediction> appendDeadline(List<Schedule> scheduleList, List<Prediction> predictionList){
+    public static List<Prediction> appendDeadline(List<Schedule> scheduleList, List<Prediction> predictionList) {
 
-        for(Schedule schedule : scheduleList){
-            for(Prediction prediction : predictionList){
-                if(prediction.getMatchNumber() == schedule.getMatchNumber()){
+        for (Schedule schedule : scheduleList) {
+            for (Prediction prediction : predictionList) {
+                if (prediction.getMatchNumber() == schedule.getMatchNumber()) {
                     prediction.setCanPredict(schedule.isCanPredict());
                 }
             }
@@ -129,16 +151,16 @@ public class ValidatePredictions implements Serializable {
         return predictionList;
     }
 
-    public static List<Schedule> isScheduleAfterRegistration(List<Schedule> scheduleList , String registeredDate) throws ParseException {
+    public static List<Schedule> isScheduleAfterRegistration(List<Schedule> scheduleList, String registeredDate) throws ParseException {
 
         List<Schedule> finalSchedule = new ArrayList<>(scheduleList);
 
-        for ( Schedule schedule : scheduleList){
-           if (ValidateDeadline.isPredictionAfterRegistration(registeredDate, schedule.getStartDate())){
+        for (Schedule schedule : scheduleList) {
+            if (ValidateDeadline.isPredictionAfterRegistration(registeredDate, schedule.getStartDate())) {
                 finalSchedule.remove(schedule);
-           }
+            }
         }
-     return finalSchedule;
+        return finalSchedule;
     }
 
 }

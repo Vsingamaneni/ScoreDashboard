@@ -117,7 +117,7 @@
 
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
-
+        <br/>
         <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, Select your team. </h2>
         <br /><br /><br />
 
@@ -135,7 +135,7 @@
                 <div class='panel panel-primary dialog-panel'>
                     <div class='panel-heading' style="background-color: #082a3e;">
                         <br />
-                        <h3 style="text-align: center;">Good Luck Dude</h3>
+                        <h3 style="text-align: center;">Good Luck</h3>
                     </div>
                     <div class='panel-body' >
                         <form action="${predictionUrl}" modelAttribute="predictionForm" method="POST" class='form-horizontal' role='form'>
@@ -171,6 +171,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class='form-group'>
+                                <label class='control-label col-md-2 col-md-offset-2' for='id_selected'>Amount</label>
+                                <div class='col-md-2'>
+                                    <select class='form-control' id='id_amount' name="amount" style="min-width:150px; ">
+                                        <c:forEach var='fees' items='${scheduleForm.matchFeeList}'>
+                                            <option style="text-align: center">${fees}</option>
+                                        </c:forEach>
+                                        <%--<option style="text-align: center">${fn:toUpperCase(scheduleForm.homeTeam)}</option>
+                                        <option style="text-align: center">${fn:toUpperCase(scheduleForm.awayTeam)}</option>--%>
+                                    </select>
+                                </div>
+                            </div>
+
                             <br />
                             <div class='form-group'>
                                 <div class='col-md-offset-4 col-md-3'>

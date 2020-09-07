@@ -24,6 +24,10 @@ public class Prediction implements Serializable {
 
     private Integer matchDay;
 
+    private Integer amount;
+
+    private float expectedAmount;
+
     public Integer getPredictionId() {
         return predictionId;
     }
@@ -102,5 +106,21 @@ public class Prediction implements Serializable {
 
     public void setMatchDay(Integer matchDay) {
         this.matchDay = matchDay;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public float getExpectedAmount() {
+        return expectedAmount;
+    }
+
+    public void setExpectedAmount(float expectedAmount) {
+        this.expectedAmount = expectedAmount;
     }
 }

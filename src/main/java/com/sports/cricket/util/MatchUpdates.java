@@ -33,16 +33,16 @@ public class MatchUpdates implements Serializable {
         result.setWinner(schedule.getWinner());
 
         if (schedule.getWinner().equalsIgnoreCase(schedule.getHomeTeam())) {
-            result.setWinningAmount(schedulePrediction.getHomeWinAmount());
+            /*result.setWinningAmount(schedulePrediction.getHomeWinAmount());*/
             result.setAdminQuota(schedulePrediction.getAdminHomeQuota());
         } else if (schedule.getWinner().equalsIgnoreCase(schedule.getAwayTeam())) {
-            result.setWinningAmount(schedulePrediction.getAwayWinAmount());
+            /*result.setWinningAmount(schedulePrediction.getAwayWinAmount());*/
             result.setAdminQuota(schedulePrediction.getAdminAwayQuota());
         } else if (schedule.getWinner().equalsIgnoreCase("draw")) {
-            result.setWinningAmount(schedulePrediction.getDrawWinAmount());
+            /*result.setWinningAmount(schedulePrediction.getDrawWinAmount());*/
             result.setAdminQuota(Float.valueOf("0"));
         } else if (schedule.getWinner().equalsIgnoreCase("default")) {
-            result.setWinningAmount(Float.valueOf("0"));
+            /*result.setWinningAmount(Float.valueOf("0"));*/
             result.setAdminQuota(Float.valueOf("0"));
         }
 
@@ -76,9 +76,9 @@ public class MatchUpdates implements Serializable {
 
             if(standings.getSelected().equalsIgnoreCase(standings.getWinner())){
                 if(standings.getWinner().equalsIgnoreCase(standings.getHomeTeam())) {
-                    standings.setWonAmount(schedulePrediction.getHomeWinAmount());
+                    standings.setWonAmount(prediction.getExpectedAmount());
                 }else if(standings.getWinner().equalsIgnoreCase(standings.getAwayTeam())) {
-                    standings.setWonAmount(schedulePrediction.getAwayWinAmount());
+                    standings.setWonAmount(prediction.getExpectedAmount());
                 }else if(standings.getWinner().equalsIgnoreCase("draw")){
                     standings.setWonAmount(schedulePrediction.getDrawWinAmount());
                 }

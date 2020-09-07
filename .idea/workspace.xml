@@ -6,52 +6,63 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08544572-b210-407f-b5e0-ae3b4ee815be" name="Default" comment="Added the inital commit">
+    <list default="true" id="08544572-b210-407f-b5e0-ae3b4ee815be" name="Default" comment="Updated the admin portion">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PreditionsUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/appengine/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/appengine/app.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/config/SpringJDBCConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/config/SpringJDBCConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/service/ScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/service/ScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/service/ScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/service/ScheduleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/Prediction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/SchedulePrediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/model/SchedulePrediction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/validations/FormValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/validations/FormValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/validations/ValidateDeadLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/validations/ValidateDeadLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/user_prediction.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/user_prediction.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/service/ScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/service/ScheduleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/service/ScheduleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/service/ScheduleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/Prediction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/Prediction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/Schedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/Schedule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/SchedulePrediction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/model/SchedulePrediction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/MatchUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/MatchUpdates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/PredictionListMapper$MatchDayPredictions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/PredictionListMapper$MatchDayPredictions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/PredictionListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/PredictionListMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/ValidatePredictions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/ValidatePredictions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/validations/FormValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/validations/FormValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/validations/ValidateDeadLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/validations/ValidateDeadLine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/web/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/account.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/confirm_delete.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/confirm_delete.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/contact_admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/contact_admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/currentPredictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/currentPredictions.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/display.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/display.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/history.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/history.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/leaderboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/leaderboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/members.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/members.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/predictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/predictions.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/rules.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/rules.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/schedule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/schedule.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/settlement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/settlement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/showreviews.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/showreviews.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/stats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/stats.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/update.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/updateResult.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/updateResult.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-5.1.37.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-aop-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-beans-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-context-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-core-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-expression-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-jcl-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-jdbc-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-tx-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-web-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/lib/spring-webmvc-5.1.3.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/register.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/user_prediction.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/user_prediction.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/userreview.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/userreview.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/welcome.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/service/ScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/service/ScheduleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/service/ScheduleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/service/ScheduleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/Prediction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/Prediction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/Schedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/Schedule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/SchedulePrediction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/model/SchedulePrediction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/MatchUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/MatchUpdates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/PredictionListMapper$MatchDayPredictions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/PredictionListMapper$MatchDayPredictions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/PredictionListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/PredictionListMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/ValidatePredictions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/ValidatePredictions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/validations/FormValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/validations/FormValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/validations/ValidateDeadLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/validations/ValidateDeadLine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/web/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,8 +111,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="jsf" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -165,7 +176,7 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.tomcat-local">
+  <component name="RunManager" selected="Google App Engine Deployment.Google App Engine Deployment">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -403,7 +414,7 @@
       <workItem from="1599238048415" duration="842000" />
       <workItem from="1599238925778" duration="201000" />
       <workItem from="1599239218008" duration="623000" />
-      <workItem from="1599240464750" duration="11979000" />
+      <workItem from="1599240464750" duration="27672000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1545768438159</created>
@@ -734,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599252116242</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Updated the admin portion">
+      <created>1599333999965</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1599333999965</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView">
@@ -752,7 +770,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Aligned all the tabs to all the jsp's" />
     <MESSAGE value="Added the activation and deactivation of users" />
     <MESSAGE value="Added the account and updated the urls" />
     <MESSAGE value="Added user profile" />
@@ -777,7 +794,8 @@
     <MESSAGE value="Fixed the settlement process" />
     <MESSAGE value="Removed the settled details" />
     <MESSAGE value="Added the inital commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the inital commit" />
+    <MESSAGE value="Updated the admin portion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the admin portion" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="127" key="#Deployment" timestamp="1599238543215">
@@ -790,139 +808,147 @@
     <state x="-1496" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238133716" />
     <state x="318" y="181" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599239925920" />
     <state x="318" y="181" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1599317752281" />
-    <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1599253044102">
+    <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1599501294593">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1599253044101" />
-    <state x="226" y="37" key="CommitChangelistDialog2" timestamp="1599252110114">
+    <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1599501294593" />
+    <state x="483" y="172" key="#xdebugger.evaluate" timestamp="1599495685118">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="226" y="37" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1599252110114" />
-    <state width="1398" height="327" key="GridCell.Tab.0.bottom" timestamp="1599321276438">
+    <state x="483" y="172" key="#xdebugger.evaluate/0.23.1440.877@0.23.1440.877" timestamp="1599495685118" />
+    <state x="226" y="37" key="CommitChangelistDialog2" timestamp="1599333991953">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="226" y="37" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1599333991953" />
+    <state width="459" height="466" key="DebuggerActiveHint" timestamp="1599499157717">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="459" height="466" key="DebuggerActiveHint/0.23.1440.877@0.23.1440.877" timestamp="1599499157716" />
+    <state width="1178" height="330" key="GridCell.Tab.0.bottom" timestamp="1599507696334">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911140" />
-    <state width="1398" height="327" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599321276438" />
-    <state width="1398" height="327" key="GridCell.Tab.0.center" timestamp="1599321276437">
+    <state width="1178" height="330" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599507696334" />
+    <state width="1178" height="330" key="GridCell.Tab.0.center" timestamp="1599507696334">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911139" />
-    <state width="1398" height="327" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1599321276437" />
-    <state width="1398" height="327" key="GridCell.Tab.0.left" timestamp="1599321276436">
+    <state width="1178" height="330" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1599507696334" />
+    <state width="1178" height="330" key="GridCell.Tab.0.left" timestamp="1599507696333">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911138" />
-    <state width="1398" height="327" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1599321276436" />
-    <state width="1398" height="327" key="GridCell.Tab.0.right" timestamp="1599321276438">
+    <state width="1178" height="330" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1599507696333" />
+    <state width="1178" height="330" key="GridCell.Tab.0.right" timestamp="1599507696334">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911139" />
-    <state width="1398" height="327" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1599321276438" />
-    <state width="1065" height="298" key="GridCell.Tab.1.bottom" timestamp="1599317775127">
+    <state width="1178" height="330" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1599507696334" />
+    <state width="1178" height="330" key="GridCell.Tab.1.bottom" timestamp="1599507696336">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188351" />
     <state width="1148" height="177" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896750" />
-    <state width="1065" height="298" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599317775127" />
-    <state width="1065" height="298" key="GridCell.Tab.1.center" timestamp="1599317775126">
+    <state width="1178" height="330" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599507696336" />
+    <state width="1178" height="330" key="GridCell.Tab.1.center" timestamp="1599507696335">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188350" />
     <state width="1148" height="177" key="GridCell.Tab.1.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896749" />
-    <state width="1065" height="298" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1599317775126" />
-    <state width="1065" height="298" key="GridCell.Tab.1.left" timestamp="1599317775126">
+    <state width="1178" height="330" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1599507696335" />
+    <state width="1178" height="330" key="GridCell.Tab.1.left" timestamp="1599507696335">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188349" />
     <state width="1148" height="177" key="GridCell.Tab.1.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896748" />
-    <state width="1065" height="298" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1599317775126" />
-    <state width="1065" height="298" key="GridCell.Tab.1.right" timestamp="1599317775126">
+    <state width="1178" height="330" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1599507696335" />
+    <state width="1178" height="330" key="GridCell.Tab.1.right" timestamp="1599507696335">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188351" />
     <state width="1148" height="177" key="GridCell.Tab.1.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896750" />
-    <state width="1065" height="298" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1599317775126" />
-    <state width="1065" height="298" key="GridCell.Tab.2.bottom" timestamp="1599317775128">
+    <state width="1178" height="330" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1599507696335" />
+    <state width="1178" height="330" key="GridCell.Tab.2.bottom" timestamp="1599507696337">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896754" />
-    <state width="1065" height="298" key="GridCell.Tab.2.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599317775128" />
-    <state width="1065" height="298" key="GridCell.Tab.2.center" timestamp="1599317775127">
+    <state width="1178" height="330" key="GridCell.Tab.2.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599507696337" />
+    <state width="1178" height="330" key="GridCell.Tab.2.center" timestamp="1599507696336">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896752" />
-    <state width="1065" height="298" key="GridCell.Tab.2.center/0.23.1440.877@0.23.1440.877" timestamp="1599317775127" />
-    <state width="1065" height="298" key="GridCell.Tab.2.left" timestamp="1599317775127">
+    <state width="1178" height="330" key="GridCell.Tab.2.center/0.23.1440.877@0.23.1440.877" timestamp="1599507696336" />
+    <state width="1178" height="330" key="GridCell.Tab.2.left" timestamp="1599507696336">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896751" />
-    <state width="1065" height="298" key="GridCell.Tab.2.left/0.23.1440.877@0.23.1440.877" timestamp="1599317775127" />
-    <state width="1065" height="298" key="GridCell.Tab.2.right" timestamp="1599317775128">
+    <state width="1178" height="330" key="GridCell.Tab.2.left/0.23.1440.877@0.23.1440.877" timestamp="1599507696336" />
+    <state width="1178" height="330" key="GridCell.Tab.2.right" timestamp="1599507696337">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896753" />
-    <state width="1065" height="298" key="GridCell.Tab.2.right/0.23.1440.877@0.23.1440.877" timestamp="1599317775128" />
-    <state width="1065" height="298" key="GridCell.Tab.3.bottom" timestamp="1599317775129">
+    <state width="1178" height="330" key="GridCell.Tab.2.right/0.23.1440.877@0.23.1440.877" timestamp="1599507696337" />
+    <state width="1178" height="330" key="GridCell.Tab.3.bottom" timestamp="1599507696340">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896414" />
-    <state width="1065" height="298" key="GridCell.Tab.3.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599317775129" />
-    <state width="1065" height="298" key="GridCell.Tab.3.center" timestamp="1599317775129">
+    <state width="1178" height="330" key="GridCell.Tab.3.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599507696340" />
+    <state width="1178" height="330" key="GridCell.Tab.3.center" timestamp="1599507696339">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896413" />
-    <state width="1065" height="298" key="GridCell.Tab.3.center/0.23.1440.877@0.23.1440.877" timestamp="1599317775129" />
-    <state width="1065" height="298" key="GridCell.Tab.3.left" timestamp="1599317775129">
+    <state width="1178" height="330" key="GridCell.Tab.3.center/0.23.1440.877@0.23.1440.877" timestamp="1599507696339" />
+    <state width="1178" height="330" key="GridCell.Tab.3.left" timestamp="1599507696339">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896412" />
-    <state width="1065" height="298" key="GridCell.Tab.3.left/0.23.1440.877@0.23.1440.877" timestamp="1599317775129" />
-    <state width="1065" height="298" key="GridCell.Tab.3.right" timestamp="1599317775129">
+    <state width="1178" height="330" key="GridCell.Tab.3.left/0.23.1440.877@0.23.1440.877" timestamp="1599507696339" />
+    <state width="1178" height="330" key="GridCell.Tab.3.right" timestamp="1599507696339">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896413" />
-    <state width="1065" height="298" key="GridCell.Tab.3.right/0.23.1440.877@0.23.1440.877" timestamp="1599317775129" />
-    <state width="1065" height="298" key="GridCell.Tab.4.bottom" timestamp="1599317775131">
+    <state width="1178" height="330" key="GridCell.Tab.3.right/0.23.1440.877@0.23.1440.877" timestamp="1599507696339" />
+    <state width="1178" height="330" key="GridCell.Tab.4.bottom" timestamp="1599507696338">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896412" />
-    <state width="1065" height="298" key="GridCell.Tab.4.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599317775131" />
-    <state width="1065" height="298" key="GridCell.Tab.4.center" timestamp="1599317775130">
+    <state width="1178" height="330" key="GridCell.Tab.4.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599507696338" />
+    <state width="1178" height="330" key="GridCell.Tab.4.center" timestamp="1599507696338">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896411" />
-    <state width="1065" height="298" key="GridCell.Tab.4.center/0.23.1440.877@0.23.1440.877" timestamp="1599317775130" />
-    <state width="1065" height="298" key="GridCell.Tab.4.left" timestamp="1599317775130">
+    <state width="1178" height="330" key="GridCell.Tab.4.center/0.23.1440.877@0.23.1440.877" timestamp="1599507696338" />
+    <state width="1178" height="330" key="GridCell.Tab.4.left" timestamp="1599507696338">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896410" />
-    <state width="1065" height="298" key="GridCell.Tab.4.left/0.23.1440.877@0.23.1440.877" timestamp="1599317775130" />
-    <state width="1065" height="298" key="GridCell.Tab.4.right" timestamp="1599317775130">
+    <state width="1178" height="330" key="GridCell.Tab.4.left/0.23.1440.877@0.23.1440.877" timestamp="1599507696338" />
+    <state width="1178" height="330" key="GridCell.Tab.4.right" timestamp="1599507696338">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896411" />
-    <state width="1065" height="298" key="GridCell.Tab.4.right/0.23.1440.877@0.23.1440.877" timestamp="1599317775130" />
+    <state width="1178" height="330" key="GridCell.Tab.4.right/0.23.1440.877@0.23.1440.877" timestamp="1599507696338" />
     <state x="208" y="43" key="SettingsEditor" timestamp="1599239126257">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="208" y="43" key="SettingsEditor/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599239126257" />
-    <state x="320" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599252140073">
+    <state x="320" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599334002159">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="320" y="201" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1599252140073" />
-    <state x="421" y="216" width="598" height="490" key="find.popup" timestamp="1599320803991">
+    <state x="320" y="201" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1599334002159" />
+    <state x="421" y="216" width="598" height="490" key="find.popup" timestamp="1599504685469">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599239995177" />
-    <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1599320803991" />
+    <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1599504685469" />
     <state x="88" y="84" key="new project wizard" timestamp="1599238765924">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="88" y="84" key="new project wizard/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599238765923" />
-    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599319790860">
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599493470408">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1599319790860" />
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1599493470408" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -934,27 +960,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>841</line>
+          <line>843</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
-          <line>341</line>
+          <line>344</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>884</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>886</line>
-          <option name="timeStamp" value="109" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>891</line>
+          <line>893</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -989,7 +1005,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1171</line>
+          <line>1174</line>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1009,52 +1025,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>476</line>
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>490</line>
-          <option name="timeStamp" value="144" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>673</line>
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>931</line>
+          <line>934</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>145</line>
+          <line>147</line>
           <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
-          <line>567</line>
+          <line>569</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
-          <line>568</line>
+          <line>570</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>45</line>
+          <line>46</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>41</line>
+          <line>42</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>42</line>
+          <line>43</line>
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1064,38 +1065,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp</url>
-          <line>177</line>
+          <line>178</line>
           <option name="timeStamp" value="171" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp</url>
-          <line>167</line>
+          <line>168</line>
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>938</line>
+          <line>941</line>
           <option name="timeStamp" value="173" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>936</line>
+          <line>939</line>
           <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java</url>
-          <line>104</line>
-          <option name="timeStamp" value="178" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="179" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>968</line>
-          <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
@@ -1108,28 +1094,23 @@
           <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>919</line>
-          <option name="timeStamp" value="184" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>176</line>
+          <line>178</line>
           <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PredictionListMapper.java</url>
-          <line>177</line>
+          <line>179</line>
           <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>705</line>
+          <line>707</line>
           <option name="timeStamp" value="190" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>693</line>
+          <line>695</line>
           <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1143,24 +1124,9 @@
           <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/account.jsp</url>
-          <line>60</line>
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
           <line>176</line>
           <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="215" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>882</line>
-          <option name="timeStamp" value="216" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java</url>
@@ -1169,7 +1135,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1194</line>
+          <line>1197</line>
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1179,22 +1145,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1036</line>
+          <line>1039</line>
           <option name="timeStamp" value="243" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1030</line>
+          <line>1033</line>
           <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
-          <line>461</line>
+          <line>463</line>
           <option name="timeStamp" value="245" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1017</line>
+          <line>1020</line>
           <option name="timeStamp" value="246" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1214,104 +1180,90 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1114</line>
+          <line>1117</line>
           <option name="timeStamp" value="250" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1134</line>
+          <line>1137</line>
           <option name="timeStamp" value="255" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1159</line>
+          <line>1162</line>
           <option name="timeStamp" value="256" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>1144</line>
+          <line>1147</line>
           <option name="timeStamp" value="257" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>904</line>
-          <option name="timeStamp" value="258" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="259" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>868</line>
-          <option name="timeStamp" value="260" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
-          <line>875</line>
-          <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java</url>
           <line>76</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
+          <line>675</line>
+          <option name="timeStamp" value="264" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="269" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
+          <line>729</line>
+          <option name="timeStamp" value="278" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="281" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/PreditionsUtil.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="284" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
+          <line>877</line>
+          <option name="timeStamp" value="285" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
+          <line>908</line>
+          <option name="timeStamp" value="286" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/util/ValidatePredictions.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="287" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java</url>
+          <line>979</line>
+          <option name="timeStamp" value="291" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
+          <line>381</line>
+          <option name="timeStamp" value="292" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java</url>
+          <line>383</line>
+          <option name="timeStamp" value="293" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>reviewCount.getFiveStar()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(reviewCount.getFiveStar()/reviewList.size()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>BigDecimal.valueOf(overAllRating).setScale(1, RoundingMode.UP).setScale(1, RoundingMode.UP)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>BigDecimal.valueOf(overAllRating).setScale(1, RoundingMode.UP)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>p1.getFirstName().compareTo(p2.getFirstName())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>12800/9</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount))</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(schedule.getMatchFee() * (awayTeamCount + drawCount + notSelectedCount)) / homeTeamCount</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>hmap.get(stringBuffer.toString())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>netAmount &lt;(Math.abs(maxLimitValue) * -1 )</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="com.mysql.cj.jdbc.result.ResultSetImpl" fieldName="rowData" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

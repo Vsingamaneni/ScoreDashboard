@@ -1,6 +1,7 @@
 package com.sports.cricket.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Schedule implements Serializable {
 
@@ -29,6 +30,10 @@ public class Schedule implements Serializable {
     private Integer matchDay;
 
     private String status;
+
+    private Integer maxAmount;
+
+    private List<Integer> matchFeeList;
 
     public Integer getLineNumber() {
         return lineNumber;
@@ -133,5 +138,21 @@ public class Schedule implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getMaxAmount() {
+        return maxAmount;
+    }
+
+    public void setMaxAmount(Integer maxAmount) {
+        this.maxAmount = maxAmount;
+    }
+
+    public List<Integer> getMatchFeeList() {
+        return matchFeeList;
+    }
+
+    public void setMatchFeeList(List<Integer> matchFeeList) {
+        this.matchFeeList = matchFeeList;
     }
 }

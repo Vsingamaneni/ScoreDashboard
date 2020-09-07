@@ -28,6 +28,7 @@ public class PredictionListMapper implements Serializable {
                 prediction.setFirstName(rs.getString("firstName"));
                 prediction.setSelected(rs.getString("selected"));
                 prediction.setPredictedTime(rs.getString("predictedTime"));
+                prediction.setAmount(rs.getInt("amount"));
 
                 predictionList1.add(prediction);
             }
@@ -52,6 +53,7 @@ public class PredictionListMapper implements Serializable {
                 prediction.setSelected(rs.getString("selected"));
                 prediction.setPredictedTime(rs.getString("predictedTime"));
                 prediction.setMatchDay(rs.getInt("matchDay"));
+                prediction.setAmount(rs.getInt("amount"));
 
                 predictions.add(prediction);
             }
@@ -184,5 +186,16 @@ public class PredictionListMapper implements Serializable {
         public int compare(Prediction p1, Prediction p2) {
             return p1.getFirstName().compareTo(p2.getFirstName());
         }
+    }
+
+    public static void setMatchFeeList(Schedule schedule){
+        List<Integer> matchList = new ArrayList<>();
+        if (null != schedule.getMaxAmount()){
+            int matchFee = schedule.getMatchFee();
+            for (int fee = matchFee; fee <= schedule.getMaxAmount(); fee += 50) {
+                matchList.add(fee);
+            }
+        }
+        schedule.setMatchFeeList(matchList);
     }
 }

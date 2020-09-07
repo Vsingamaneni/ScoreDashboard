@@ -643,6 +643,8 @@ public class UserController implements Serializable {
                 return "redirect:/predictions";
             }
 
+            PredictionListMapper.setMatchFeeList(schedule);
+
             Prediction prediction = new Prediction();
 
             model.addAttribute("scheduleForm", schedule);
@@ -922,6 +924,7 @@ public class UserController implements Serializable {
                 SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
                 ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
                 List<Prediction> predictionList = PredictionListMapper.sortPredictions(matchDetails.getPrediction());
+
                 matchDetails.setPrediction(predictionList);
                 schedulePredictionsList.add(matchDetails);
                 isScheduleDone = true;

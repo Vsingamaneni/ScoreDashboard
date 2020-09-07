@@ -67,6 +67,7 @@ public class ValidateDeadLine implements Serializable {
                         defaultPrediction.setHomeTeam(schedule.getHomeTeam());
                         defaultPrediction.setAwayTeam(schedule.getAwayTeam());
                         defaultPrediction.setMatchNumber(schedule.getMatchNumber());
+                        defaultPrediction.setAmount(schedule.getMatchFee());
                         finalPredictionList.add(defaultPrediction);
                         copyMemberList.remove(0);
                     }

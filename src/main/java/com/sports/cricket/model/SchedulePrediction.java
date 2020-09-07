@@ -29,6 +29,8 @@ public class SchedulePrediction implements Serializable {
 
     private float adminAwayQuota;
 
+    private float defaultQuota;
+
     public Schedule getSchedule() {
         return schedule;
     }
@@ -123,5 +125,13 @@ public class SchedulePrediction implements Serializable {
 
     public void setAdminAwayQuota(float adminAwayQuota) {
         this.adminAwayQuota = adminAwayQuota;
+    }
+
+    public float getDefaultQuota() {
+        return defaultQuota;
+    }
+
+    public void setDefaultQuota(float defaultQuota) {
+        this.defaultQuota = defaultQuota;
     }
 }

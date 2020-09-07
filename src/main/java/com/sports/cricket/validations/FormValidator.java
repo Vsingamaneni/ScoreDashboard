@@ -35,7 +35,7 @@ public class FormValidator implements Serializable {
             if(null == userLogin.getEmail() || userLogin.getEmail().isEmpty()){
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("email");
-                errorDetails.setErrorMessage("Dude, Email Id is required!");
+                errorDetails.setErrorMessage("Email Id is required!");
                 errorsList.add(errorDetails);
             }else if(null != userLogin.getEmail() && !userLogin.getEmail().isEmpty()){
                 if(!emailValidator.valid(userLogin.getEmail())) {
@@ -49,7 +49,7 @@ public class FormValidator implements Serializable {
             if(null == userLogin.getPassword() || userLogin.getPassword().isEmpty()){
                 errorDetails = new ErrorDetails();
                 errorDetails.setErrorField("password");
-                errorDetails.setErrorMessage("Password dude?");
+                errorDetails.setErrorMessage("Missing Password");
                 errorsList.add(errorDetails);
             }
         }

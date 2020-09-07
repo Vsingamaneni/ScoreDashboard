@@ -84,8 +84,8 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
 
         boolean isSuccess = false;
 
-        String sql = "INSERT INTO PREDICTIONS(memberId, matchNumber, homeTeam, awayTeam, firstName, selected, predictedTime, matchday)" +
-                    "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO PREDICTIONS(memberId, matchNumber, homeTeam, awayTeam, firstName, selected, predictedTime, matchday, amount)" +
+                    "VALUES (?,?,?,?,?,?,?,?,?)";
 
 
         Connection conn = null;
@@ -101,6 +101,7 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
             ps.setString(6, prediction.getSelected());
             ps.setString(7, getTime().toString());
             ps.setInt(8, prediction.getMatchDay());
+            ps.setInt(9, prediction.getAmount());
 
             ps.executeUpdate();
             ps.close();
@@ -195,6 +196,7 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
         String sql = "SELECT * FROM PREDICTIONS where matchDay = ?";
 
         List<Prediction> predictionList = PredictionListMapper.predictionList(jdbcTemplate, sql, matchDay);
+
         return predictionList;
     }
 
@@ -248,9 +250,10 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
         Map<String, Object> params = new HashMap<>();
         params.put("matchId", matchId);
 
-        String sql = "SELECT * FROM PREDICTIONS where matchNumber =?";
+        String sql = "SELECT * FROM PREDICTIONS where matchNumber =" + matchId;
 
-        List<Prediction> predictionList = PredictionListMapper.predictionList(jdbcTemplate, sql, matchId);
+        /*List<Prediction> predictionList = PredictionListMapper.predictionList(jdbcTemplate, sql, matchId);*/
+        List<Prediction> predictionList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Prediction.class));
         return predictionList;
     }
 
@@ -335,8 +338,8 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
 
         boolean isSuccess = false;
 
-        String sql = "INSERT INTO RESULTS(matchNumber, homeTeam, awayTeam, startDate, winner, winningAmount, adminAmount, homeTeamCount, awayTeamCount, notPredictedCount, matchDay, drawTeamCount)" +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?," +result.getDrawTeamCount()+")";
+        String sql = "INSERT INTO RESULTS(matchNumber, homeTeam, awayTeam, startDate, winner, adminAmount, homeTeamCount, awayTeamCount, notPredictedCount, matchDay, drawTeamCount)" +
+                "VALUES (?,?,?,?,?,?,?,?,?,?," +result.getDrawTeamCount()+")";
 
 
         Connection conn = null;
@@ -349,12 +352,11 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
             ps.setString(3, result.getAwayTeam());
             ps.setString(4, result.getStartDate());
             ps.setString(5, result.getWinner());
-            ps.setDouble(6, result.getWinningAmount());
-            ps.setDouble(7, result.getAdminQuota());
-            ps.setInt(8, (int)result.getHomeTeamCount());
-            ps.setInt(9, (int)result.getAwayTeamCount());
-            ps.setInt(10, (int)result.getNotPredictedCount());
-            ps.setInt(11, result.getMatchDay());
+            ps.setDouble(6, result.getAdminQuota());
+            ps.setInt(7, (int)result.getHomeTeamCount());
+            ps.setInt(8, (int)result.getAwayTeamCount());
+            ps.setInt(9, (int)result.getNotPredictedCount());
+            ps.setInt(10, result.getMatchDay());
 
             ps.executeUpdate();
             ps.close();
