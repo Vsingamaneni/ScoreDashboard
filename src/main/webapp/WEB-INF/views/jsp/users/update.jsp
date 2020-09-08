@@ -117,8 +117,8 @@
 
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
-
-        <h2 style="text-align: center;"> Hey ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
+        <br />
+        <h2 style="text-align: center;"> ${fn:toUpperCase(user_name)}, Update your prediction. </h2>
 
         <c:if test="${not empty errorDetailsList}">
             <h2 style="color:red;font-size:15px;text-decoration:none;font-family:Comic Sans MS; text-align:center;"> Dude, fix the below error(s)</h2>
@@ -172,6 +172,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class='form-group'>
+                                <label class='control-label col-md-2 col-md-offset-2' for='id_selected'>Amount</label>
+                                <div class='col-md-2'>
+                                    <select class='form-control' id='id_amount' name="amount" style="min-width:150px; ">
+                                        <c:forEach var='fees' items='${scheduleForm.matchFeeList}'>
+                                            <option style="text-align: center">${fees}</option>
+                                        </c:forEach>
+
+                                    </select>
+                                </div>
+                            </div>
                             <br />
                             <div class='form-group'>
                                 <div class='col-md-offset-4 col-md-3'>
@@ -195,7 +206,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
+        <p>&copy; All rights Reserved @<b>Vamsi Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->

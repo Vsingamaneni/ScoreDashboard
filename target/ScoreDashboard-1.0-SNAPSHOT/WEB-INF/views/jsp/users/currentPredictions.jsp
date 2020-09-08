@@ -133,6 +133,7 @@
                                 <th>Fixture</th>
                                 <th>Choice</th>
                                 <th>Predicted Time</th>
+                                <th>Amount</th>
                                 </thead>
                             </tr>
                             <c:forEach var="predictions" items="${adminPredictions}">
@@ -143,6 +144,7 @@
                                         vs ${predictions.awayTeam} </b></td>
                                     <td style="text-align:left;"><b>${predictions.selected} </b></td>
                                     <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
+                                    <td style="text-align:left;"><b>${predictions.amount} </b></td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -150,7 +152,6 @@
                     <br /><br />
                 </c:if>
                 <h1 style="text-align:center;">Match Day Predictions</h1>
-                <br />
                 <c:if test="${not empty deadLineSchedule}">
                     <c:forEach var="schedule" items="${deadLineSchedule}">
                         <div style="width:50%; text-align:center;color:darkred; background-color: #d5e693; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
@@ -175,13 +176,13 @@
                         </span>
                     <br />
                 </c:if>
-                    <c:if test="${schedulePrediction.deadlinReached}">
+                    <%--<c:if test="${schedulePrediction.deadlinReached}">
                         <span style="display:flex;">
                         <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.homeTeam)} : ${schedulePrediction.homeWinAmount}" style=" margin: 0 auto;" class="btn btn-info">
                         <input type="button"  value="${fn:toUpperCase(schedulePrediction.schedule.awayTeam)} : ${schedulePrediction.awayWinAmount}" style=" margin: 0 auto;" class="btn btn-primary">
                         </span>
                     </c:if>
-                    <br /><br />
+                    <br /><br />--%>
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <tr align="center">
                         <thead>
@@ -190,6 +191,8 @@
                         <th>Fixture</th>
                         <th>Choice</th>
                         <th>Predicted Time</th>
+                        <th>Amount</th>
+                        <th>Expected</th>
                         </thead>
                     </tr>
                     <c:if test="${not empty schedulePrediction}">
@@ -200,6 +203,8 @@
                                 <td style="text-align:left;"><b>${predictions.homeTeam} vs ${predictions.awayTeam} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.selected} </b> </td>
                                 <td style="text-align:left;"><b>${predictions.predictedTime} </b></td>
+                                <td style="text-align:left;"><b>${predictions.amount} </b></td>
+                                <td style="text-align:left;"><b>${predictions.expectedAmount} </b></td>
                             </tr>
                         </c:forEach>
                     </c:if>
@@ -218,7 +223,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
+        <p>&copy; All rights Reserved @<b>Vamsi Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->

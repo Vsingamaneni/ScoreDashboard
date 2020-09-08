@@ -124,7 +124,7 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
     public boolean updatePrediction(Prediction prediction) {
         boolean isSuccess = false;
 
-        String sql = "UPDATE PREDICTIONS SET selected = ? , predictedTime = ? where predictionId = ?";
+        String sql = "UPDATE PREDICTIONS SET selected = ? , predictedTime = ?, amount = ? where predictionId = ?";
 
 
         Connection conn = null;
@@ -134,7 +134,8 @@ public class ScheduleDaoImpl implements ScheduleDao, Serializable {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, prediction.getSelected());
             ps.setString(2, getTime().toString());
-            ps.setInt(3, prediction.getPredictionId());
+            ps.setInt(3, prediction.getAmount());
+            ps.setInt(4, prediction.getPredictionId());
 
 
             ps.executeUpdate();

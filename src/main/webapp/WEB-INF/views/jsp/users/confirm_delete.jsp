@@ -114,8 +114,8 @@
         <br><br><br><br><br><br><br><br>
     </c:if>
     <c:if test="${isActivated.equalsIgnoreCase('Y')}">
-
-        <h2 style="text-align: center;"> Hey ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
+        <br />
+        <h2 style="text-align: center;"> ${fn:toUpperCase(user_name)}, You are about to delete your prediction. </h2>
         <br /><br /><br />
 
             <div class='container' style="width: 80%; margin: 0 auto;">
@@ -180,7 +180,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
+        <p>&copy; All rights Reserved @<b>Vamsi Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->

@@ -178,7 +178,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
+        <p>&copy; All rights Reserved @<b>Vamsi Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->

@@ -712,6 +712,7 @@ public class UserController implements Serializable {
         }
         Prediction prediction = scheduleService.getPrediction(memberId, matchNumber);
 
+        PredictionListMapper.setMatchFeeList(schedule);
 
         model.addAttribute("scheduleForm", schedule);
         model.addAttribute("predictionForm", prediction);
