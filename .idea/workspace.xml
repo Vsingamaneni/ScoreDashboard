@@ -6,52 +6,31 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08544572-b210-407f-b5e0-ae3b4ee815be" name="Default" comment="updated the variable values and db schema">
+    <list default="true" id="08544572-b210-407f-b5e0-ae3b4ee815be" name="Default" comment="Updated the new prediction.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/config/SpringJDBCConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/config/SpringJDBCConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/dao/ScheduleDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/util/MatchUpdates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sports/cricket/web/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/account.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/addSettlement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/addSettlement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/backup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/backup.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/confirm_delete.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/confirm_delete.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/contact_admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/contact_admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/currentPredictions.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/display.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/display.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/history.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/history.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/leaderboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/leaderboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/members.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/members.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/predictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/predictions.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/review.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/review.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/rules.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/rules.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/schedule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/schedule.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/settlement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/settlement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/showreviews.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/showreviews.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/stats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/stats.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/update.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/updateResult.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/updateResult.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/user_prediction.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/user_prediction.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/userreview.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/userreview.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/users/welcome.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/MatchUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/util/MatchUpdates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/classes/com/sports/cricket/web/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/currentPredictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/currentPredictions.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/update.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/user_prediction.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/user_prediction.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/account.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/addSettlement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/addSettlement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/backup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/backup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/confirm_delete.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/confirm_delete.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/contact_admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/contact_admin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/display.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/display.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/history.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/history.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/leaderboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/leaderboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/members.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/members.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/predictions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/predictions.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/review.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/review.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/rules.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/rules.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/schedule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/schedule.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/settlement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/settlement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/showreviews.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/showreviews.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/stats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/stats.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/updateResult.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/updateResult.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/userreview.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/userreview.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ScoreDashboard-1.0-SNAPSHOT/WEB-INF/views/jsp/users/welcome.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/config/SpringJDBCConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/dao/ScheduleDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/MatchUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/util/MatchUpdates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sports/cricket/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sports/cricket/web/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +143,7 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Google App Engine Deployment.Google App Engine Deployment">
+  <component name="RunManager" selected="Tomcat Server.tomcat-local">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -402,14 +381,7 @@
       <workItem from="1599238048415" duration="842000" />
       <workItem from="1599238925778" duration="201000" />
       <workItem from="1599239218008" duration="623000" />
-      <workItem from="1599240464750" duration="30505000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial commit">
-      <created>1545768438159</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1545768438159</updated>
+      <workItem from="1599240464750" duration="32768000" />
     </task>
     <task id="LOCAL-00002" summary="Initial commit">
       <created>1545768545292</created>
@@ -747,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599507866627</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated the new prediction.">
+      <created>1599524001422</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1599524001423</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
@@ -765,7 +744,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added the account and updated the urls" />
     <MESSAGE value="Added user profile" />
     <MESSAGE value="Added the cloud config" />
     <MESSAGE value="Aligned the nav bar to be unique with fav icons" />
@@ -790,7 +768,8 @@
     <MESSAGE value="Added the inital commit" />
     <MESSAGE value="Updated the admin portion" />
     <MESSAGE value="updated the variable values and db schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the variable values and db schema" />
+    <MESSAGE value="Updated the new prediction." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the new prediction." />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="127" key="#Deployment" timestamp="1599238543215">
@@ -811,10 +790,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="483" y="172" key="#xdebugger.evaluate/0.23.1440.877@0.23.1440.877" timestamp="1599495685118" />
-    <state x="226" y="37" key="CommitChangelistDialog2" timestamp="1599507860547">
+    <state x="226" y="37" key="CommitChangelistDialog2" timestamp="1599523996953">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="226" y="37" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1599507860547" />
+    <state x="226" y="37" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1599523996953" />
     <state width="459" height="466" key="DebuggerActiveHint" timestamp="1599499157717">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -823,110 +802,110 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1599509926559" />
-    <state width="1178" height="330" key="GridCell.Tab.0.bottom" timestamp="1599523757443">
+    <state width="1178" height="330" key="GridCell.Tab.0.bottom" timestamp="1599672743125">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911140" />
-    <state width="1178" height="330" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599523757443" />
-    <state width="1178" height="330" key="GridCell.Tab.0.center" timestamp="1599523757442">
+    <state width="1178" height="330" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599672743125" />
+    <state width="1178" height="330" key="GridCell.Tab.0.center" timestamp="1599672743124">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911139" />
-    <state width="1178" height="330" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1599523757442" />
-    <state width="1178" height="330" key="GridCell.Tab.0.left" timestamp="1599523757442">
+    <state width="1178" height="330" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1599672743124" />
+    <state width="1178" height="330" key="GridCell.Tab.0.left" timestamp="1599672743122">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911138" />
-    <state width="1178" height="330" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1599523757442" />
-    <state width="1178" height="330" key="GridCell.Tab.0.right" timestamp="1599523757443">
+    <state width="1178" height="330" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1599672743122" />
+    <state width="1178" height="330" key="GridCell.Tab.0.right" timestamp="1599672743124">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.0.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242911139" />
-    <state width="1178" height="330" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1599523757443" />
-    <state width="1178" height="330" key="GridCell.Tab.1.bottom" timestamp="1599523757439">
+    <state width="1178" height="330" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1599672743124" />
+    <state width="1178" height="330" key="GridCell.Tab.1.bottom" timestamp="1599672743126">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188351" />
     <state width="1148" height="177" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896750" />
-    <state width="1178" height="330" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599523757439" />
-    <state width="1178" height="330" key="GridCell.Tab.1.center" timestamp="1599523757438">
+    <state width="1178" height="330" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599672743126" />
+    <state width="1178" height="330" key="GridCell.Tab.1.center" timestamp="1599672743126">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188350" />
     <state width="1148" height="177" key="GridCell.Tab.1.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896749" />
-    <state width="1178" height="330" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1599523757438" />
-    <state width="1178" height="330" key="GridCell.Tab.1.left" timestamp="1599523757437">
+    <state width="1178" height="330" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1599672743126" />
+    <state width="1178" height="330" key="GridCell.Tab.1.left" timestamp="1599672743125">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188349" />
     <state width="1148" height="177" key="GridCell.Tab.1.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896748" />
-    <state width="1178" height="330" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1599523757437" />
-    <state width="1178" height="330" key="GridCell.Tab.1.right" timestamp="1599523757439">
+    <state width="1178" height="330" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1599672743125" />
+    <state width="1178" height="330" key="GridCell.Tab.1.right" timestamp="1599672743126">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1294" height="282" key="GridCell.Tab.1.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1599238188351" />
     <state width="1148" height="177" key="GridCell.Tab.1.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896750" />
-    <state width="1178" height="330" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1599523757439" />
-    <state width="1178" height="330" key="GridCell.Tab.2.bottom" timestamp="1599523757441">
+    <state width="1178" height="330" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1599672743126" />
+    <state width="1178" height="330" key="GridCell.Tab.2.bottom" timestamp="1599672743127">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896754" />
-    <state width="1178" height="330" key="GridCell.Tab.2.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599523757441" />
-    <state width="1178" height="330" key="GridCell.Tab.2.center" timestamp="1599523757440">
+    <state width="1178" height="330" key="GridCell.Tab.2.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599672743127" />
+    <state width="1178" height="330" key="GridCell.Tab.2.center" timestamp="1599672743127">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896752" />
-    <state width="1178" height="330" key="GridCell.Tab.2.center/0.23.1440.877@0.23.1440.877" timestamp="1599523757440" />
-    <state width="1178" height="330" key="GridCell.Tab.2.left" timestamp="1599523757439">
+    <state width="1178" height="330" key="GridCell.Tab.2.center/0.23.1440.877@0.23.1440.877" timestamp="1599672743127" />
+    <state width="1178" height="330" key="GridCell.Tab.2.left" timestamp="1599672743127">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896751" />
-    <state width="1178" height="330" key="GridCell.Tab.2.left/0.23.1440.877@0.23.1440.877" timestamp="1599523757439" />
-    <state width="1178" height="330" key="GridCell.Tab.2.right" timestamp="1599523757440">
+    <state width="1178" height="330" key="GridCell.Tab.2.left/0.23.1440.877@0.23.1440.877" timestamp="1599672743127" />
+    <state width="1178" height="330" key="GridCell.Tab.2.right" timestamp="1599672743127">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.2.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896753" />
-    <state width="1178" height="330" key="GridCell.Tab.2.right/0.23.1440.877@0.23.1440.877" timestamp="1599523757440" />
-    <state width="1178" height="330" key="GridCell.Tab.3.bottom" timestamp="1599523756943">
+    <state width="1178" height="330" key="GridCell.Tab.2.right/0.23.1440.877@0.23.1440.877" timestamp="1599672743127" />
+    <state width="1178" height="330" key="GridCell.Tab.3.bottom" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896414" />
-    <state width="1178" height="330" key="GridCell.Tab.3.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599523756943" />
-    <state width="1178" height="330" key="GridCell.Tab.3.center" timestamp="1599523756943">
+    <state width="1178" height="330" key="GridCell.Tab.3.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
+    <state width="1178" height="330" key="GridCell.Tab.3.center" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896413" />
-    <state width="1178" height="330" key="GridCell.Tab.3.center/0.23.1440.877@0.23.1440.877" timestamp="1599523756943" />
-    <state width="1178" height="330" key="GridCell.Tab.3.left" timestamp="1599523756942">
+    <state width="1178" height="330" key="GridCell.Tab.3.center/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
+    <state width="1178" height="330" key="GridCell.Tab.3.left" timestamp="1599672743127">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896412" />
-    <state width="1178" height="330" key="GridCell.Tab.3.left/0.23.1440.877@0.23.1440.877" timestamp="1599523756942" />
-    <state width="1178" height="330" key="GridCell.Tab.3.right" timestamp="1599523756943">
+    <state width="1178" height="330" key="GridCell.Tab.3.left/0.23.1440.877@0.23.1440.877" timestamp="1599672743127" />
+    <state width="1178" height="330" key="GridCell.Tab.3.right" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.3.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896413" />
-    <state width="1178" height="330" key="GridCell.Tab.3.right/0.23.1440.877@0.23.1440.877" timestamp="1599523756943" />
-    <state width="1178" height="330" key="GridCell.Tab.4.bottom" timestamp="1599523756942">
+    <state width="1178" height="330" key="GridCell.Tab.3.right/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
+    <state width="1178" height="330" key="GridCell.Tab.4.bottom" timestamp="1599672743129">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.bottom/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896412" />
-    <state width="1178" height="330" key="GridCell.Tab.4.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599523756942" />
-    <state width="1178" height="330" key="GridCell.Tab.4.center" timestamp="1599523756941">
+    <state width="1178" height="330" key="GridCell.Tab.4.bottom/0.23.1440.877@0.23.1440.877" timestamp="1599672743129" />
+    <state width="1178" height="330" key="GridCell.Tab.4.center" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.center/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896411" />
-    <state width="1178" height="330" key="GridCell.Tab.4.center/0.23.1440.877@0.23.1440.877" timestamp="1599523756941" />
-    <state width="1178" height="330" key="GridCell.Tab.4.left" timestamp="1599523756941">
+    <state width="1178" height="330" key="GridCell.Tab.4.center/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
+    <state width="1178" height="330" key="GridCell.Tab.4.left" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.left/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896410" />
-    <state width="1178" height="330" key="GridCell.Tab.4.left/0.23.1440.877@0.23.1440.877" timestamp="1599523756941" />
-    <state width="1178" height="330" key="GridCell.Tab.4.right" timestamp="1599523756942">
+    <state width="1178" height="330" key="GridCell.Tab.4.left/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
+    <state width="1178" height="330" key="GridCell.Tab.4.right" timestamp="1599672743128">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1148" height="177" key="GridCell.Tab.4.right/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599242896411" />
-    <state width="1178" height="330" key="GridCell.Tab.4.right/0.23.1440.877@0.23.1440.877" timestamp="1599523756942" />
+    <state width="1178" height="330" key="GridCell.Tab.4.right/0.23.1440.877@0.23.1440.877" timestamp="1599672743128" />
     <state x="497" y="171" key="RollbackChangesDialog" timestamp="1599508125957">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -939,15 +918,15 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="629" y="181" key="VCS.ChangeListViewerDialog/0.23.1440.877@0.23.1440.877" timestamp="1599508346875" />
-    <state x="320" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599507868008">
+    <state x="320" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599524002772">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="320" y="201" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1599507868008" />
-    <state x="421" y="216" width="598" height="490" key="find.popup" timestamp="1599523802871">
+    <state x="320" y="201" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1599524002772" />
+    <state x="421" y="216" width="598" height="490" key="find.popup" timestamp="1599523865022">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1599239995177" />
-    <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1599523802871" />
+    <state x="421" y="216" width="598" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1599523865022" />
     <state x="88" y="84" key="new project wizard" timestamp="1599238765924">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

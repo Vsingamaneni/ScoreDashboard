@@ -110,8 +110,8 @@
         </div>
         <br>
     </c:if>
-
-    <h2 style="text-align: center;"> &nbsp;&nbsp; Hey ${fn:toUpperCase(user_name)}, your match day predictions are below. </h2>
+    <br />
+    <h2 style="text-align: center;"> &nbsp;&nbsp; ${fn:toUpperCase(user_name)}, your active predictions are below. </h2>
 
     <c:if test="${not empty msg}">
         <div class="alert alert-${css} alert-dismissible" style="text-align:center;color:#4CAF50;" role="alert">
@@ -121,7 +121,7 @@
 
         <!-- Predictions -->
         <header class="w3-container" style="padding-top:22px">
-            <h3><b><i class="fa fa-plus"></i> MatchDay Predictions </b></h3>
+            <h3><b><i class="fa fa-plus"></i> Active Predictions </b></h3>
         </header>
 
         <div class="w3-panel">
@@ -133,6 +133,7 @@
                             <th>Fixture</th>
                             <th>Choice</th>
                             <th>Predicted Time</th>
+                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                         <c:forEach var="prediction" items="${predictions}">
@@ -142,6 +143,7 @@
                                     <td>${fn:toUpperCase(prediction.homeTeam)} vs ${fn:toUpperCase(prediction.awayTeam)}</td>
                                     <td>${fn:toUpperCase(prediction.selected)}</td>
                                     <td>${fn:toUpperCase(prediction.predictedTime)}</td>
+                                    <td>${fn:toUpperCase(prediction.amount)}</td>
                                     <td>
                                     <spring:url value="/prediction/${prediction.predictionId}/${prediction.matchNumber}/update" var="updateUrl" />
                                     <spring:url value="/prediction/${prediction.predictionId}/delete" var="deleteUrl" />
@@ -208,7 +210,7 @@
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>&copy; All rights Reserved @<b>Vamsi Krishna Singamaneni</b></p>
+        <p>&copy; All rights Reserved @<b>Vamsi Singamaneni</b></p>
     </footer>
 
     <!-- End page content -->
