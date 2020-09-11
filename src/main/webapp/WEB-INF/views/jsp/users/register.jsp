@@ -78,10 +78,15 @@
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
 
+                <div class="wrap-input100 validate-input" data-validate="Phone Number">
+                    <input class="input100" type="text" placeholder="Phone Number" name="phoneNumber">
+                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                </div>
+
                 <div class="wrap-input100 validate-input" data-validate="Country">
                     <div align="center">
-                        <select style="text-align: center; text-align-last: center;" class='input50' name="country">
-                            <option style="text-align: center;">Select Country</option>
+                        <select style="width: 80%;" class='input50' name="country">
+                            <option>Select Country</option>
                             <option>India</option>
                             <option>United States</option>
                             <option>England</option>
@@ -92,7 +97,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Security Question">
                     <div align="center">
-                        <select style="text-align: center; text-align-last: center;" class='input50' name="securityQuestion">
+                        <select style="width: 80%;" class='input50' name="securityQuestion">
                             <option> Security Question </option>
                             <option>What is your best friend name?</option>
                             <option>Who is your favourite Cricketer</option>

@@ -180,11 +180,48 @@ public class PredictionListMapper implements Serializable {
         return predictionList;
     }
 
+    public static List<Prediction> mapPredictionPerSelection(List<Prediction> predictionList, Schedule schedule){
+        List<Prediction> predictions = new ArrayList<>();
+        List<Prediction> homeTeamPredictions = new ArrayList<>();
+        List<Prediction> awayTeamPredictions = new ArrayList<>();
+        List<Prediction> defaultList = new ArrayList<>();
+
+        if (!CollectionUtils.isEmpty(predictionList) && predictionList.size() > 0){
+            predictionList.stream().forEach(p -> {
+                if (p.getSelected().equals(schedule.getHomeTeam())){
+                    homeTeamPredictions.add(p);
+                } else if (p.getSelected().equals(schedule.getAwayTeam())){
+                    awayTeamPredictions.add(p);
+                } else {
+                    defaultList.add(p);
+                }
+            });
+        }
+
+        Collections.sort(homeTeamPredictions, new VariablePredictions());
+        predictions.addAll(homeTeamPredictions);
+
+        Collections.sort(awayTeamPredictions, new VariablePredictions());
+        predictions.addAll(awayTeamPredictions);
+
+        predictions.addAll(defaultList);
+
+        return predictions;
+    }
+
     static class MatchDayPredictions implements Comparator<Prediction> {
 
         @Override
         public int compare(Prediction p1, Prediction p2) {
-            return p1.getFirstName().compareTo(p2.getFirstName());
+            return p2.getFirstName().compareTo(p1.getFirstName());
+        }
+    }
+
+    static class VariablePredictions implements Comparator<Prediction> {
+
+        @Override
+        public int compare(Prediction p1, Prediction p2) {
+            return p2.getAmount().compareTo(p1.getAmount());
         }
     }
 

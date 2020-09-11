@@ -101,29 +101,38 @@
                 <br /><br />
                 <h1 style="text-align: center;">Rules</h1>
                 <br />
-                <div style="width:100%; text-align:left;color:darkred; background-color: #24e67b; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
+                <div style="width:100%; text-align:left;color:#030303; background-color: #a9acab; margin:0 auto; padding: 25px;border-radius: 15px 50px 30px">
                     <table>
                         <div class="alert alert-${css} alert-dismissible" role="alert">
                             <h4>
                                 <ul>
                                     <h4>Match Fee</h4>
                                     <b><ul>
-                                        <li>Group Stage : 200</li>
-                                        <li>Qualifiers  : 300</li>
-                                        <li>Eliminator  : 400</li>
-                                        <li>Final       : 500</li>
+                                        <li>Group Stage : 200 - 500</li>
+                                        <li>Qualifiers  : 300 - 600</li>
+                                        <li>Eliminator  : 400 - 800</li>
+                                        <li>Final       : 500 - 1000</li>
                                     </ul></b>
                                     <br/>
                                     <li>You should make an entry for every match before an hour of the actual match time.</li>
                                     <li>You can predict/update the upcoming matches any time.</li>
                                     <li>Predictions will be closed an hour before the match time.</li>
                                     <li>If you are not able to predict before the deadline, you will be placed in loosing team by default.</li>
+
                                     <br />
-                                    <p> <i>Example </i></p>
-                                    <b><li>Match : RCB vs CSK</li>
-                                        <li>Predictions : <i>RCB : 50, CSK : 20, Default : 3</i></li>
-                                    <li>RCB WIN : Sum of CSK and Default multiplied by the match fee shared among the RCB selected folks. </li>
-                                    <li>Vice versa for a CSK Win </li></b>
+                                    <li>There's a variable amount this time, players are not just limited to 200 per match but they can choose between 200, 250, 300, 350, 400, 450, 500.
+                                        Your winnings with be proportional to the amount you bet.
+                                        <li>So if you're supposed to win 400 for 200, you'd win 600 for 300 bet.</li>
+                                        <li>Default amount that will be selected during prediction is 200. You will have to select from the dropdown if you want to do variable amount.</li>
+                                        <li>You can go through the season without using this option as well but for players who want to spice it up can go with this.</li>
+                                        <br />
+                                    <li>Eg. SRH vs RCB, 3 players bet on SRH, 3 on RCB. All of em bet 200 but one SRH fan is super confident in his team and bets 400. So total amount bet is 600 on RCB 800 on SRH. If SRH win the guys will get (600/800) x (Their bet) as return on their betting amount. That's 0.75x, the the guy who bet 400 will receive 300 return and and the guys who bet 200 will get 150 return. If RCB win the guys will get (800/600) their bet, that's 1.33x which is 267 return on their bet.</li>
+                                    </li>
+
+                                    <br/>
+                                    <li>
+                                        Last two seasons we ditched excel sheets and created a seperate website for this. However we did it on trail version and that has expired and this season we've had to financially invest in the website so in order to recoup that money, we'll be charging 5% per match earnings ONLY for the winners. If you lose you don't have to pay. Again, just to clarify this is not an admin fee but just website maintenance fee.
+                                    </li>
                                 </ul>
                             </h4>
 

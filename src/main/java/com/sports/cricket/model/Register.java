@@ -10,6 +10,8 @@ public class Register implements Serializable {
 
     private String lName;
 
+    private String phoneNumber;
+
     private String registeredTime;
 
     private String emailId;
@@ -172,5 +174,13 @@ public class Register implements Serializable {
 
     public void setIsAdminActivated(String isAdminActivated) {
         this.isAdminActivated = isAdminActivated;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -924,7 +924,9 @@ public class UserController implements Serializable {
             if(ValidateDeadline.isDeadLineReached(schedule.getStartDate()) || userLogin.getRole().equalsIgnoreCase("admin")){
                 SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
                 ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
-                List<Prediction> predictionList = PredictionListMapper.sortPredictions(matchDetails.getPrediction());
+                //List<Prediction> predictionList = PredictionListMapper.sortPredictions(matchDetails.getPrediction());
+
+                List<Prediction> predictionList = PredictionListMapper.mapPredictionPerSelection(matchDetails.getPrediction(), schedule);
 
                 matchDetails.setPrediction(predictionList);
                 schedulePredictionsList.add(matchDetails);

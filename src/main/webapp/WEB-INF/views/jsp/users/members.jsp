@@ -113,7 +113,7 @@
                         <th>Member #</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Admin Activated</th>
+                        <th>Phone Number</th>
                         <th>Status</th>
                     </tr>
                     </thead>
@@ -123,7 +123,7 @@
                             <td style="text-align:left;"> ${register.memberId}</td>
                             <td style="text-align:left;">${fn:toUpperCase(register.fName)}</td>
                             <td style="text-align:left;">${fn:toUpperCase(register.lName)}</td>
-                            <td style="text-align:left;">${fn:toUpperCase(register.isAdminActivated)}</td>
+                            <td style="text-align:left;">${fn:toUpperCase(register.phoneNumber)}</td>
                             <td style="text-align:left;">
                                 <spring:url value="/member/${register.memberId}/authorize" var="activateUrl"/>
                                 <spring:url value="/member/${register.memberId}/deactivate" var="deactivateUrl"/>

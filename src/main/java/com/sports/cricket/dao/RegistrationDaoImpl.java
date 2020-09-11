@@ -54,8 +54,8 @@ public class RegistrationDaoImpl implements RegistrationDao, Serializable {
             registration.setIsAdminActivated("N");
         }
 
-        String sql = "INSERT INTO REGISTER(fname, lname, registeredTime, email, country, encryptedPass, saltKey, securityQuestion, securityAnswer, securityKey, isActive, role, isAdminActivated) "
-                    + "VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO REGISTER(fname, lname, registeredTime, email, country, encryptedPass, saltKey, securityQuestion, securityAnswer, securityKey, isActive, role, isAdminActivated, phoneNumber) "
+                    + "VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
         Connection conn = null;
@@ -76,6 +76,7 @@ public class RegistrationDaoImpl implements RegistrationDao, Serializable {
             ps.setString(11, registration.getIsActive());
             ps.setString(12, registration.getRole());
             ps.setString(13, registration.getIsAdminActivated());
+            ps.setString(14, registration.getPhoneNumber());
 
             ps.executeUpdate();
             ps.close();
