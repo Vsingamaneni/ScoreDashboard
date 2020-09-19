@@ -1,9 +1,6 @@
 package com.sports.cricket.util;
 
-import com.sports.cricket.model.Register;
-import com.sports.cricket.model.Settlement;
-import com.sports.cricket.model.TrackSettlement;
-import com.sports.cricket.model.UserLogin;
+import com.sports.cricket.model.*;
 import org.springframework.util.CollectionUtils;
 
 import java.time.OffsetDateTime;
@@ -97,4 +94,16 @@ public class SettlementUtil {
         }
         return "";
     }
+
+    public static void mapResults(List<Result> resultList){
+        float net = 0f;
+        if (!CollectionUtils.isEmpty(resultList)){
+            for (Result result : resultList){
+                net = net + result.getAdminAmount();
+                result.setNet(net);
+            }
+        }
+    }
 }
+
+

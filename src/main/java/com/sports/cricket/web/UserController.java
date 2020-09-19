@@ -65,7 +65,7 @@ public class UserController implements Serializable {
     // Show index page
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showHomePage(Model model, HttpSession httpSession) {
-        if (null != httpSession.getAttribute("msg")){
+        if (null != httpSession.getAttribute("msg")) {
             model.addAttribute("msg", httpSession.getAttribute("msg"));
             httpSession.removeAttribute("msg");
         }
@@ -73,9 +73,9 @@ public class UserController implements Serializable {
                 && null == httpSession.getAttribute("session")) {
             UserLogin userLogin = new UserLogin();
             logger.debug("Login Page");
-            List<ErrorDetails> loginErrorDetails = (List<ErrorDetails>)httpSession.getAttribute("loginErrorDetails");
+            List<ErrorDetails> loginErrorDetails = (List<ErrorDetails>) httpSession.getAttribute("loginErrorDetails");
             if (null != loginErrorDetails
-                && loginErrorDetails.size() > 0){
+                    && loginErrorDetails.size() > 0) {
                 model.addAttribute("loginErrorDetails", loginErrorDetails);
                 httpSession.removeAttribute("loginErrorDetails");
             }
@@ -85,7 +85,7 @@ public class UserController implements Serializable {
             UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
             Register register;
             if (null != userLogin.getIsAdminActivated()
-                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")){
+                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
                 register = registrationService.getUser(userLogin.getEmail());
 
                 userLogin.setIsActive(register.getIsActive());
@@ -95,7 +95,7 @@ public class UserController implements Serializable {
             if (userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
                 return "users/contact_admin";
             } else {
-               return "redirect:/profile";
+                return "redirect:/profile";
             }
         }
         return "redirect:/profile";
@@ -127,7 +127,7 @@ public class UserController implements Serializable {
 
         UserLogin loginDetails = registrationService.loginUser(userLogin);
 
-        if ( null != loginDetails
+        if (null != loginDetails
                 && loginDetails.isLoginSuccess()) {
 
             model.addAttribute("session", loginDetails);
@@ -136,7 +136,7 @@ public class UserController implements Serializable {
             httpSession.setAttribute("role", loginDetails.getRole());
             httpSession.setAttribute("session", userLogin);
 
-            if (loginDetails.getIsAdminActivated().equalsIgnoreCase("N")){
+            if (loginDetails.getIsAdminActivated().equalsIgnoreCase("N")) {
                 httpSession.setAttribute("msg", "Please contact the admin to activate your account..!");
                 return "users/contact_admin";
             }
@@ -161,7 +161,7 @@ public class UserController implements Serializable {
             model.remove("msg");
         }
 
-        if (null == userLogin){
+        if (null == userLogin) {
             return "redirect:/";
         } else {
             httpSession.setMaxInactiveInterval(10 * 60);
@@ -193,7 +193,7 @@ public class UserController implements Serializable {
         } else {
             Register register;
             if (null != userLogin.getIsAdminActivated()
-                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")){
+                    && userLogin.getIsAdminActivated().equalsIgnoreCase("N")) {
                 register = registrationService.getUser(userLogin.getEmail());
 
                 userLogin.setIsActive(register.getIsActive());
@@ -238,7 +238,7 @@ public class UserController implements Serializable {
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
 
-        if (null == userLogin){
+        if (null == userLogin) {
             return "redirect:/";
         }
 
@@ -309,7 +309,7 @@ public class UserController implements Serializable {
 
             model.addAttribute("session", userLogin);
             model.addAttribute("isAuthSuccess", isAuthSuccess);
-            if (isAuthSuccess){
+            if (isAuthSuccess) {
                 userLogin.setIsAdminActivated("Y");
                 userLogin.setIsActive("Y");
             }
@@ -331,7 +331,7 @@ public class UserController implements Serializable {
             boolean isAuthSuccess = scheduleService.deactivateMember(memberId);
 
             model.addAttribute("session", user);
-            if (isAuthSuccess){
+            if (isAuthSuccess) {
                 user.setIsActive("N");
             }
             httpSession.setAttribute("session", user);
@@ -344,8 +344,8 @@ public class UserController implements Serializable {
     @RequestMapping(value = "/forget", method = {RequestMethod.GET, RequestMethod.POST})
     public String forgetPassword(Model model, HttpSession httpSession) {
 
-        if ( null != httpSession.getAttribute("errorDetailsList")){
-            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>)httpSession.getAttribute("errorDetailsList");
+        if (null != httpSession.getAttribute("errorDetailsList")) {
+            List<ErrorDetails> errorDetailsList = (List<ErrorDetails>) httpSession.getAttribute("errorDetailsList");
             model.addAttribute("errorDetailsList", errorDetailsList);
             httpSession.removeAttribute("errorDetailsList");
             return "users/forget";
@@ -372,14 +372,14 @@ public class UserController implements Serializable {
 
         List<ErrorDetails> errorDetailsList = formValidator.isEmailValid(register);
 
-        if (errorDetailsList.size() > 0){
+        if (errorDetailsList.size() > 0) {
             httpSession.setAttribute("errorDetailsList", errorDetailsList);
             return "redirect:/forget";
         } else {
             userDetails = registrationService.getUser(register.getEmailId());
         }
 
-        if (null == userDetails){
+        if (null == userDetails) {
             ErrorDetails errorDetails = new ErrorDetails();
             errorDetails.setErrorMessage("Invalid Email ID!");
             errorDetails.setErrorField("emailID");
@@ -408,7 +408,7 @@ public class UserController implements Serializable {
 
         List<ErrorDetails> errorDetailsList = formValidator.isUpdateValid(register, registrationService);
 
-        if (errorDetailsList.size() > 0){
+        if (errorDetailsList.size() > 0) {
             httpSession.setAttribute("errorDetailsList", errorDetailsList);
             return "redirect:/forget";
         }
@@ -478,7 +478,7 @@ public class UserController implements Serializable {
 
             userLogin.setIsActive(register.getIsActive());
 
-            if (null !=  httpSession.getAttribute("msg")){
+            if (null != httpSession.getAttribute("msg")) {
                 model.addAttribute("msg", httpSession.getAttribute("msg"));
                 httpSession.removeAttribute("msg");
             }
@@ -516,7 +516,7 @@ public class UserController implements Serializable {
 
             Review review = registrationService.getReview(userLogin.getMemberId());
 
-            if (null != review){
+            if (null != review) {
                 httpSession.setAttribute("review", review);
                 return "redirect:/review";
             }
@@ -544,7 +544,7 @@ public class UserController implements Serializable {
 
             Review review = new Review();
 
-            if (null != userRating){
+            if (null != userRating) {
                 review.setMemberId(userLogin.getMemberId());
                 review.setFeedback(userRating.getReviewRating());
                 review.setInterested(userRating.getInterested());
@@ -555,7 +555,7 @@ public class UserController implements Serializable {
 
             boolean isReviewSaved = registrationService.saveReview(review);
 
-            if (isReviewSaved){
+            if (isReviewSaved) {
                 return "redirect:/review";
             }
 
@@ -578,7 +578,7 @@ public class UserController implements Serializable {
             model.addAttribute("session", userLogin);
             httpSession.setAttribute("session", userLogin);
 
-            if (!userLogin.getRole().equalsIgnoreCase("admin")){
+            if (!userLogin.getRole().equalsIgnoreCase("admin")) {
                 return "redirect:/";
             }
 
@@ -638,7 +638,7 @@ public class UserController implements Serializable {
             }
 
             Schedule schedule = scheduleService.findById(matchNumber);
-            if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+            if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())) {
                 httpSession.setAttribute("msg", "Prediction deadline is reached, cannot predict/update");
                 return "redirect:/predictions";
             }
@@ -680,7 +680,7 @@ public class UserController implements Serializable {
             //model.addAttribute("scheduleForm", schedule);
             model.addAttribute("isPredictionSuccess", savePrediction);
             model.addAttribute("session", httpSession.getAttribute("session"));
-            model.addAttribute("msg" , "Your Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is Saved Successfully!!");
+            model.addAttribute("msg", "Your Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is Saved Successfully!!");
             httpSession.setAttribute("msg", "Your Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is Saved Successfully!!");
 
             return "redirect:/predictions";
@@ -706,7 +706,7 @@ public class UserController implements Serializable {
         }
 
         Schedule schedule = scheduleService.findById(matchNumber);
-        if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())){
+        if (ValidateDeadline.isDeadLineReached(schedule.getStartDate())) {
             httpSession.setAttribute("msg", "Prediction deadline is reached, cannot predict/update");
             return "redirect:/predictions";
         }
@@ -742,7 +742,7 @@ public class UserController implements Serializable {
         model.addAttribute("isPredictionSuccess", savePrediction);
         model.addAttribute("session", httpSession.getAttribute("session"));
 
-        if (savePrediction){
+        if (savePrediction) {
             httpSession.setAttribute("msg", "Prediction for " + prediction.getHomeTeam() + " vs " + prediction.getAwayTeam() + " is updated successfully");
         }
 
@@ -793,7 +793,7 @@ public class UserController implements Serializable {
 
     // Save Result
     @RequestMapping(value = "/saveResult", method = RequestMethod.GET)
-    public String saveResult(ModelMap model, HttpSession httpSession){
+    public String saveResult(ModelMap model, HttpSession httpSession) {
 
         logger.debug("saveResult() : {}");
 
@@ -872,8 +872,8 @@ public class UserController implements Serializable {
             if (null != schedule
                     && null != schedule.getWinner()) {
                 List<ErrorDetails> errorDetailsList = ResultValidator.isMatchResultValid(schedule);
-                if (errorDetailsList.size() > 0 ){
-                    httpSession.setAttribute("errorDetailsList" , errorDetailsList);
+                if (errorDetailsList.size() > 0) {
+                    httpSession.setAttribute("errorDetailsList", errorDetailsList);
                     return "redirect:/saveResult";
                 }
                 Integer totalMatches = scheduleService.totalMatches(schedule.getMatchDay());
@@ -908,7 +908,7 @@ public class UserController implements Serializable {
         logger.debug("showCurrentPredictions()");
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
-        if (null == userLogin){
+        if (null == userLogin) {
             return "redirect:/";
         }
 
@@ -921,7 +921,7 @@ public class UserController implements Serializable {
 
         List<SchedulePrediction> schedulePredictionsList = new ArrayList<>();
         for (Schedule schedule : currentSchedule) {
-            if(ValidateDeadline.isDeadLineReached(schedule.getStartDate()) || userLogin.getRole().equalsIgnoreCase("admin")){
+            if (ValidateDeadline.isDeadLineReached(schedule.getStartDate()) || userLogin.getRole().equalsIgnoreCase("admin")) {
                 SchedulePrediction matchDetails = MatchUpdates.setUpdates(schedule, scheduleService, registrationService);
                 ValidateDeadLine.isUpdatePossible(matchDetails.getSchedule(), matchDetails.getPrediction());
                 //List<Prediction> predictionList = PredictionListMapper.sortPredictions(matchDetails.getPrediction());
@@ -979,7 +979,7 @@ public class UserController implements Serializable {
             model.addAttribute("leader", leaderBoard);
 
             if (null != userLogin.getRole()
-                    && userLogin.getRole().equalsIgnoreCase("admin")){
+                    && userLogin.getRole().equalsIgnoreCase("admin")) {
                 List<Result> resultList = scheduleService.getResults();
                 model.addAttribute("resultsList", resultList);
             }
@@ -1038,7 +1038,7 @@ public class UserController implements Serializable {
 
             Settlement toSettlement = scheduleService.getSettlement(trackSettlement.getMemberId());
             Settlement fromSettlement = scheduleService.getSettlement(trackSettlement.getSettledMemberId());
-            List<Settlement> settlementList = SettlementUtil.mapSettlement(trackSettlement, toSettlement,fromSettlement);
+            List<Settlement> settlementList = SettlementUtil.mapSettlement(trackSettlement, toSettlement, fromSettlement);
 
             scheduleService.updateSettlement(settlementList);
             scheduleService.addSettlement(trackSettlement);
@@ -1163,7 +1163,7 @@ public class UserController implements Serializable {
                 model.addAttribute("winAndLossAmounts", winAndLossAmounts);
             }
 
-            StatsDetails userStats = StatisticsDetails.getIndividualStats(standingsList,register);
+            StatsDetails userStats = StatisticsDetails.getIndividualStats(standingsList, register);
             model.addAttribute("userStats", userStats);
 
             httpSession.setMaxInactiveInterval(5 * 60);
@@ -1173,7 +1173,7 @@ public class UserController implements Serializable {
 
     // Display predictions
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public String showHistory(ModelMap model, HttpSession httpSession) {
+    public String showResults(ModelMap model, HttpSession httpSession) {
 
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
         if (null != model.get("msg")) {
@@ -1205,9 +1205,45 @@ public class UserController implements Serializable {
         }
     }
 
+    // Display predictions
+    @RequestMapping(value = "/results", method = RequestMethod.GET)
+    public String showHistory(ModelMap model, HttpSession httpSession) {
+        UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
+        if (null != model.get("msg")) {
+            model.remove("msg");
+        }
+
+        if (null == userLogin) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("session", userLogin);
+            //model.addAttribute("msg", "User logged in");
+            String value = (String) httpSession.getAttribute("msg");
+            if (null != value) {
+                model.addAttribute("msg", value);
+            }
+            httpSession.removeAttribute("msg");
+            httpSession.setAttribute("session", userLogin);
+
+            Register register = registrationService.getUser(userLogin.getEmail());
+
+            if (!register.getRole().equals("admin")) {
+                return "redirect:/";
+            }
+
+            List<Result> resultList = scheduleService.getResults();
+            SettlementUtil.mapResults(resultList);
+
+            model.addAttribute("resultList", resultList);
+
+            httpSession.setMaxInactiveInterval(5 * 60);
+            return "users/results";
+        }
+    }
+
     // Show Rules
     @RequestMapping(value = "/rules", method = RequestMethod.GET)
-    public String showRules(ModelMap model, HttpSession httpSession){
+    public String showRules(ModelMap model, HttpSession httpSession) {
         logger.debug("show Rules");
         UserLogin userLogin = (UserLogin) httpSession.getAttribute("session");
         model.addAttribute("session", userLogin);

@@ -26,7 +26,9 @@ public class Result implements Serializable {
 
     private Integer matchDay;
 
-    private float adminQuota;
+    private float adminAmount;
+
+    private float net;
 
     public Integer getMatchNumber() {
         return matchNumber;
@@ -116,11 +118,19 @@ public class Result implements Serializable {
         this.matchDay = matchDay;
     }
 
-    public float getAdminQuota() {
-        return adminQuota;
+    public float getAdminAmount() {
+        return adminAmount;
     }
 
-    public void setAdminQuota(float adminQuota) {
-        this.adminQuota = adminQuota;
+    public void setAdminAmount(float adminAmount) {
+        this.adminAmount = adminAmount;
+    }
+
+    public float getNet() {
+        return net;
+    }
+
+    public void setNet(float net) {
+        this.net = net;
     }
 }
