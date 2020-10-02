@@ -124,7 +124,7 @@
                 <c:if test="${not role.equalsIgnoreCase('admin')}">
                     <c:if test="${not empty adminPredictions}">
                         <h1 style="text-align:center;">Admin Predictions</h1>
-                        <br />
+                        <br/>
                         <table class="w3-table w3-striped w3-white"
                                style="text-align: center; align:center; align-content: center">
                             <tr align="center">
@@ -150,8 +150,9 @@
                             </c:forEach>
                         </table>
                     </c:if>
-                    <br /><br />
+                    <br/><br/>
                 </c:if>
+
                 <h1 style="text-align:center;">Match Day Predictions</h1>
                 <c:if test="${not empty deadLineSchedule}">
                     <c:forEach var="schedule" items="${deadLineSchedule}">
@@ -191,6 +192,20 @@
                         </thead>
                     </tr>
                     <c:if test="${not empty schedulePrediction}">
+
+                        <c:if test="${not empty userPrediction}">
+                            <tr style="color:black;font-size:20px;text-decoration:none;">
+                                <td style="text-align:left;"> <b>${userPrediction.matchNumber}</b></td>
+                                <td style="text-align:left;"> <b>${fn:toUpperCase(userPrediction.firstName)} </b></td>
+                                <td style="text-align:left;"><b>${userPrediction.homeTeam} vs ${userPrediction.awayTeam} </b> </td>
+                                <td style="text-align:left;"><b>${userPrediction.selected} </b> </td>
+                                <td style="text-align:left;"><b>${userPrediction.predictedTime} </b></td>
+                                <td style="text-align:left;"><b>${userPrediction.amount} </b></td>
+                                <td style="text-align:left;"><b>${userPrediction.expectedAmount} </b></td>
+                            </tr>
+                        </c:if>
+                        <br/><br/>
+
                         <c:forEach var="predictions" items="${schedulePrediction.prediction}">
                             <tr style="color:black;font-size:20px;text-decoration:none;">
                                 <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>

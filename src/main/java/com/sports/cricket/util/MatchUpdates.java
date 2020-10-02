@@ -34,10 +34,10 @@ public class MatchUpdates implements Serializable {
 
         if (schedule.getWinner().equalsIgnoreCase(schedule.getHomeTeam())) {
             /*result.setWinningAmount(schedulePrediction.getHomeWinAmount());*/
-            result.setAdminAmount(schedulePrediction.getAdminHomeQuota());
+            result.setAdminAmount(schedulePrediction.getAdminAwayQuota());
         } else if (schedule.getWinner().equalsIgnoreCase(schedule.getAwayTeam())) {
             /*result.setWinningAmount(schedulePrediction.getAwayWinAmount());*/
-            result.setAdminAmount(schedulePrediction.getAdminAwayQuota());
+            result.setAdminAmount(schedulePrediction.getAdminHomeQuota());
         } else if (schedule.getWinner().equalsIgnoreCase("draw")) {
             /*result.setWinningAmount(schedulePrediction.getDrawWinAmount());*/
             result.setAdminAmount(Float.valueOf("0"));

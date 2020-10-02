@@ -29,6 +29,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sports.cricket.service.UserService;
 import com.sports.cricket.validator.UserFormValidator;
 
+import static com.sports.cricket.util.PredictionListMapper.getActiveMatchDay;
+import static com.sports.cricket.util.PredictionListMapper.getAdminId;
+
 @Controller
 @ControllerAdvice
 public class UserController implements Serializable {
@@ -935,12 +938,23 @@ public class UserController implements Serializable {
         }
 
         if (!isScheduleDone) {
-            List<Prediction> adminPredictions = PredictionListMapper.adminPredictions(registrationService, scheduleService);
+            int memberId = getAdminId(registrationService);
+
+            int matchday = getActiveMatchDay(scheduleService);
+
+            List<Prediction> adminPredictions = PredictionListMapper.adminPredictions(scheduleService, memberId, matchday);
+            List<Prediction> userPrediction = PredictionListMapper.adminPredictions(scheduleService, userLogin.getMemberId(), matchday);
+
             model.addAttribute("adminPredictions", adminPredictions);
             model.addAttribute("deadLineSchedule", currentSchedule);
         }
 
         model.addAttribute("schedulePredictions", schedulePredictionsList);
+
+        Prediction prediction = PredictionListMapper.getUserPredictions(schedulePredictionsList, userLogin);
+        if (null != prediction){
+            model.addAttribute("userPrediction", prediction);
+        }
 
         return "users/currentPredictions";
     }

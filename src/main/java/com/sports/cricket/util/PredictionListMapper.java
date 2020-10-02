@@ -137,11 +137,7 @@ public class PredictionListMapper implements Serializable {
         return matchDetailsList;
     }
 
-    public static List<Prediction> adminPredictions(RegistrationService registrationService, ScheduleService scheduleService){
-
-        int memberId = getAdminId(registrationService);
-
-        int matchday = getActiveMatchDay(scheduleService);
+    public static List<Prediction> adminPredictions(ScheduleService scheduleService, int memberId, int matchday){
 
         List<Prediction> adminPredictions = scheduleService.getAdminPrediction(memberId, matchday);
 
@@ -234,5 +230,23 @@ public class PredictionListMapper implements Serializable {
             }
         }
         schedule.setMatchFeeList(matchList);
+    }
+
+    public static Prediction getUserPredictions(List<SchedulePrediction> schedulePredictions, UserLogin userLogin) {
+        if (null != schedulePredictions
+                && schedulePredictions.size() > 0) {
+            SchedulePrediction schedulePrediction = schedulePredictions.get(0);
+            List<Prediction> predictionList = schedulePrediction.getPrediction();
+            if (null != predictionList
+                    && predictionList.size() > 0) {
+                for (Prediction prediction : predictionList) {
+                    if (prediction.getMemberId() != userLogin.getMemberId()) {
+                        continue;
+                    }
+                    return prediction;
+                }
+            }
+        }
+        return null;
     }
 }
