@@ -12,13 +12,14 @@ import java.io.Serializable;
 
 @Configuration
 public class SpringJDBCConfiguration implements Serializable {
-   /* @Bean
+    /*@Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //MySQL database we are using
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        //Google cloud URL - 104.198.192.106
-        //dataSource.setUrl("jdbc:mysql://35.237.53.198:3306/ipl");
+        //Google cloud URL - 34.67.153.144
+        //dataSource.setUrl("jdbc:mysql://google//34.67.153.144:3306/ipl");
+        //dataSource.setUrl("jdbc:mysql://google/ipl?useSSL=false&cloudSqlInstance=34.67.153.144&socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp");
 
         // Local
         dataSource.setUrl("jdbc:mysql://localhost:3306/ipl?serverTimezone=UTC");

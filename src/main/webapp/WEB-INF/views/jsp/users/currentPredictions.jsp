@@ -179,6 +179,37 @@
                     <br />
                 </c:if>
 
+                    <c:if test="${not empty schedulePrediction}">
+                        <c:if test="${not empty userPrediction}">
+                            <table class="w3-table w3-striped w3-white"
+                                   style="text-align: center; align:center; align-content: center">
+                                <tr align="center">
+                                    <thead>
+                                    <th>#Game</th>
+                                    <th>Name</th>
+                                    <th>Fixture</th>
+                                    <th>Choice</th>
+                                    <th>Predicted Time</th>
+                                    <th>Amount</th>
+                                    <th>Expected</th>
+                                    </thead>
+                                </tr>
+                                <tr style="color:black;font-size:20px;text-decoration:none;">
+                                    <td style="text-align:left;"><b>${userPrediction.matchNumber}</b></td>
+                                    <td style="text-align:left;"><b>${fn:toUpperCase(userPrediction.firstName)} </b>
+                                    </td>
+                                    <td style="text-align:left;"><b>${userPrediction.homeTeam}
+                                        vs ${userPrediction.awayTeam} </b></td>
+                                    <td style="text-align:left;"><b>${userPrediction.selected} </b></td>
+                                    <td style="text-align:left;"><b>${userPrediction.predictedTime} </b></td>
+                                    <td style="text-align:left;"><b>${userPrediction.amount} </b></td>
+                                    <td style="text-align:left;"><b>${userPrediction.expectedAmount} </b></td>
+                                </tr>
+                            </table>
+                        </c:if>
+                    </c:if>
+                    <br/><br/>
+
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <tr align="center">
                         <thead>
@@ -192,20 +223,6 @@
                         </thead>
                     </tr>
                     <c:if test="${not empty schedulePrediction}">
-
-                        <c:if test="${not empty userPrediction}">
-                            <tr style="color:black;font-size:20px;text-decoration:none;">
-                                <td style="text-align:left;"> <b>${userPrediction.matchNumber}</b></td>
-                                <td style="text-align:left;"> <b>${fn:toUpperCase(userPrediction.firstName)} </b></td>
-                                <td style="text-align:left;"><b>${userPrediction.homeTeam} vs ${userPrediction.awayTeam} </b> </td>
-                                <td style="text-align:left;"><b>${userPrediction.selected} </b> </td>
-                                <td style="text-align:left;"><b>${userPrediction.predictedTime} </b></td>
-                                <td style="text-align:left;"><b>${userPrediction.amount} </b></td>
-                                <td style="text-align:left;"><b>${userPrediction.expectedAmount} </b></td>
-                            </tr>
-                        </c:if>
-                        <br/><br/>
-
                         <c:forEach var="predictions" items="${schedulePrediction.prediction}">
                             <tr style="color:black;font-size:20px;text-decoration:none;">
                                 <td style="text-align:left;"> <b>${predictions.matchNumber}</b></td>

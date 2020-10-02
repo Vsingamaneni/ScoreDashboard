@@ -126,8 +126,6 @@ public class UserController implements Serializable {
             return "redirect:/";
         }
 
-        logger.debug("saveOrUpdateLogin() : {}", "");
-
         UserLogin loginDetails = registrationService.loginUser(userLogin);
 
         if (null != loginDetails
