@@ -31,6 +31,10 @@ public class SchedulePrediction implements Serializable {
 
     private float defaultQuota;
 
+    private List<CountTotal> homeTotal;
+
+    private List<CountTotal> awayTotal;
+
     public Schedule getSchedule() {
         return schedule;
     }
@@ -133,5 +137,21 @@ public class SchedulePrediction implements Serializable {
 
     public void setDefaultQuota(float defaultQuota) {
         this.defaultQuota = defaultQuota;
+    }
+
+    public List<CountTotal> getHomeTotal() {
+        return homeTotal;
+    }
+
+    public void setHomeTotal(List<CountTotal> homeTotal) {
+        this.homeTotal = homeTotal;
+    }
+
+    public List<CountTotal> getAwayTotal() {
+        return awayTotal;
+    }
+
+    public void setAwayTotal(List<CountTotal> awayTotal) {
+        this.awayTotal = awayTotal;
     }
 }

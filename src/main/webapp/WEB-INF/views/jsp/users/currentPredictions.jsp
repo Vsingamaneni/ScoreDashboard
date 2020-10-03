@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
     <link rel="stylesheet" href="/resources/core/css/table.css"/>
+    <link rel="stylesheet" href="/resources/core/css/count.css"/>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
@@ -76,7 +77,7 @@
                 <%--<a href="/showReviews" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Show Reviews</a>
                 <a href="/addSettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Add Settlement</a>--%>
             </c:if>
-            <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; Results</a>
+            <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
             <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
             <%--<a href="/settlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Settlement</a>
             <a href="/displaySettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Settlement History</a>--%>
@@ -150,8 +151,38 @@
                             </c:forEach>
                         </table>
                     </c:if>
-                    <br/><br/>
+                    <br/>
                 </c:if>
+
+                <c:if test="${not empty userPrediction}">
+                    <h1 style="text-align:center;">Your Predictions</h1>
+                    <table class="w3-table w3-striped w3-white"
+                           style="text-align: center; align:center; align-content: center">
+                        <tr align="center">
+                            <thead>
+                            <th>#Game</th>
+                            <th>Name</th>
+                            <th>Fixture</th>
+                            <th>Choice</th>
+                            <th>Predicted Time</th>
+                            <th>Amount</th>
+                            <th>Expected</th>
+                            </thead>
+                        </tr>
+                        <tr style="color:black;font-size:20px;text-decoration:none;">
+                            <td style="text-align:left;"><b>${userPrediction.matchNumber}</b></td>
+                            <td style="text-align:left;"><b>${fn:toUpperCase(userPrediction.firstName)} </b>
+                            </td>
+                            <td style="text-align:left;"><b>${userPrediction.homeTeam}
+                                vs ${userPrediction.awayTeam} </b></td>
+                            <td style="text-align:left;"><b>${userPrediction.selected} </b></td>
+                            <td style="text-align:left;"><b>${userPrediction.predictedTime} </b></td>
+                            <td style="text-align:left;"><b>${userPrediction.amount} </b></td>
+                            <td style="text-align:left;"><b>${userPrediction.expectedAmount} </b></td>
+                        </tr>
+                    </table>
+                </c:if>
+                <br/>
 
                 <h1 style="text-align:center;">Match Day Predictions</h1>
                 <c:if test="${not empty deadLineSchedule}">
@@ -178,8 +209,63 @@
                         </span>
                     <br />
                 </c:if>
-
                     <c:if test="${not empty schedulePrediction}">
+                        <table style="margin:0 auto;  border: 1px solid black;border-collapse: collapse;background-color: #31b0d5;color:white;">
+                            <tr>
+                                <c:if test="${not empty schedulePrediction.homeTotal}">
+                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">
+                                        <p style="text-align:center;">${schedulePrediction.schedule.homeTeam}</p>
+                                        <table style="margin:0 auto;border: 1px solid black;">
+                                            <tr style="text-align:center;">
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">
+                                                    Amount
+                                                </td>
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">Count
+                                                </td>
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">Expected
+                                                </td>
+                                            </tr>
+                                            <c:forEach var="home" items="${schedulePrediction.homeTotal}">
+                                                <tr style="text-align:center;">
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${home.amount}
+                                                    </td>
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${home.count}</td>
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${home.expected}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                    </td>
+                                </c:if>
+                                <c:if test="${not empty schedulePrediction.awayTotal}">
+                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">
+                                        <p style="text-align:center;">${schedulePrediction.schedule.awayTeam}</p>
+                                        <table style="margin:0 auto;border: 1px solid black;">
+                                            <tr style="text-align:center;">
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">
+                                                    Amount
+                                                </td>
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">Count
+                                                </td>
+                                                <td style="padding: 5px;font-size:20px;border: 1px solid black;">Expected
+                                                </td>
+                                            </tr>
+                                            <c:forEach var="away" items="${schedulePrediction.awayTotal}">
+                                                <tr style="text-align:center;">
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${away.amount}
+                                                    </td>
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${away.count}</td>
+                                                    <td style="padding: 5px;font-size:20px;border: 1px solid black;">${away.expected}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                    </td>
+                                </c:if>
+                            </tr>
+
+                        </table>
+                    </c:if>
+                    <br /><br />
+                    <%--<c:if test="${not empty schedulePrediction}">
                         <c:if test="${not empty userPrediction}">
                             <table class="w3-table w3-striped w3-white"
                                    style="text-align: center; align:center; align-content: center">
@@ -207,8 +293,7 @@
                                 </tr>
                             </table>
                         </c:if>
-                    </c:if>
-                    <br/><br/>
+                    </c:if>--%>
 
                 <table class="w3-table w3-striped w3-white" style="text-align: center; align:center; align-content: center">
                     <tr align="center">

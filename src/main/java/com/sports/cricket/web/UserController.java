@@ -930,6 +930,7 @@ public class UserController implements Serializable {
                 List<Prediction> predictionList = PredictionListMapper.mapPredictionPerSelection(matchDetails.getPrediction(), schedule);
 
                 matchDetails.setPrediction(predictionList);
+                PredictionListMapper.mapCountTotals(matchDetails);
                 schedulePredictionsList.add(matchDetails);
                 isScheduleDone = true;
             }
@@ -941,7 +942,6 @@ public class UserController implements Serializable {
             int matchday = getActiveMatchDay(scheduleService);
 
             List<Prediction> adminPredictions = PredictionListMapper.adminPredictions(scheduleService, memberId, matchday);
-            List<Prediction> userPrediction = PredictionListMapper.adminPredictions(scheduleService, userLogin.getMemberId(), matchday);
 
             model.addAttribute("adminPredictions", adminPredictions);
             model.addAttribute("deadLineSchedule", currentSchedule);
