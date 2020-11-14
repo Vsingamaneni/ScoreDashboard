@@ -27,14 +27,18 @@
     <link rel="stylesheet" type="text/css" href="/resources/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="/resources/login/css/main.css">
     <style>
-        html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-        body {font-family: Arial, Helvetica, sans-serif;}
-        * {box-sizing: border-box;}
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+
+        a href {
+            text-decoration: none;
+        }
 
         input[type=text], select, textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
             margin-top: 6px;
@@ -60,6 +64,9 @@
             background-color: #f2f2f2;
             padding: 20px;
         }
+
+
+
     </style>
 </head>
 
@@ -102,13 +109,17 @@
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
         <c:if test="${ not user_name.equalsIgnoreCase('user')}">
             <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
-            <a href="/account" class="w3-bar-item w3-button w3-padding"><i class="fa fa-hand-o-right"></i>&nbsp; Account</a>
-            <a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus"></i>&nbsp; Predictions</a>
-            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clock-o"></i>&nbsp; MatchDay Predictions</a>
+            <%--<a href="/account" class="w3-bar-item w3-button w3-padding"><i class="fa fa-hand-o-right"></i>&nbsp; Account</a>--%>
+            <a href="/settlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Settlements</a>
+            <%--<a href="/predictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus"></i>&nbsp; Predictions</a>
+            <a href="/currentPredictions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clock-o"></i>&nbsp; MatchDay Predictions</a>--%>
             <c:if test="${role.equalsIgnoreCase('admin')}">
-                <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Update Result</a>
-                <%--<a href="/showReviews" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Show Reviews</a>
-                <a href="/addSettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Add Settlement</a>--%>
+                <%--   <a href="/saveResult" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Update Result</a>--%>
+                <%--<a href="/results" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Quota</a>--%>
+                <%--<a href="/showReviews" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Show Reviews</a>--%>
+                <a href="/addSettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Add Settlement</a>
+                <a href="/displaySettlement" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp;Settlement Details</a>
+                <a href="/showReviews" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Show Reviews</a>
             </c:if>
             <a href="/history" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; Results</a>
             <a href="/standings" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart"></i>&nbsp; Standings</a>
@@ -117,7 +128,9 @@
             <a href="/showAllUsers" class="w3-bar-item w3-button w3-padding"><i class="fa fa-child"></i>&nbsp; Users</a>
             <a href="/statistics" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-pie-chart"></i>&nbsp; Stats</a>
             <%--<a href="/userReview" style="text-decoration : none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart"></i>&nbsp; Review</a>--%>
-            <a href="/rules" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Rules</a>
+            <%--<a href="/rules" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Rules</a>--%>
+            <a href="/userReview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp; Review</a>
+            <%--<a href="/showReviews" class="w3-bar-item w3-button w3-padding"><i class="fa fa-legal"></i>&nbsp;Show Reviews</a>--%>
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i>&nbsp; Logout</a>
         </c:if>
         <c:if test="${user_name.equalsIgnoreCase('user')}">
@@ -139,7 +152,7 @@
                 <div class="container">
                     <form class="login100-form validate-form p-b-33 p-t-5"  action="/saveReview" modelAttribute="userReview" method="POST">
 
-                    <label for="reviewRating">Overall Rating</label>
+                        <label for="reviewRating"><b><i>Overall Rating</i></b></label>
                         <select id="reviewRating" name="reviewRating">
                             <option>Very Satisfied (5)</option>
                             <option>Satisfied (4)</option>
@@ -149,16 +162,16 @@
                         </select>
 
 
-                        <label for="interested">Interested for next season?</label>
+                        <label for="interested"><b><i>Interested for next season?</i></b></label>
                         <select id="interested" name="interested">
                             <option>Yes</option>
                             <option>No</option>
                         </select>
 
-                        <label for="improve">How can we improve</label>
-                        <textarea id="improve" name="improve" placeholder="What didnt you like / How can we improve this model?" style="height:200px"></textarea>
+                        <label for="improve"><b><i>How can we improve</i></b></label>
+                        <textarea id="improve" name="improve" placeholder="What didnt you like / How can we improve ?" style="height:200px"></textarea>
 
-                        <label for="ideas">New model suggestions</label>
+                        <label for="ideas"><b><i>Any New model suggestions</i></b></label>
                         <textarea id="ideas" name="ideas" placeholder="Any suggestions for a new model next year?" style="height:200px"></textarea>
                         <div class="container-login100-form-btn m-t-32">
                             <button class="login100-form-btn" type='submit' action="/saveReview">Submit</button>

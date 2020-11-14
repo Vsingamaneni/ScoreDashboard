@@ -238,7 +238,7 @@ public class PredictionListMapper implements Serializable {
             List<Prediction> predictionList = schedulePrediction.getPrediction();
             if (null != predictionList && predictionList.size() > 0) {
                 for (Prediction prediction : predictionList) {
-                    if (prediction.getMemberId() == userLogin.getMemberId()) {
+                    if (prediction.getMemberId().equals(userLogin.getMemberId())) {
                         return prediction;
                     }
                 }

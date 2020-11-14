@@ -1091,8 +1091,19 @@ public class UserController implements Serializable {
             settlementDetails = SettlementUtil.pickNonSettled(settlementDetails);
             SettlementUtil.setNumbers(settlementDetails);
 
+            List<Settlement> settlementList = new ArrayList<>();
+            if (!userLogin.getRole().equals("admin")){
+                for (Settlement settlement : settlementDetails){
+                    if (settlement.getMemberId() != 1){
+                        settlementList.add(settlement);
+                    }
+                }
+            } else {
+                settlementList = settlementDetails;
+            }
+
             model.addAttribute("memberSettlement", memberSettlement);
-            model.addAttribute("settlementDetails", settlementDetails);
+            model.addAttribute("settlementDetails", settlementList);
 
             httpSession.setMaxInactiveInterval(5 * 60);
             return "users/settlement";
